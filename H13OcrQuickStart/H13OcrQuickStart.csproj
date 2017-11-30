@@ -160,6 +160,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Models\FirstAcquisitionProcessor.cs" />
+    <Compile Include="Models\FirstCalibrationProcessor.cs" />
     <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ICameraCalibrationProcessor.cs" />
     <Compile Include="Models\IProcessingResult.cs" />
@@ -171,9 +173,29 @@
     <Compile Include="Utilities\SettingsManager.cs" />
     <Compile Include="Utilities\SettingsManagerBase.cs" />
     <Compile Include="Utilities\UtilityLibrary.cs" />
+    <Compile Include="ViewModels\FirstAcquisitionMainVMPartial.cs" />
+    <Compile Include="ViewModels\FirstAcquisitionViewModel.cs" />
+    <Compile Include="ViewModels\FirstCalibrationMainVMPartial.cs" />
+    <Compile Include="ViewModels\FirstCalibrationViewModel.cs" />
     <Compile Include="ViewModels\ICameraCalibrationViewModel.cs" />
+    <Compile Include="Views\FirstAcquisitionModule.cs" />
+    <Compile Include="Views\FirstAcquisitionPage.xaml.cs">
+      <DependentUpon>FirstAcquisitionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FirstCalibrationModule.cs" />
+    <Compile Include="Views\FirstCalibrationPage.xaml.cs">
+      <DependentUpon>FirstCalibrationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\NegativeIntegerConverter.cs" />
     <Compile Include="Views\RadioButtonCheckedToEnumConverter.cs" />
+    <Page Include="Views\FirstAcquisitionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FirstCalibrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

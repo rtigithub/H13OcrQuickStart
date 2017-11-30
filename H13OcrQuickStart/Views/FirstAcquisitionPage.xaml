@@ -1,0 +1,89 @@
+﻿<Page x:Class="H13OcrQuickStart.View.AcquireAcquisitionPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:H13OcrQuickStart.View"
+      mc:Ignorable="d" 
+      d:DesignHeight="627" d:DesignWidth="388"
+      Title="AcquireAcquisitionPage">
+
+    <Grid Background="AliceBlue" Margin="0,0,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="237*"/>
+            <ColumnDefinition Width="145*"/>
+        </Grid.ColumnDefinitions>
+        <GroupBox x:Name="groupBoxCameraSetup" Header="Camera Setup" Background="AliceBlue" 
+							Grid.Column="0" Margin="0,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.ColumnSpan="1">
+            <Grid HorizontalAlignment="Stretch"  Margin="2,0,0,-2" VerticalAlignment="Stretch" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Label x:Name="labelAcquisitionInterfaceName" Content="Acquisition Interface Name" HorizontalAlignment="Center" Grid.Row="0" Height="26" Margin="0,0,0,0" VerticalAlignment="Center" Width="165" Grid.ColumnSpan="2"/>
+                <ComboBox x:Name="comboBoxAcquisitionInterfaceName" HorizontalAlignment="Stretch" 
+									Height="21"  Grid.Row="1" VerticalAlignment="Top" Width="Auto" Grid.ColumnSpan="2"  Margin="0,2,0,2"/>
+                <Label x:Name="labelHorizontalResolution" Content="Horizontal Resolution" Grid.Row="2" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxHorizontalResolution" Grid.Row="2" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelVerticalResolution" Content="Vertical Resolution" Grid.Row="3" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxVerticalResolution" Grid.Row="3" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelImageWidth" Content="Image Width" Grid.Row="4" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxImageWidth" Grid.Row="4" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelImageHeight" Content="Image Height" Grid.Row="5" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxImageHeight" Grid.Row="5" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelStartRow" Content="Start Row" Grid.Row="6" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxStartRow" Grid.Row="6" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelStartColumn" Content="Start Column" Grid.Row="7" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxStartColumn" Grid.Row="7" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelField" Content="Field" Grid.Row="8" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxField" Grid.Row="8" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelBitsPerChannel" Content="Bits Per Channel" Grid.Row="9" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBitsPerChannel" Grid.Row="9" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelColorSpace" Content="Color Space" Grid.Row="10" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxColorSpace" Grid.Row="10" Grid.Column="1" IsEditable="True" Height="22" Margin="0,2,0,2"/>
+                <Label x:Name="labelGeneric" Content="Generic" Grid.Row="11" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxGeneric" Grid.Row="12" Grid.ColumnSpan="2" IsEditable="True" />
+                <Label x:Name="labelExternalTrigger" Content="External Trigger" Grid.Row="13" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxExternalTrigger" Grid.Row="13" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelCameraType" Content="Camera Type" Grid.Row="14" VerticalAlignment="Center"/>
+                <Button x:Name="buttonSelectFile" Content="SelectFile" Grid.Row="14" Grid.Column="1" Margin="0,4,0,2"/>
+                <ComboBox x:Name="comboBoxCameraType" Grid.Row="15" Grid.ColumnSpan="2" IsEditable="True" Margin="0,4,0,2"/>
+                <Label x:Name="labelDevice" Content="Device" Grid.Row="16" Grid.ColumnSpan="2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxDevice" Grid.Row="17" Grid.Column="0" Grid.ColumnSpan="2" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelPort" Content="Port" Grid.Row="18" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxPort" Grid.Row="18" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Label x:Name="labelLineIn" Content="Line In" Grid.Row="19" VerticalAlignment="Center"/>
+                <ComboBox x:Name="comboBoxLineIn" Grid.Row="19" Grid.Column="1" IsEditable="True" Margin="0,2,0,2"/>
+                <Button x:Name="buttonInitializeCamera" Content="Initialize" Grid.Row="20" Grid.ColumnSpan="2" Margin="67,10,75,-31" RenderTransformOrigin="0.798,0.571"/>
+            </Grid>
+        </GroupBox>
+        <StackPanel x:Name="stackPanelAcquistionTest" Grid.Column="1" Background="AliceBlue">
+            <Button x:Name="buttonAcquire" Content="Grab Image" HorizontalAlignment="Left" Height="31" Margin="20,30,0,0" Width="105"/>
+            <Button x:Name="buttonLiveVideo" Content="Start Live Video" HorizontalAlignment="Left" Height="31" Margin="20,30,0,0" Width="105"/>
+            <Button x:Name="buttonSave" Content="Save" HorizontalAlignment="Left" Height="31" Margin="20,30,0,0" Width="105"/>
+        </StackPanel>
+    </Grid>
+</Page>
