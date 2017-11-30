@@ -19,7 +19,7 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      public partial class MainViewModel : MainViewModelBase
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores a value indicating whether the class has been disposed.
@@ -36,9 +36,9 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           private Utilities.SettingsManager settingsVM;
 
-          #endregion Private Declarations
+          #endregion Private Fields
 
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the MainViewModel class.
@@ -75,11 +75,9 @@ namespace H13OcrQuickStart.ViewModels
                    .Subscribe(x => this.LastAppState = x));
           }
 
-          #endregion Constructors
+          #endregion Public Constructors
 
-
-
-          #region Properties
+          #region Public Properties
 
           /// <summary>
           /// Gets or sets the last application state.
@@ -101,9 +99,7 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           public Utilities.SettingsManager SettingsVM => this.settingsVM;
 
-          #endregion Properties
-
-
+          #endregion Public Properties
 
           #region Protected Methods
 

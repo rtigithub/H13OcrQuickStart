@@ -15,7 +15,7 @@ namespace H13OcrQuickStart.Models
      /// </summary>
      public abstract class ProcessorBase : ReactiveObject, IDisposable, IProcessor
      {
-          #region private fields
+          #region Private Fields
 
           /// <summary>
           /// Stores the display collection for any debug output.
@@ -43,9 +43,9 @@ namespace H13OcrQuickStart.Models
           /// </summary>
           private bool isDisposed = false;
 
-          #endregion private fields
+          #endregion Private Fields
 
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the ProcessorBase class.
@@ -54,18 +54,18 @@ namespace H13OcrQuickStart.Models
           {
           }
 
-          #endregion Constructors
+          #endregion Public Constructors
 
-          #region Destructors
+          #region Private Destructors
 
           /// <summary>
           /// Finalizes an instance of the ProcessorBase class.
           /// </summary>
           ~ProcessorBase() => this.Dispose(false);
 
-          #endregion Destructors
+          #endregion Private Destructors
 
-          #region Properties
+          #region Public Properties
 
           /// <summary>
           /// Gets or sets the display collection for any debug output.
@@ -107,11 +107,9 @@ namespace H13OcrQuickStart.Models
                set => this.RaiseAndSetIfChanged(ref this.errorMessage, value);
           }
 
-          #endregion Properties
+          #endregion Public Properties
 
-          #region public methods
-
-          #region IDisposable Members
+          #region Public Methods
 
           /// <summary>
           /// Implements the Dispose method of IDisposable.
@@ -121,8 +119,6 @@ namespace H13OcrQuickStart.Models
                this.Dispose(true);
                GC.SuppressFinalize(this);
           }
-
-          #endregion IDisposable Members
 
           /// <summary>
           /// Performs the process for this class.
@@ -209,7 +205,7 @@ namespace H13OcrQuickStart.Models
                return result;
           }
 
-          #endregion public methods
+          #endregion Public Methods
 
           #region Protected Methods
 

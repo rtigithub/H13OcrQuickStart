@@ -21,7 +21,7 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      public class FirstAcquisitionViewModel : ProcessViewModelBase<MainViewModel, FirstAcquisitionProcessor>
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores the image height.
@@ -235,9 +235,9 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           private HTuple verticalResolutionParameters = new HTuple();
 
-          #endregion Private Declarations
+          #endregion Private Fields
 
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the AcquireAcquisitionViewModel class.
@@ -347,13 +347,11 @@ namespace H13OcrQuickStart.ViewModels
                     .Subscribe(x => this.Processor.CanGrabNextFrame = !x));
           }
 
-          #endregion Constructors
-
-
-
-          #region Public Properties
+          #endregion Public Constructors
 
           //// Create additional reactive commands as needed.
+
+          #region Public Properties
 
           /// <summary>
           /// Gets the image height.
@@ -800,6 +798,8 @@ namespace H13OcrQuickStart.ViewModels
                set => this.RaiseAndSetIfChanged(ref this.verticalResolutionParameters, value);
           }
 
+          #endregion Public Properties
+
           /////// <summary>
           /////// Gets or sets the MyCommand.
           /////// </summary>
@@ -837,10 +837,6 @@ namespace H13OcrQuickStart.ViewModels
           //// Create properties to manage View properties and any needed to pass to the Processor or other View Models.
 
           //// Create properties that expose any display object properties in the Processor model.
-
-          #endregion Public Properties
-
-
 
           #region Protected Methods
 
@@ -909,8 +905,6 @@ namespace H13OcrQuickStart.ViewModels
 
           #endregion Protected Methods
 
-          #region Private Methods
-
           //// Create additional async methods for commands
 
           ////private async Task<ProcessingResult> MyProcessAsync()
@@ -925,6 +919,8 @@ namespace H13OcrQuickStart.ViewModels
           ////    return await Task.Factory.StartNew(() => this.Processor.MyProcess(parameters));
           ////    // Create Processor.MyProcess(object parameters) and handle any parameters passes.
           ////}
+
+          #region Private Methods
 
           /// <summary>
           /// Implements the asynchronous method to initialize the camera.

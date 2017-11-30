@@ -15,7 +15,7 @@ namespace H13OcrQuickStart.Models
      /// </summary>
      public class FirstCalibrationProcessor : ProcessorBase, ICameraCalibrationProcessor
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores a value indicating whether the calibration images are set.
@@ -104,9 +104,9 @@ namespace H13OcrQuickStart.Models
           /// </summary>
           private HPose worldPose = new HPose();
 
-          #endregion Private Declarations
+          #endregion Private Fields
 
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the AcquireCalibrationProcessor class.
@@ -116,13 +116,11 @@ namespace H13OcrQuickStart.Models
           {
           }
 
-          #endregion Constructors
-
-
-
-          #region Public Properties
+          #endregion Public Constructors
 
           //// Create properties for objects and display objects set in the process methods. Not including output results.
+
+          #region Public Properties
 
           /// <summary>
           /// Gets or sets a value indicating whether the calibration images are set.
@@ -616,11 +614,9 @@ namespace H13OcrQuickStart.Models
                return result;
           }
 
-          //// TODO: work out a way to pass the format along.
-
           #endregion Public Methods
 
-
+          //// TODO: work out a way to pass the format along.
 
           #region Protected Methods
 
@@ -652,7 +648,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Protected Methods
 
-          #region private methods
+          #region Private Methods
 
           /// <summary>
           /// Performs the camera calibration.
@@ -1001,6 +997,6 @@ namespace H13OcrQuickStart.Models
                }
           }
 
-          #endregion private methods
+          #endregion Private Methods
      }
 }

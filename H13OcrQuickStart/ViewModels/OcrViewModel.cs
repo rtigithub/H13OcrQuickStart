@@ -20,7 +20,7 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      public class OcrViewModel : ProcessViewModelBase<MainViewModel, OcrProcessor>
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores a value indicating whether the class has been disposed.
@@ -32,6 +32,8 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           private ObservableAsPropertyHelper<ProcessingResult> processingResults;
 
+          #endregion Private Fields
+
           //// Create an ObservableAsPropertyHelper<ProcessingResult> for each command with a ProcessingResult you need to monitor.
 
           /////// <summary>
@@ -40,9 +42,7 @@ namespace H13OcrQuickStart.ViewModels
           ////private ObservableAsPropertyHelper<ProcessingResult> myProcessingResults;
           //// Create backing fields for the properties as needed.
 
-          #endregion Private Declarations
-
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the OcrViewModel class.
@@ -111,11 +111,7 @@ namespace H13OcrQuickStart.ViewModels
                    }));
           }
 
-          #endregion Constructors
-
-
-
-          #region Public Properties
+          #endregion Public Constructors
 
           //// Create additional reactive commands as needed.
 
@@ -139,6 +135,8 @@ namespace H13OcrQuickStart.ViewModels
           ////    set;
           ////}
 
+          #region Public Properties
+
           /// <summary>
           /// Gets the processing results.
           /// </summary>
@@ -149,6 +147,8 @@ namespace H13OcrQuickStart.ViewModels
                     return this.processingResults.Value;
                }
           }
+
+          #endregion Public Properties
 
           //// Create a ProcessingResult property for each command with an ObservableAsPropertyHelper<ProcessingResult> you need to monitor.
 
@@ -166,10 +166,6 @@ namespace H13OcrQuickStart.ViewModels
           //// Create properties to manage View properties and any needed to pass to the Processor or other View Models.
 
           //// Create properties that expose any display object properties in the Processor model.
-
-          #endregion Public Properties
-
-
 
           #region Protected Methods
 
@@ -236,8 +232,6 @@ namespace H13OcrQuickStart.ViewModels
 
           #endregion Protected Methods
 
-          #region Private Methods
-
           //// Create additional async methods for commands.
 
           ////private async Task<ProcessingResult> MyProcessAsync()
@@ -252,7 +246,5 @@ namespace H13OcrQuickStart.ViewModels
           ////    return await Task.Factory.StartNew(() => this.Processor.MyProcess(parameters));
           ////    // Create Processor.MyProcess(object parameters) and handle any parameters passes.
           ////}
-
-          #endregion Private Methods
      }
 }

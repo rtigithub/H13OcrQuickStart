@@ -19,7 +19,7 @@ namespace H13OcrQuickStart.Utilities
 
      public class UtilityLibrary : IDisposable
      {
-          #region private fields
+          #region Private Fields
 
           /// <summary>
           /// Dialog for selecting a folder.
@@ -42,7 +42,7 @@ namespace H13OcrQuickStart.Utilities
           /// </summary>
           private SaveFileDialog saveFileDialog = new SaveFileDialog();
 
-          #endregion private fields
+          #endregion Private Fields
 
           #region Public Constructors
 
@@ -62,19 +62,6 @@ namespace H13OcrQuickStart.Utilities
           #endregion Private Destructors
 
           #region Public Methods
-
-          #region IDisposable Members
-
-          /// <summary>
-          /// Implements the Dispose method of IDisposable.
-          /// </summary>
-          public void Dispose()
-          {
-               this.Dispose(true);
-               GC.SuppressFinalize(this);
-          }
-
-          #endregion IDisposable Members
 
           /// <summary>
           /// Returns an HTuple with only unique elements.
@@ -100,6 +87,15 @@ namespace H13OcrQuickStart.Utilities
                }
 
                return output;
+          }
+
+          /// <summary>
+          /// Implements the Dispose method of IDisposable.
+          /// </summary>
+          public void Dispose()
+          {
+               this.Dispose(true);
+               GC.SuppressFinalize(this);
           }
 
           /// <summary>

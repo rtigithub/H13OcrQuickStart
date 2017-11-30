@@ -120,8 +120,6 @@ namespace H13OcrQuickStart.Utilities
 
           #region Public Methods
 
-          #region IDisposable Members
-
           /// <summary>
           /// Implements the Dispose method of IDisposable.
           /// </summary>
@@ -130,8 +128,6 @@ namespace H13OcrQuickStart.Utilities
                this.Dispose(true);
                GC.SuppressFinalize(this);
           }
-
-          #endregion IDisposable Members
 
           /// <summary>
           /// Abstract declaration of method to save the settings.

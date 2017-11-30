@@ -39,8 +39,6 @@ namespace H13OcrQuickStart.Models
 
           #endregion Public Constructors
 
-
-
           #region Public Properties
 
           /// <summary>
@@ -54,8 +52,6 @@ namespace H13OcrQuickStart.Models
           }
 
           #endregion Public Properties
-
-
 
           #region Protected Methods
 

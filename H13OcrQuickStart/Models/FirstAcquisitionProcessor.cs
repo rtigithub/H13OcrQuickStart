@@ -19,7 +19,7 @@ namespace H13OcrQuickStart.Models
      /// </summary>
      public class FirstAcquisitionProcessor : ProcessorBase
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores the acquired image.
@@ -79,9 +79,9 @@ namespace H13OcrQuickStart.Models
           /// </summary>
           private bool isInitialized = false;
 
-          #endregion Private Declarations
+          #endregion Private Fields
 
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the AcquireAcquisitionProcessor class.
@@ -140,13 +140,11 @@ namespace H13OcrQuickStart.Models
                     }));
           }
 
-          #endregion Constructors
-
-
-
-          #region Public Properties
+          #endregion Public Constructors
 
           //// Create properties for objects and display objects set in the process methods. Not including output results.
+
+          #region Public Properties
 
           /// <summary>
           /// Gets or sets the acquired image.
@@ -620,8 +618,6 @@ namespace H13OcrQuickStart.Models
 
           #endregion Public Methods
 
-
-
           #region Protected Methods
 
           /// <summary>
@@ -652,7 +648,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Protected Methods
 
-          #region private methods
+          #region Private Methods
 
           /// <summary>
           /// Acquires an image and corrects it with the provided calibration map.
@@ -745,6 +741,6 @@ namespace H13OcrQuickStart.Models
                }
           }
 
-          #endregion private methods
+          #endregion Private Methods
      }
 }

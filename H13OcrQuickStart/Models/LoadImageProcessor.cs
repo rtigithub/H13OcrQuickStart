@@ -16,7 +16,7 @@ namespace H13OcrQuickStart.Models
      /// </summary>
      public class LoadImageProcessor : ProcessorBase
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores the loaded unprocessed image.
@@ -38,9 +38,9 @@ namespace H13OcrQuickStart.Models
           /// </summary>
           private bool isDisposed = false;
 
-          #endregion Private Declarations
+          #endregion Private Fields
 
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the LoadImageProcessor class.
@@ -65,9 +65,7 @@ namespace H13OcrQuickStart.Models
                   }));
           }
 
-          #endregion Constructors
-
-
+          #endregion Public Constructors
 
           #region Public Properties
 
@@ -103,7 +101,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Public Properties
 
-          #region public Methods
+          #region Public Methods
 
           /// <summary>
           /// Implements the process for this processor class.
@@ -185,9 +183,7 @@ namespace H13OcrQuickStart.Models
                return result;
           }
 
-          #endregion public Methods
-
-
+          #endregion Public Methods
 
           #region Protected Methods
 
@@ -217,7 +213,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Protected Methods
 
-          #region private methods
+          #region Private Methods
 
           /// <summary>
           /// Loads an image from a file name.
@@ -241,6 +237,6 @@ namespace H13OcrQuickStart.Models
                }
           }
 
-          #endregion private methods
+          #endregion Private Methods
      }
 }

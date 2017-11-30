@@ -21,7 +21,7 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      public class FirstCalibrationViewModel : ProcessViewModelBase<MainViewModel, FirstCalibrationProcessor>, ICameraCalibrationViewModel
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores a value indicating whether all parameters are valid.
@@ -289,9 +289,9 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           private int worldPoseIndex = 0;
 
-          #endregion Private Declarations
+          #endregion Private Fields
 
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the AcquireCalibrationViewModel class.
@@ -434,9 +434,7 @@ namespace H13OcrQuickStart.ViewModels
                this.SetParameters();
           }
 
-          #endregion Constructors
-
-
+          #endregion Public Constructors
 
           #region Public Properties
 

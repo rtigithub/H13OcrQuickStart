@@ -123,11 +123,7 @@ namespace H13OcrQuickStart.ViewModels
 
           #endregion Public Properties
 
-
-
           #region Public Methods
-
-          #region IDisposable Members
 
           /// <summary>
           /// Implements the Dispose method of IDisposable.
@@ -137,8 +133,6 @@ namespace H13OcrQuickStart.ViewModels
                this.Dispose(true);
                GC.SuppressFinalize(this);
           }
-
-          #endregion IDisposable Members
 
           #endregion Public Methods
 

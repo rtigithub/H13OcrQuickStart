@@ -20,9 +20,9 @@ namespace H13OcrQuickStart.Utilities
      /// </summary>
      public class SettingsManager : SettingsManagerBase<MainViewModel>
      {
-          #region Private Fields
-
           //// Modify these  two constants as needed to set the directory and file name of the settings file.
+
+          #region Private Fields
 
           /// <summary>
           /// Constant for Settings Directory Name.
@@ -39,9 +39,9 @@ namespace H13OcrQuickStart.Utilities
           /// </summary>
           private bool isDisposed = false;
 
-          //// Copy the backing fields for all properties in other ProcessorViewModel classes that are to be included in the settings.
-
           #endregion Private Fields
+
+          //// Copy the backing fields for all properties in other ProcessorViewModel classes that are to be included in the settings.
 
           #region Public Constructors
 
@@ -67,8 +67,6 @@ namespace H13OcrQuickStart.Utilities
 
           #endregion Public Constructors
 
-
-
           #region Public Properties
 
           /// <summary>
@@ -89,10 +87,10 @@ namespace H13OcrQuickStart.Utilities
                }
           }
 
+          #endregion Public Properties
+
           //// Copy the properties in other ProcessorViewModel classes that are to be included in the settings exactly.
           //// The name of the property must not be changed.
-
-          #endregion Public Properties
 
           #region Public Methods
 
@@ -139,8 +137,6 @@ namespace H13OcrQuickStart.Utilities
 
           #region Protected Methods
 
-          #region IDisposable Members
-
           /// <summary>
           /// Overrides the Dispose method of IDisposable that actually disposes of managed resources.
           /// </summary>
@@ -162,8 +158,6 @@ namespace H13OcrQuickStart.Utilities
                // Call base.Dispose, passing parameter.
                base.Dispose(disposing);
           }
-
-          #endregion IDisposable Members
 
           #endregion Protected Methods
      }

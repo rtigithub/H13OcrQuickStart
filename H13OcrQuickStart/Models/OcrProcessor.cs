@@ -17,18 +17,18 @@ namespace H13OcrQuickStart.Models
      /// </summary>
      public class OcrProcessor : ProcessorBase
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores a value indicating whether the class has been disposed.
           /// </summary>
           private bool isDisposed = false;
 
+          #endregion Private Fields
+
           //// Create backing fields for the properties as needed.
 
-          #endregion Private Declarations
-
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the Processor class.
@@ -38,15 +38,9 @@ namespace H13OcrQuickStart.Models
           {
           }
 
-          #endregion Constructors
-
-
-
-          #region Public Properties
+          #endregion Public Constructors
 
           //// Create properties for objects and display objects set in the process methods. Not including output results.
-
-          #endregion Public Properties
 
           #region Public Methods
 
@@ -145,8 +139,6 @@ namespace H13OcrQuickStart.Models
           }
 
           #endregion Public Methods
-
-
 
           #region Protected Methods
 

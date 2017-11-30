@@ -29,7 +29,7 @@ namespace H13OcrQuickStart
      /// </summary>
      public sealed partial class MainWindow : Window, ReactiveUI.IViewFor<ViewModel>, IDisposable
      {
-          #region Public static Fields
+          #region Public Fields
 
           /// <summary>
           /// The DependencyProperty for the ViewModel.
@@ -37,9 +37,9 @@ namespace H13OcrQuickStart
           public static readonly DependencyProperty ViewModelProperty =
           DependencyProperty.Register("MainViewModel", typeof(ViewModel), typeof(MainWindow), new PropertyMetadata(null));
 
-          #endregion Public static Fields
+          #endregion Public Fields
 
-          #region private fields
+          #region Private Fields
 
           /// <summary>
           /// Stores a value indicating whether ViewROIManager can react to zoom changes.
@@ -77,7 +77,7 @@ namespace H13OcrQuickStart
           /// </summary>
           private ViewROIManager viewROIManager = new ViewROIManager();
 
-          #endregion private fields
+          #endregion Private Fields
 
           #region Public Constructors
 
@@ -128,10 +128,6 @@ namespace H13OcrQuickStart
                set => this.SetValue(ViewModelProperty, value);
           }
 
-          #endregion Public Properties
-
-          #region Interface Member Properties
-
           /// <summary>
           /// Gets or sets the ViewModel as an object. Needed for RxUI binding.
           /// </summary>
@@ -152,11 +148,9 @@ namespace H13OcrQuickStart
                set => this.MainViewModel = value;
           }
 
-          #endregion Interface Member Properties
+          #endregion Public Properties
 
           #region Public Methods
-
-          #region IDisposable Members
 
           /// <summary>
           /// Implements the Dispose method of IDisposable.
@@ -167,11 +161,7 @@ namespace H13OcrQuickStart
                GC.SuppressFinalize(this);
           }
 
-          #endregion IDisposable Members
-
           #endregion Public Methods
-
-
 
           #region Private Methods
 

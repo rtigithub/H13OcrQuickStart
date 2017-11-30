@@ -170,8 +170,6 @@ namespace H13OcrQuickStart.ViewModels
 
           #region Public Methods
 
-          #region IDisposable Members
-
           /// <summary>
           /// Implements the Dispose method of IDisposable.
           /// </summary>
@@ -181,10 +179,6 @@ namespace H13OcrQuickStart.ViewModels
                GC.SuppressFinalize(this);
           }
 
-          #endregion IDisposable Members
-
-          #endregion Public Methods
-
           /// <summary>
           /// Sets the ImageDisplay to a new value, triggering property changed.
           /// </summary>
@@ -193,6 +187,8 @@ namespace H13OcrQuickStart.ViewModels
                this.Display.Dispose();
                this.Display = this.BuildDisplayItem();
           }
+
+          #endregion Public Methods
 
           #region Protected Methods
 

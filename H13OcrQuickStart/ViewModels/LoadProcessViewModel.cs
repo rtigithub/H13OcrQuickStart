@@ -20,7 +20,7 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      public class LoadProcessViewModel : ProcessViewModelBase<MainViewModel, LoadImageProcessor>
      {
-          #region Private Declarations
+          #region Private Fields
 
           /// <summary>
           /// Stores the file name string.
@@ -57,9 +57,9 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           private ObservableAsPropertyHelper<ProcessingResult> processingResults;
 
-          #endregion Private Declarations
+          #endregion Private Fields
 
-          #region Constructors
+          #region Public Constructors
 
           /// <summary>
           /// Initializes a new instance of the LoadProcessViewModel class.
@@ -129,9 +129,9 @@ namespace H13OcrQuickStart.ViewModels
                    .ToProperty(this, x => x.ImageWidth, out this.imageWidth));
           }
 
-          #endregion Constructors
+          #endregion Public Constructors
 
-          #region Properties
+          #region Public Properties
 
           /// <summary>
           /// Gets or sets the file name.
@@ -173,7 +173,7 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           public ProcessingResult ProcessingResults => this.processingResults.Value;
 
-          #endregion Properties
+          #endregion Public Properties
 
           #region Protected Methods
 
