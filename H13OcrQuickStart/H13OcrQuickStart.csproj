@@ -166,6 +166,7 @@
     <Compile Include="Models\ICameraCalibrationProcessor.cs" />
     <Compile Include="Models\IProcessingResult.cs" />
     <Compile Include="Models\LoadImageProcessor.cs" />
+    <Compile Include="Models\OcrProcessor.cs" />
     <Compile Include="Models\ProcessingResult.cs" />
     <Compile Include="Models\ProcessingResultsBase.cs" />
     <Compile Include="Models\ProcessorBase.cs" />
@@ -178,6 +179,8 @@
     <Compile Include="ViewModels\FirstCalibrationMainVMPartial.cs" />
     <Compile Include="ViewModels\FirstCalibrationViewModel.cs" />
     <Compile Include="ViewModels\ICameraCalibrationViewModel.cs" />
+    <Compile Include="ViewModels\OcrMainVMPartial.cs" />
+    <Compile Include="ViewModels\OcrViewModel.cs" />
     <Compile Include="Views\FirstAcquisitionModule.cs" />
     <Compile Include="Views\FirstAcquisitionPage.xaml.cs">
       <DependentUpon>FirstAcquisitionPage.xaml</DependentUpon>
@@ -187,6 +190,7 @@
       <DependentUpon>FirstCalibrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NegativeIntegerConverter.cs" />
+    <Compile Include="Views\OcrModule.cs" />
     <Compile Include="Views\RadioButtonCheckedToEnumConverter.cs" />
     <Page Include="Views\FirstAcquisitionPage.xaml">
       <SubType>Designer</SubType>
