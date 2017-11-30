@@ -67,9 +67,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Constructors
 
-          #region Private Destructors
 
-          #endregion Private Destructors
 
           #region Public Properties
 
@@ -121,7 +119,7 @@ namespace H13OcrQuickStart.Models
                {
                     if (this.ErrorCode == ProcessingErrorCode.NoError)
                     {
-                         // Call sub methods here. 
+                         // Call sub methods here.
                          ////this.LoadImage();
                     }
 
@@ -189,9 +187,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion public Methods
 
-          #region internal methods
 
-          #endregion internal methods
 
           #region Protected Methods
 

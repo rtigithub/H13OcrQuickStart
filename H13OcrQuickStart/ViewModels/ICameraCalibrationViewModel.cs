@@ -18,6 +18,8 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      public interface ICameraCalibrationViewModel
      {
+          #region Public Properties
+
           /// <summary>
           /// Gets the acquire calibration images command.
           /// </summary>
@@ -395,5 +397,7 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           /// <value>The index of the world pose.</value>
           int WorldPoseIndex { get; set; }
+
+          #endregion Public Properties
      }
 }

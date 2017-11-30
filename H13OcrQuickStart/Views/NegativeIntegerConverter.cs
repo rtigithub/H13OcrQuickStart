@@ -1,5 +1,4 @@
-﻿
-// ***********************************************************************
+﻿// ***********************************************************************
 // Assembly         : H13OcrQuickStart
 // Author           : Resolution Technology, Inc.
 // Created          : 06-15-2017
@@ -21,8 +20,10 @@ namespace RibbonTest
      /// Class NegativeIntegerConverter.
      /// </summary>
      /// <seealso cref="System.Windows.Data.IValueConverter" />
-     class NegativeIntegerConverter : IValueConverter
+     internal class NegativeIntegerConverter : IValueConverter
      {
+          #region Public Methods
+
           /// <summary>
           /// Converts a value.
           /// </summary>
@@ -44,5 +45,7 @@ namespace RibbonTest
           /// <returns>A converted value. If the method returns <see langword="null" />, the valid null value is used.</returns>
           public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) =>
                 -1 * System.Convert.ToInt32(value);
+
+          #endregion Public Methods
      }
 }

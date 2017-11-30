@@ -16,58 +16,57 @@ namespace H13OcrQuickStart.ViewModels
      using Rti.ViewRoiCore;
 
      /// <summary>
-     /// View model for the Ocr process. 
-     /// </summary>    
+     /// View model for the Ocr process.
+     /// </summary>
      public class OcrViewModel : ProcessViewModelBase<MainViewModel, OcrProcessor>
      {
           #region Private Declarations
 
           /// <summary>
-          /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call. 
-          /// </summary>
-          private ObservableAsPropertyHelper<ProcessingResult> processingResults;
-
-          //// Create an ObservableAsPropertyHelper<ProcessingResult> for each command with a ProcessingResult you need to monitor. 
-
-          /////// <summary>
-          /////// Stores the ProcessingResult returned from MyProcessAsync.ToProperty call. 
-          /////// </summary>
-          ////private ObservableAsPropertyHelper<ProcessingResult> myProcessingResults;
-
-          /// <summary>
-          /// Stores a value indicating whether the class has been disposed. 
+          /// Stores a value indicating whether the class has been disposed.
           /// </summary>
           private bool isDisposed = false;
 
-          //// Create backing fields for the properties as needed. 
+          /// <summary>
+          /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call.
+          /// </summary>
+          private ObservableAsPropertyHelper<ProcessingResult> processingResults;
+
+          //// Create an ObservableAsPropertyHelper<ProcessingResult> for each command with a ProcessingResult you need to monitor.
+
+          /////// <summary>
+          /////// Stores the ProcessingResult returned from MyProcessAsync.ToProperty call.
+          /////// </summary>
+          ////private ObservableAsPropertyHelper<ProcessingResult> myProcessingResults;
+          //// Create backing fields for the properties as needed.
 
           #endregion Private Declarations
 
           #region Constructors
 
           /// <summary>
-          /// Initializes a new instance of the OcrViewModel class. 
+          /// Initializes a new instance of the OcrViewModel class.
           /// </summary>
           /// <param name="mainVM">A reference to to main view model.</param>
           /// <param name="processor">An instance of the processor class for this view model.</param>
           public OcrViewModel(IMainViewModel mainVM, IProcessor processor)
                  : base(mainVM, processor)
           {
-               //// If a CanExecute condition needs to be set, do it here and recreate the Command using 
-               //// the CanExecute object.                        
-               //// this.CanExecute = this.WhenAny(x => x.MainViewModelRef.<some property>, x => x.Value == false);            
+               //// If a CanExecute condition needs to be set, do it here and recreate the Command using
+               //// the CanExecute object.
+               //// this.CanExecute = this.WhenAny(x => x.MainViewModelRef.<some property>, x => x.Value == false);
                //// this.Command = ReactiveCommand.CreateFromTask(_ => this.ProcessAsync(), this.CanExecute);
 
-               // To force immediate disposal of large or Iconic objects, uncomment the Do clause line, 
-               // otherwise the GarbageCollection will do it after enough memory is used. 
+               // To force immediate disposal of large or Iconic objects, uncomment the Do clause line,
+               // otherwise the GarbageCollection will do it after enough memory is used.
                this.Command
                     // .Do(_ => this.ProcessingResults?.Dispose())
                     .ToProperty(this, x => x.ProcessingResults, out this.processingResults);
 
-               //// Initialize addition commands, with or without can execute reference, as needed. 
+               //// Initialize addition commands, with or without can execute reference, as needed.
                ////this.MyCommand = ReactiveCommand.CreateFromTask(_ => this.MyProcessAsync());
                ////this.MyCommand = ReactiveCommand.CreateFromTask(_ => this.MyProcessAsync(), this.MyCanExecute);
-               //// Monitor ProcessingResults separately for each command. 
+               //// Monitor ProcessingResults separately for each command.
                ////this.MyCommand.ToProperty(this, x => x.MyProcessingResults, out this.myProcessingResults);
 
                this.DisposeCollection.Add(
@@ -104,7 +103,7 @@ namespace H13OcrQuickStart.ViewModels
                ////        this.SetDisplay();
                ////    }));
 
-               //// This reacts to the execution of the command by resetting the AppState. Modify as needed. 
+               //// This reacts to the execution of the command by resetting the AppState. Modify as needed.
                this.DisposeCollection.Add(this.Command
                    .Subscribe(_ =>
                    {
@@ -112,11 +111,9 @@ namespace H13OcrQuickStart.ViewModels
                    }));
           }
 
-          #endregion  Constructors
+          #endregion Constructors
 
-          #region Private Destructors
 
-          #endregion Private Destructors
 
           #region Public Properties
 
@@ -134,7 +131,7 @@ namespace H13OcrQuickStart.ViewModels
           //// Create additional CanExecute observables as needed.
 
           ///// <summary>
-          ///// Gets or sets the can executer observable for my command. 
+          ///// Gets or sets the can executer observable for my command.
           ///// </summary>
           ////public IObservable<bool> MyCommandCanExecute
           ////{
@@ -143,7 +140,7 @@ namespace H13OcrQuickStart.ViewModels
           ////}
 
           /// <summary>
-          /// Gets the processing results. 
+          /// Gets the processing results.
           /// </summary>
           public ProcessingResult ProcessingResults
           {
@@ -153,10 +150,10 @@ namespace H13OcrQuickStart.ViewModels
                }
           }
 
-          //// Create a ProcessingResult property for each command with an ObservableAsPropertyHelper<ProcessingResult> you need to monitor. 
+          //// Create a ProcessingResult property for each command with an ObservableAsPropertyHelper<ProcessingResult> you need to monitor.
 
           /////// <summary>
-          /////// Gets the processing results for MyCommand. 
+          /////// Gets the processing results for MyCommand.
           /////// </summary>
           ////public ProcessingResult MyProcessingResults
           ////{
@@ -170,34 +167,14 @@ namespace H13OcrQuickStart.ViewModels
 
           //// Create properties that expose any display object properties in the Processor model.
 
-          #endregion Properties
+          #endregion Public Properties
 
-          #region Public Methods
 
-          #endregion public methods
 
           #region Protected Methods
 
           /// <summary>
-          /// Implements the asynchronous process method for this process. 
-          /// </summary>
-          /// <returns>A ProcessingResult instance.</returns>
-          protected override async Task<ProcessingResult> ProcessAsync()
-          {
-               // This default version will call the Processor.Process() method with no parameters.
-               // If desired, properties can be manually set in the Processor here. Passing parameters in the second version is preferred. 
-               return await base.ProcessAsync();
-
-               // To pass parameters, use this version to call the Processor.Process(object parameters) overload.
-               // Create a defined non-generic Tuple containing the parameters. 
-               // Dummy parameters. Change this. 
-               //// Tuple<object> parameters = new Tuple<object>(new object());
-               //// Example: Tuple<HImage, double> parameters = new Tuple<HImage, double>(this.MainViewModelRef.LoadImageVM.Image, this.PropertyNameOfDoubleType);
-               //// return await Task.Factory.StartNew(() => this.Processor.Process(parameters));
-          }
-
-          /// <summary>
-          /// Builds a DisplayCollection that will be displayed whenever a monitored display object is changed. 
+          /// Builds a DisplayCollection that will be displayed whenever a monitored display object is changed.
           /// </summary>
           /// <returns>the DisplayCollection.</returns>
           protected override DisplayCollection BuildDisplayItem()
@@ -205,7 +182,7 @@ namespace H13OcrQuickStart.ViewModels
                DisplayCollection tempDC = new DisplayCollection()
                {
                     //// Set to true to clear any existing display before adding new objects.
-                    //// Set to false to display new objects over existing ones. 
+                    //// Set to false to display new objects over existing ones.
                     ClearDisplayFirst = true
                };
 
@@ -218,7 +195,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Overrides the Dispose method of IDisposable that actually disposes of managed resources. 
+          /// Overrides the Dispose method of IDisposable that actually disposes of managed resources.
           /// </summary>
           /// <param name="disposing">A boolean value indicating whether the class is being disposed.</param>
           protected override void Dispose(bool disposing)
@@ -227,7 +204,7 @@ namespace H13OcrQuickStart.ViewModels
                {
                     if (disposing)
                     {
-                         //// Dispose of managed resources here. 
+                         //// Dispose of managed resources here.
                     }
 
                     //// Dispose of unmanaged resources here.
@@ -235,8 +212,26 @@ namespace H13OcrQuickStart.ViewModels
                     this.isDisposed = true;
                }
 
-               // Call base.Dispose, passing parameter. 
+               // Call base.Dispose, passing parameter.
                base.Dispose(disposing);
+          }
+
+          /// <summary>
+          /// Implements the asynchronous process method for this process.
+          /// </summary>
+          /// <returns>A ProcessingResult instance.</returns>
+          protected override async Task<ProcessingResult> ProcessAsync()
+          {
+               // This default version will call the Processor.Process() method with no parameters.
+               // If desired, properties can be manually set in the Processor here. Passing parameters in the second version is preferred.
+               return await base.ProcessAsync();
+
+               // To pass parameters, use this version to call the Processor.Process(object parameters) overload.
+               // Create a defined non-generic Tuple containing the parameters.
+               // Dummy parameters. Change this.
+               //// Tuple<object> parameters = new Tuple<object>(new object());
+               //// Example: Tuple<HImage, double> parameters = new Tuple<HImage, double>(this.MainViewModelRef.LoadImageVM.Image, this.PropertyNameOfDoubleType);
+               //// return await Task.Factory.StartNew(() => this.Processor.Process(parameters));
           }
 
           #endregion Protected Methods
@@ -250,12 +245,12 @@ namespace H13OcrQuickStart.ViewModels
           ////    // No parameters:
           ////    return await Task.Factory.StartNew(() => this.Processor.MyProcess());
           ////    // Create Processor.MyProcess().
-          ////    
+          ////
           ////    // With parameters.
-          ////    // Dummy parameters. Change this. 
+          ////    // Dummy parameters. Change this.
           ////    Tuple<object> parameters = new Tuple<object>(new object());
           ////    return await Task.Factory.StartNew(() => this.Processor.MyProcess(parameters));
-          ////    // Create Processor.MyProcess(object parameters) and handle any parameters passes. 
+          ////    // Create Processor.MyProcess(object parameters) and handle any parameters passes.
           ////}
 
           #endregion Private Methods

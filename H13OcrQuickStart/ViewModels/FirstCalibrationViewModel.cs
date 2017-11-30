@@ -17,46 +17,61 @@ namespace H13OcrQuickStart.ViewModels
      using Rti.Halcon;
 
      /// <summary>
-     /// View model for the new Acquire Calibration process. 
+     /// View model for the new Acquire Calibration process.
      /// </summary>
      public class FirstCalibrationViewModel : ProcessViewModelBase<MainViewModel, FirstCalibrationProcessor>, ICameraCalibrationViewModel
      {
           #region Private Declarations
 
           /// <summary>
-          /// Stores the Interaction to get a file name from the user.
+          /// Stores a value indicating whether all parameters are valid.
           /// </summary>
-          private Interaction<Unit, string> getFileName;
+          private bool areInitialParametersValid = true;
 
           /// <summary>
-          /// Stores the Interaction to get a file name for a save operation from the user.
+          /// Stores the calibrated scale.
           /// </summary>
-          private Interaction<Unit, string> getSaveFileName;
+          private double calibratedScale = 0.5;
 
           /// <summary>
-          /// Stores the Interaction to get a file name for a save calibration map operation from the user.
+          /// Stores the name of the folder where calibration images are located.
           /// </summary>
-          private Interaction<Unit, string> getCalibratioinMapSaveFileName;
+          private string calibrationImageFolderName = string.Empty;
 
           /// <summary>
-          /// Stores the Interaction to get a folder name from the user.
+          /// Stores the calibration map.
           /// </summary>
-          private Interaction<Unit, string> getFolderName;
+          private HImage calibrationMap = new HImage();
 
           /// <summary>
-          /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call. 
+          /// Stores the file name for loading the calibration map.
           /// </summary>
-          private ObservableAsPropertyHelper<ProcessingResult> processingResults;
+          private string calibrationMapLoadFileName = string.Empty;
 
           /// <summary>
-          /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call. 
+          /// Stores the file name for saving the calibration map.
           /// </summary>
-          private ObservableAsPropertyHelper<ProcessingResult> processingResultsCalibrate;
+          private string calibrationMapSaveFileName = string.Empty;
 
           /// <summary>
-          /// Stores a value indicating whether the class has been disposed. 
+          /// Stores the calibration test image.
           /// </summary>
-          private bool isDisposed = false;
+          private HImage calibrationTestImage = new HImage();
+
+          /// <summary>
+          /// Stores the camera type.
+          /// </summary>
+          private string cameraType = "area_scan_division";
+
+          /// <summary>
+          /// Stores the camera type parameters.
+          /// </summary>
+          private HTuple cameraTypeParameters = new HTuple();
+
+          /// <summary>
+          /// Stores a value indicating whether new images should be corrected.
+          /// </summary>
+          private bool correctNewImages = false;
 
           /// <summary>
           /// Stores the focal length.
@@ -67,6 +82,147 @@ namespace H13OcrQuickStart.ViewModels
           /// Stores the focal length parameters.
           /// </summary>
           private HTuple focalLengthParameters = new HTuple(1.0);
+
+          /// <summary>
+          /// Stores the Interaction to get a file name for a save calibration map operation from the user.
+          /// </summary>
+          private Interaction<Unit, string> getCalibratioinMapSaveFileName;
+
+          /// <summary>
+          /// Stores the Interaction to get a file name from the user.
+          /// </summary>
+          private Interaction<Unit, string> getFileName;
+
+          /// <summary>
+          /// Stores the Interaction to get a folder name from the user.
+          /// </summary>
+          private Interaction<Unit, string> getFolderName;
+
+          /// <summary>
+          /// Stores the Interaction to get a file name for a save operation from the user.
+          /// </summary>
+          private Interaction<Unit, string> getSaveFileName;
+
+          /// <summary>
+          /// Stores the name of the halcon calibration plate.
+          /// </summary>
+          private string halconCalibrationPlateName = "calplate_320mm.cpd";
+
+          // assumes defaults are valid.
+          // <summary>
+          /// Stores the name parameters of the halcon calibration plate.
+          /// </summary>
+          private HTuple halconCalibrationPlateParameters = new HTuple();
+
+          /// <summary>
+          /// Stores the image height.
+          /// </summary>
+          private int imageHeight = 480;
+
+          /// <summary>
+          /// Stores the image height parameters.
+          /// </summary>
+          private HTuple imageHeightParameters = new HTuple();
+
+          /// <summary>
+          /// Stores the image width.
+          /// </summary>
+          private int imageWidth = 640;
+
+          /// <summary>
+          /// Stores the image width parameters.
+          /// </summary>
+          private HTuple imageWidthParameters = new HTuple();
+
+          /// <summary>
+          /// Stores a value indicating whether the processor is busy.
+          /// </summary>
+          private bool isBusy = false;
+
+          /// <summary>
+          /// Stores a value indicating whether calibration test image is present.
+          /// </summary>
+          private bool isCalibrationTestImagePresent = false;
+
+          /// <summary>
+          /// Stores a value indicating whether the class has been disposed.
+          /// </summary>
+          private bool isDisposed = false;
+
+          /// <summary>
+          /// Stores a value indicating whether processor is loading a calibration test image.
+          /// </summary>
+          private bool loadingTestImage = false;
+
+          /// <summary>
+          /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call.
+          /// </summary>
+          private ObservableAsPropertyHelper<ProcessingResult> processingResults;
+
+          /// <summary>
+          /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call.
+          /// </summary>
+          private ObservableAsPropertyHelper<ProcessingResult> processingResultsCalibrate;
+
+          /// <summary>
+          /// Stores the rectified image height.
+          /// </summary>
+          private int rectifiedImageHeight = 525;
+
+          /// <summary>
+          /// Stores  a value indicating whether the rectified image size change is programmatically called.
+          /// </summary>
+          private bool rectifiedImageSizeProgramaticCall = false;
+
+          /// <summary>
+          /// Stores the rectified image width.
+          /// </summary>
+          private int rectifiedImageWidth = 700;
+
+          /// <summary>
+          /// Stores the file name for saving the rectified test image.
+          /// </summary>
+          private string rectifiedTestImageSaveName = string.Empty;
+
+          /// <summary>
+          /// Stores the rotation.
+          /// </summary>
+          private double rotation = 0.0;
+
+          /// <summary>
+          /// Stores the rotation parameters.
+          /// </summary>
+          private HTuple rotationParameters = new HTuple();
+
+          /// <summary>
+          /// Stores the rotation in the X direction.
+          /// </summary>
+          private double rotX = 0;
+
+          /// <summary>
+          /// Stores the rotation in the X direction parameters.
+          /// </summary>
+          private HTuple rotXParameters = new HTuple();
+
+          /// <summary>
+          /// Stores the rotation in the Y direction.
+          /// </summary>
+          private double rotY = 0;
+
+          /// <summary>
+          /// Stores the rotation in the Y direction parameters.
+          /// </summary>
+          private HTuple rotYParameters = new HTuple();
+
+          /// <summary>
+          /// Stores the rotation in the z direction.
+          /// </summary>
+          private double rotZ = 0;
+
+          /// <summary>
+          /// Stores the rotation in the Z direction parameters.
+          /// </summary>
+          private HTuple rotZParameters = new HTuple();
 
           /// <summary>
           /// Stores the sensor size in the X direction.
@@ -89,36 +245,6 @@ namespace H13OcrQuickStart.ViewModels
           private HTuple sensorSizeYParameters = new HTuple();
 
           /// <summary>
-          /// Stores the image width.
-          /// </summary>
-          private int imageWidth = 640;
-
-          /// <summary>
-          /// Stores the image width parameters.
-          /// </summary>
-          private HTuple imageWidthParameters = new HTuple();
-
-          /// <summary>
-          /// Stores the image height.
-          /// </summary>
-          private int imageHeight = 480;
-
-          /// <summary>
-          /// Stores the image height parameters.
-          /// </summary>
-          private HTuple imageHeightParameters = new HTuple();
-
-          /// <summary>
-          /// Stores the camera type.
-          /// </summary>
-          private string cameraType = "area_scan_division";
-
-          /// <summary>
-          /// Stores the camera type parameters.
-          /// </summary>
-          private HTuple cameraTypeParameters = new HTuple();
-
-          /// <summary>
           /// Stores the tilt.
           /// </summary>
           private double tilt = 0.0;
@@ -127,16 +253,6 @@ namespace H13OcrQuickStart.ViewModels
           /// Stores the tilt parameters.
           /// </summary>
           private HTuple tiltParameters = new HTuple();
-
-          /// <summary>
-          /// Stores the rotation.
-          /// </summary>
-          private double rotation = 0.0;
-
-          /// <summary>
-          /// Stores the rotation parameters.
-          /// </summary>
-          private HTuple rotationParameters = new HTuple();
 
           /// <summary>
           /// Stores the translation in the X direction.
@@ -169,140 +285,25 @@ namespace H13OcrQuickStart.ViewModels
           private HTuple transZParameters = new HTuple();
 
           /// <summary>
-          /// Stores the rotation in the X direction.
-          /// </summary>
-          private double rotX = 0;
-
-          /// <summary>
-          /// Stores the rotation in the X direction parameters.
-          /// </summary>
-          private HTuple rotXParameters = new HTuple();
-
-          /// <summary>
-          /// Stores the rotation in the Y direction.
-          /// </summary>
-          private double rotY = 0;
-
-          /// <summary>
-          /// Stores the rotation in the Y direction parameters.
-          /// </summary>
-          private HTuple rotYParameters = new HTuple();
-
-          /// <summary>
-          /// Stores the rotation in the z direction.
-          /// </summary>
-          private double rotZ = 0;
-
-          /// <summary>
-          /// Stores the rotation in the Z direction parameters. 
-          /// </summary>
-          private HTuple rotZParameters = new HTuple();
-
-          /// <summary>
-          /// Stores the rectified image width.
-          /// </summary>
-          private int rectifiedImageWidth = 700;
-
-          /// <summary>
-          /// Stores the rectified image height.
-          /// </summary>
-          private int rectifiedImageHeight = 525;
-
-          /// <summary>
-          /// Stores the calibrated scale.
-          /// </summary>
-          private double calibratedScale = 0.5;
-
-          /// <summary>
           /// Stores the index into the poses in the camera parameters to use as the world pose.
           /// </summary>
           private int worldPoseIndex = 0;
-
-          /// <summary>
-          /// Stores a value indicating whether all parameters are valid.
-          /// </summary>
-          private bool areInitialParametersValid = true; // assumes defaults are valid. 
-
-          /// <summary>
-          /// Stores the name of the halcon calibration plate.
-          /// </summary>
-          private string halconCalibrationPlateName = "calplate_320mm.cpd";
-
-          // <summary>
-          /// Stores the name parameters of the halcon calibration plate.
-          /// </summary>
-          private HTuple halconCalibrationPlateParameters = new HTuple();
-
-          /// <summary>
-          /// Stores the name of the folder where calibration images are located.
-          /// </summary>
-          private string calibrationImageFolderName = string.Empty;
-
-          /// <summary>
-          /// Stores the file name for saving the calibration map. 
-          /// </summary>
-          private string calibrationMapSaveFileName = string.Empty;
-
-          /// <summary>
-          /// Stores the file name for loading the calibration map. 
-          /// </summary>
-          private string calibrationMapLoadFileName = string.Empty;
-
-          /// <summary>
-          /// Stores the calibration map. 
-          /// </summary>
-          private HImage calibrationMap = new HImage();
-
-          /// <summary>
-          /// Stores a value indicating whether the processor is busy. 
-          /// </summary>
-          private bool isBusy = false;
-
-          /// <summary>
-          /// Stores a value indicating whether processor is loading a calibration test image. 
-          /// </summary>
-          private bool loadingTestImage = false;
-
-          /// <summary>
-          /// Stores the calibration test image. 
-          /// </summary>
-          private HImage calibrationTestImage = new HImage();
-
-          /// <summary>
-          /// Stores a value indicating whether calibration test image is present.
-          /// </summary>
-          private bool isCalibrationTestImagePresent = false;
-
-          /// <summary>
-          /// Stores the file name for saving the rectified test image. 
-          /// </summary>
-          private string rectifiedTestImageSaveName = string.Empty;
-
-          /// <summary>
-          /// Stores a value indicating whether new images should be corrected. 
-          /// </summary>
-          private bool correctNewImages = false;
-
-          /// <summary>
-          /// Stores  a value indicating whether the rectified image size change is programmatically called.
-          /// </summary>
-          private bool rectifiedImageSizeProgramaticCall = false;
 
           #endregion Private Declarations
 
           #region Constructors
 
           /// <summary>
-          /// Initializes a new instance of the AcquireCalibrationViewModel class. 
+          /// Initializes a new instance of the AcquireCalibrationViewModel class.
           /// </summary>
           /// <param name="mainVM">A reference to the main view model.</param>
           /// <param name="processor">An instance of the processor class for this view model.</param>
           public FirstCalibrationViewModel(IMainViewModel mainVM, IProcessor processor)
                : base(mainVM, processor)
           {
-               //// If a CanExecute condition needs to be set, do it here and recreate the Command using 
-               //// the CanExecute object.                        
-               //// this.CanExecute = this.WhenAny(x => x.MainViewModelRef.<some property>, x => x.Value == false);            
+               //// If a CanExecute condition needs to be set, do it here and recreate the Command using
+               //// the CanExecute object.
+               //// this.CanExecute = this.WhenAny(x => x.MainViewModelRef.<some property>, x => x.Value == false);
                //// this.Command = ReactiveCommand.CreateFromTask(_ => this.ProcessAsync(), this.CanExecute, );
 
                // Unused.
@@ -340,14 +341,14 @@ namespace H13OcrQuickStart.ViewModels
                this.LoadTestCalibrationImageCanExecute = this.WhenAnyValue(x => x.Processor.IsCalibrationMapPresent)
                    .ObserveOn(RxApp.MainThreadScheduler);
 
-               // All this command does is set the LoadingTestImage flag. 
+               // All this command does is set the LoadingTestImage flag.
                this.LoadTestCalibrationImageCommand = ReactiveCommand.Create(() =>
                {
                     this.LoadingTestImage = true;
                }, this.LoadTestCalibrationImageCanExecute);
 
                // When executed, this command serves as an observable from which to invoke the main command of the LoadImageVM,
-               // which should run asynchronously because it is an asynchronous command. ProcessingResult is handled there. 
+               // which should run asynchronously because it is an asynchronous command. ProcessingResult is handled there.
                this.LoadTestCalibrationImageCommand
                     .InvokeCommand(this.MainViewModelRef.LoadImageVM.Command);
 
@@ -378,11 +379,11 @@ namespace H13OcrQuickStart.ViewModels
                    .Where(x => x != null)
                    .Subscribe(_ => this.IsBusy = false));
 
-               // This observable catches any processor errors not returned in a ProcessingResult instance. 
+               // This observable catches any processor errors not returned in a ProcessingResult instance.
                this.DisposeCollection.Add(this.WhenAnyValue(x => x.Processor.ErrorMessage)
                    .Subscribe(x => this.MainViewModelRef.StatusText = x));
 
-               //// This reacts to the execution of the command by resetting the AppState. Modify as needed. 
+               //// This reacts to the execution of the command by resetting the AppState. Modify as needed.
                this.DisposeCollection.Add(this.Command
                    .Subscribe(_ =>
                    {
@@ -433,157 +434,11 @@ namespace H13OcrQuickStart.ViewModels
                this.SetParameters();
           }
 
-          #endregion  Constructors
+          #endregion Constructors
 
-          #region Private Destructors
 
-          #endregion Private Destructors
 
           #region Public Properties
-
-          /// <summary>
-          /// Gets or sets a value indicating whether all parameters are valid.
-          /// </summary>
-          public bool AreInitialParametersValid
-          {
-               get => this.areInitialParametersValid;
-
-               set => this.RaiseAndSetIfChanged(ref this.areInitialParametersValid, value);
-          }
-
-          /// <summary>
-          /// Gets the Interaction to return a file name to load a file.
-          /// </summary>
-          public Interaction<Unit, string> GetFileName => this.getFileName;
-
-          /// <summary>
-          /// Gets the Interaction to return a file name to save a file.
-          /// </summary>
-          public Interaction<Unit, string> GetSaveFileName => this.getSaveFileName;
-
-          /// <summary>
-          /// Gets the Interaction to return a file name to save a calibration map.
-          /// </summary>
-          public Interaction<Unit, string> GetCalibratioinMapSaveFileName => this.getCalibratioinMapSaveFileName;
-
-          /// <summary>
-          /// Gets the Interaction to return a folder name from the user.
-          /// </summary>
-          public Interaction<Unit, string> GetFolderName => this.getFolderName;
-
-          /// <summary>
-          /// Gets or sets an observable that indicates whether the SetParameters command can execute. 
-          /// </summary>
-          public IObservable<bool> SetParametersCanExecute
-          {
-               get;
-
-               set;
-          }
-
-          /// <summary>
-          /// Gets or sets an observable that indicates whether the command to load calibration images from file can execute. 
-          /// </summary>
-          public IObservable<bool> LoadCalibImagesFromFileCanExecute
-          {
-               get;
-
-               set;
-          }
-
-          /// <summary>
-          /// Gets or sets an observable that indicates whether the Calibrate command can execute. 
-          /// </summary>
-          public IObservable<bool> CalibrateCanExecute
-          {
-               get;
-
-               set;
-          }
-
-          /// <summary>
-          /// Gets or sets an observable that indicates whether the SaveCalibrationMap command can execute. 
-          /// </summary>
-          public IObservable<bool> SaveCalibrationMapCanExecute
-          {
-               get;
-
-               set;
-          }
-
-          /// <summary>
-          /// Gets or sets an observable that indicates whether the LoadTestCalibrationImage command can execute. 
-          /// </summary>
-          public IObservable<bool> LoadTestCalibrationImageCanExecute
-          {
-               get;
-
-               set;
-          }
-
-          /// <summary>
-          /// Gets or sets an observable that indicates whether the RectifyImage command can execute. 
-          /// </summary>
-          public IObservable<bool> RectifyImageCanExecute
-          {
-               get;
-
-               set;
-          }
-
-          /// <summary>
-          /// Gets or sets an observable that indicates whether the SaveRectifiedImage command can execute. 
-          /// </summary>
-          public IObservable<bool> SaveRectifiedImageCanExecute
-          {
-               get;
-
-               set;
-          }
-
-          /// <summary>
-          /// Gets the processing results. 
-          /// </summary>
-          public ProcessingResult ProcessingResults => this.processingResults.Value;
-
-          /// <summary>
-          /// Gets the processing results calibrate. 
-          /// </summary>
-          public ProcessingResult ProcessingResultsCalibrate => this.processingResultsCalibrate.Value;
-
-          //// Create properties that must be set for the process to use instead of parameters.
-
-          //// Create properties that expose any display object properties in the Processor model.
-
-          /// <summary>
-          /// Gets or sets the SetParametersCommand.
-          /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> SetParametersCommand
-          {
-               get;
-
-               protected set;
-          }
-
-          /// <summary>
-          /// Gets or sets the command to load calibration images from file.
-          /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> LoadCalibImagesFromFileCommand
-          {
-               get;
-
-               protected set;
-          }
-
-          /// <summary>
-          /// Gets or sets the command to load a test calibration image from file.
-          /// </summary>
-          public ReactiveCommand<Unit, Unit> LoadTestCalibrationImageCommand
-          {
-               get;
-
-               protected set;
-          }
 
           /// <summary>
           /// Gets or sets the command to acquire calibration images.
@@ -596,13 +451,23 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets the  command to reset calibration images.
+          /// Gets or sets a value indicating whether all parameters are valid.
           /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> ResetCalibrationImagesCommand
+          public bool AreInitialParametersValid
+          {
+               get => this.areInitialParametersValid;
+
+               set => this.RaiseAndSetIfChanged(ref this.areInitialParametersValid, value);
+          }
+
+          /// <summary>
+          /// Gets or sets an observable that indicates whether the Calibrate command can execute.
+          /// </summary>
+          public IObservable<bool> CalibrateCanExecute
           {
                get;
 
-               protected set;
+               set;
           }
 
           /// <summary>
@@ -616,53 +481,33 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets the command to load a calibration map.
+          /// Gets or sets the calibrated scale.
           /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> LoadCalibrationMapCommand
+          public double CalibratedScale
           {
-               get;
+               get => this.calibratedScale;
 
-               protected set;
+               set => this.RaiseAndSetIfChanged(ref this.calibratedScale, value);
           }
 
           /// <summary>
-          /// Gets or sets the command to save a calibration map.
+          /// Gets or sets the name of the folder where calibration images are located.
           /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> SaveCalibrationMapCommand
+          public string CalibrationImageFolderName
           {
-               get;
+               get => this.calibrationImageFolderName;
 
-               protected set;
+               set => this.RaiseAndSetIfChanged(ref this.calibrationImageFolderName, value);
           }
 
           /// <summary>
-          /// Gets or sets the command to rectify an image.
+          /// Gets or sets the calibration map.
           /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> RectifyImageCommand
+          public HImage CalibrationMap
           {
-               get;
+               get => this.calibrationMap;
 
-               protected set;
-          }
-
-          /// <summary>
-          /// Gets or sets the command to save a rectified image.
-          /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> SaveRectifiedImageCommand
-          {
-               get;
-
-               protected set;
-          }
-
-          /// <summary>
-          /// Gets or sets the file name for saving the calibration map. 
-          /// </summary>
-          public string CalibrationMapSaveFileName
-          {
-               get => this.calibrationMapSaveFileName;
-
-               set => this.RaiseAndSetIfChanged(ref this.calibrationMapSaveFileName, value);
+               set => this.RaiseAndSetIfChanged(ref this.calibrationMap, value);
           }
 
           /// <summary>
@@ -676,17 +521,17 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets the calibration map. 
+          /// Gets or sets the file name for saving the calibration map.
           /// </summary>
-          public HImage CalibrationMap
+          public string CalibrationMapSaveFileName
           {
-               get => this.calibrationMap;
+               get => this.calibrationMapSaveFileName;
 
-               set => this.RaiseAndSetIfChanged(ref this.calibrationMap, value);
+               set => this.RaiseAndSetIfChanged(ref this.calibrationMapSaveFileName, value);
           }
 
           /// <summary>
-          /// Gets or sets the calibration test image. 
+          /// Gets or sets the calibration test image.
           /// </summary>
           public HImage CalibrationTestImage
           {
@@ -696,7 +541,27 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets a value indicating whether new images should be corrected. 
+          /// Gets or sets the camera type.
+          /// </summary>
+          public string CameraType
+          {
+               get => this.cameraType;
+
+               set => this.RaiseAndSetIfChanged(ref this.cameraType, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the camera type parameters.
+          /// </summary>
+          public HTuple CameraTypeParameters
+          {
+               get => this.cameraTypeParameters;
+
+               set => this.RaiseAndSetIfChanged(ref this.cameraTypeParameters, value);
+          }
+
+          /// <summary>
+          /// Gets or sets a value indicating whether new images should be corrected.
           /// </summary>
           public bool CorrectNewImages
           {
@@ -706,27 +571,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets a value indicating whether the processor is busy.  
-          /// </summary>
-          public bool IsBusy
-          {
-               get => this.isBusy;
-
-               set => this.RaiseAndSetIfChanged(ref this.isBusy, value);
-          }
-
-          /// <summary>
-          /// Gets or sets a value indicating whether calibration test image is present. 
-          /// </summary>
-          public bool IsCalibrationTestImagePresent
-          {
-               get => this.isCalibrationTestImagePresent;
-
-               set => this.RaiseAndSetIfChanged(ref this.isCalibrationTestImagePresent, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the focal length. 
+          /// Gets or sets the focal length.
           /// </summary>
           public double FocalLength
           {
@@ -746,63 +591,43 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets a value indicating whether processor is loading a calibration test image.  
+          /// Gets the Interaction to return a file name to save a calibration map.
           /// </summary>
-          public bool LoadingTestImage
-          {
-               get => this.loadingTestImage;
+          public Interaction<Unit, string> GetCalibratioinMapSaveFileName => this.getCalibratioinMapSaveFileName;
 
-               set => this.RaiseAndSetIfChanged(ref this.loadingTestImage, value);
+          /// <summary>
+          /// Gets the Interaction to return a file name to load a file.
+          /// </summary>
+          public Interaction<Unit, string> GetFileName => this.getFileName;
+
+          /// <summary>
+          /// Gets the Interaction to return a folder name from the user.
+          /// </summary>
+          public Interaction<Unit, string> GetFolderName => this.getFolderName;
+
+          /// <summary>
+          /// Gets the Interaction to return a file name to save a file.
+          /// </summary>
+          public Interaction<Unit, string> GetSaveFileName => this.getSaveFileName;
+
+          /// <summary>
+          /// Gets or sets the name of the halcon calibration plate.
+          /// </summary>
+          public string HalconCalibrationPlateName
+          {
+               get => this.halconCalibrationPlateName;
+
+               set => this.RaiseAndSetIfChanged(ref this.halconCalibrationPlateName, value);
           }
 
           /// <summary>
-          /// Gets or sets the file name for saving the rectified test image. 
+          /// Gets or sets the parameters for the name of the halcon calibration plate.
           /// </summary>
-          public string RectifiedTestImageSaveName
+          public HTuple HalconCalibrationPlateParameters
           {
-               get => this.rectifiedTestImageSaveName;
+               get => this.halconCalibrationPlateParameters;
 
-               set => this.RaiseAndSetIfChanged(ref this.rectifiedTestImageSaveName, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the sensor size in the X direction.
-          /// </summary>
-          public double SensorSizeX
-          {
-               get => this.sensorSizeX;
-
-               set => this.RaiseAndSetIfChanged(ref this.sensorSizeX, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the sensor size in the X direction parameters.
-          /// </summary>
-          public HTuple SensorSizeXParameters
-          {
-               get => this.sensorSizeXParameters;
-
-               set => this.RaiseAndSetIfChanged(ref this.sensorSizeXParameters, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the sensor size in the Y direction.
-          /// </summary>
-          public double SensorSizeY
-          {
-               get => this.sensorSizeY;
-
-               set => this.RaiseAndSetIfChanged(ref this.sensorSizeY, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the sensor size in the Y direction parameters.
-          /// </summary>
-          public HTuple SensorSizeYParameters
-          {
-               get => this.sensorSizeYParameters;
-
-               set => this.RaiseAndSetIfChanged(ref this.sensorSizeYParameters, value);
+               set => this.RaiseAndSetIfChanged(ref this.halconCalibrationPlateParameters, value);
           }
 
           /// <summary>
@@ -836,7 +661,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets the image width parameters. 
+          /// Gets or sets the image width parameters.
           /// </summary>
           public HTuple ImageWidthParameters
           {
@@ -846,43 +671,153 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets the camera type.
+          /// Gets or sets a value indicating whether the processor is busy.
           /// </summary>
-          public string CameraType
+          public bool IsBusy
           {
-               get => this.cameraType;
+               get => this.isBusy;
 
-               set => this.RaiseAndSetIfChanged(ref this.cameraType, value);
+               set => this.RaiseAndSetIfChanged(ref this.isBusy, value);
           }
 
           /// <summary>
-          /// Gets or sets the camera type parameters.
+          /// Gets or sets a value indicating whether calibration test image is present.
           /// </summary>
-          public HTuple CameraTypeParameters
+          public bool IsCalibrationTestImagePresent
           {
-               get => this.cameraTypeParameters;
+               get => this.isCalibrationTestImagePresent;
 
-               set => this.RaiseAndSetIfChanged(ref this.cameraTypeParameters, value);
+               set => this.RaiseAndSetIfChanged(ref this.isCalibrationTestImagePresent, value);
           }
 
           /// <summary>
-          /// Gets or sets the tilt.
+          /// Gets or sets an observable that indicates whether the command to load calibration images from file can execute.
           /// </summary>
-          public double Tilt
+          public IObservable<bool> LoadCalibImagesFromFileCanExecute
           {
-               get => this.tilt;
+               get;
 
-               set => this.RaiseAndSetIfChanged(ref this.tilt, value);
+               set;
           }
 
           /// <summary>
-          /// Gets or sets the tilt parameters.
+          /// Gets or sets the command to load calibration images from file.
           /// </summary>
-          public HTuple TiltParameters
+          public ReactiveCommand<Unit, ProcessingResult> LoadCalibImagesFromFileCommand
           {
-               get => this.tiltParameters;
+               get;
 
-               set => this.RaiseAndSetIfChanged(ref this.tiltParameters, value);
+               protected set;
+          }
+
+          /// <summary>
+          /// Gets or sets the command to load a calibration map.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> LoadCalibrationMapCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
+          /// Gets or sets a value indicating whether processor is loading a calibration test image.
+          /// </summary>
+          public bool LoadingTestImage
+          {
+               get => this.loadingTestImage;
+
+               set => this.RaiseAndSetIfChanged(ref this.loadingTestImage, value);
+          }
+
+          /// <summary>
+          /// Gets or sets an observable that indicates whether the LoadTestCalibrationImage command can execute.
+          /// </summary>
+          public IObservable<bool> LoadTestCalibrationImageCanExecute
+          {
+               get;
+
+               set;
+          }
+
+          /// <summary>
+          /// Gets or sets the command to load a test calibration image from file.
+          /// </summary>
+          public ReactiveCommand<Unit, Unit> LoadTestCalibrationImageCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
+          /// Gets the processing results.
+          /// </summary>
+          public ProcessingResult ProcessingResults => this.processingResults.Value;
+
+          /// <summary>
+          /// Gets the processing results calibrate.
+          /// </summary>
+          public ProcessingResult ProcessingResultsCalibrate => this.processingResultsCalibrate.Value;
+
+          /// <summary>
+          /// Gets or sets the rectified image height.
+          /// </summary>
+          public int RectifiedImageHeight
+          {
+               get => this.rectifiedImageHeight;
+
+               set => this.RaiseAndSetIfChanged(ref this.rectifiedImageHeight, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the rectified image width.
+          /// </summary>
+          public int RectifiedImageWidth
+          {
+               get => this.rectifiedImageWidth;
+
+               set => this.RaiseAndSetIfChanged(ref this.rectifiedImageWidth, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the file name for saving the rectified test image.
+          /// </summary>
+          public string RectifiedTestImageSaveName
+          {
+               get => this.rectifiedTestImageSaveName;
+
+               set => this.RaiseAndSetIfChanged(ref this.rectifiedTestImageSaveName, value);
+          }
+
+          /// <summary>
+          /// Gets or sets an observable that indicates whether the RectifyImage command can execute.
+          /// </summary>
+          public IObservable<bool> RectifyImageCanExecute
+          {
+               get;
+
+               set;
+          }
+
+          /// <summary>
+          /// Gets or sets the command to rectify an image.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> RectifyImageCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
+          /// Gets or sets the  command to reset calibration images.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> ResetCalibrationImagesCommand
+          {
+               get;
+
+               protected set;
           }
 
           /// <summary>
@@ -903,66 +838,6 @@ namespace H13OcrQuickStart.ViewModels
                get => this.rotationParameters;
 
                set => this.RaiseAndSetIfChanged(ref this.rotationParameters, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the translation in the X direction.
-          /// </summary>
-          public double TransX
-          {
-               get => this.transX;
-
-               set => this.RaiseAndSetIfChanged(ref this.transX, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the translation in the X direction parameters.
-          /// </summary>
-          public HTuple TransXParameters
-          {
-               get => this.transXParameters;
-
-               set => this.RaiseAndSetIfChanged(ref this.transXParameters, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the translation in the Y direction.
-          /// </summary>
-          public double TransY
-          {
-               get => this.transY;
-
-               set => this.RaiseAndSetIfChanged(ref this.transY, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the translation in the Y direction parameters.
-          /// </summary>
-          public HTuple TransYParameters
-          {
-               get => this.transYParameters;
-
-               set => this.RaiseAndSetIfChanged(ref this.transYParameters, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the translation in the Z direction.
-          /// </summary>
-          public double TransZ
-          {
-               get => this.transZ;
-
-               set => this.RaiseAndSetIfChanged(ref this.transZ, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the translation in the Z direction parameters.
-          /// </summary>
-          public HTuple TransZParameters
-          {
-               get => this.transZParameters;
-
-               set => this.RaiseAndSetIfChanged(ref this.transZParameters, value);
           }
 
           /// <summary>
@@ -1026,33 +901,187 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets the rectified image height.
+          /// Gets or sets an observable that indicates whether the SaveCalibrationMap command can execute.
           /// </summary>
-          public int RectifiedImageHeight
+          public IObservable<bool> SaveCalibrationMapCanExecute
           {
-               get => this.rectifiedImageHeight;
+               get;
 
-               set => this.RaiseAndSetIfChanged(ref this.rectifiedImageHeight, value);
+               set;
           }
 
           /// <summary>
-          /// Gets or sets the rectified image width.
+          /// Gets or sets the command to save a calibration map.
           /// </summary>
-          public int RectifiedImageWidth
+          public ReactiveCommand<Unit, ProcessingResult> SaveCalibrationMapCommand
           {
-               get => this.rectifiedImageWidth;
+               get;
 
-               set => this.RaiseAndSetIfChanged(ref this.rectifiedImageWidth, value);
+               protected set;
           }
 
           /// <summary>
-          /// Gets or sets the calibrated scale.
+          /// Gets or sets an observable that indicates whether the SaveRectifiedImage command can execute.
           /// </summary>
-          public double CalibratedScale
+          public IObservable<bool> SaveRectifiedImageCanExecute
           {
-               get => this.calibratedScale;
+               get;
 
-               set => this.RaiseAndSetIfChanged(ref this.calibratedScale, value);
+               set;
+          }
+
+          /// <summary>
+          /// Gets or sets the command to save a rectified image.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> SaveRectifiedImageCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
+          /// Gets or sets the sensor size in the X direction.
+          /// </summary>
+          public double SensorSizeX
+          {
+               get => this.sensorSizeX;
+
+               set => this.RaiseAndSetIfChanged(ref this.sensorSizeX, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the sensor size in the X direction parameters.
+          /// </summary>
+          public HTuple SensorSizeXParameters
+          {
+               get => this.sensorSizeXParameters;
+
+               set => this.RaiseAndSetIfChanged(ref this.sensorSizeXParameters, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the sensor size in the Y direction.
+          /// </summary>
+          public double SensorSizeY
+          {
+               get => this.sensorSizeY;
+
+               set => this.RaiseAndSetIfChanged(ref this.sensorSizeY, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the sensor size in the Y direction parameters.
+          /// </summary>
+          public HTuple SensorSizeYParameters
+          {
+               get => this.sensorSizeYParameters;
+
+               set => this.RaiseAndSetIfChanged(ref this.sensorSizeYParameters, value);
+          }
+
+          /// <summary>
+          /// Gets or sets an observable that indicates whether the SetParameters command can execute.
+          /// </summary>
+          public IObservable<bool> SetParametersCanExecute
+          {
+               get;
+
+               set;
+          }
+
+          //// Create properties that must be set for the process to use instead of parameters.
+
+          //// Create properties that expose any display object properties in the Processor model.
+
+          /// <summary>
+          /// Gets or sets the SetParametersCommand.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> SetParametersCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
+          /// Gets or sets the tilt.
+          /// </summary>
+          public double Tilt
+          {
+               get => this.tilt;
+
+               set => this.RaiseAndSetIfChanged(ref this.tilt, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the tilt parameters.
+          /// </summary>
+          public HTuple TiltParameters
+          {
+               get => this.tiltParameters;
+
+               set => this.RaiseAndSetIfChanged(ref this.tiltParameters, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the translation in the X direction.
+          /// </summary>
+          public double TransX
+          {
+               get => this.transX;
+
+               set => this.RaiseAndSetIfChanged(ref this.transX, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the translation in the X direction parameters.
+          /// </summary>
+          public HTuple TransXParameters
+          {
+               get => this.transXParameters;
+
+               set => this.RaiseAndSetIfChanged(ref this.transXParameters, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the translation in the Y direction.
+          /// </summary>
+          public double TransY
+          {
+               get => this.transY;
+
+               set => this.RaiseAndSetIfChanged(ref this.transY, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the translation in the Y direction parameters.
+          /// </summary>
+          public HTuple TransYParameters
+          {
+               get => this.transYParameters;
+
+               set => this.RaiseAndSetIfChanged(ref this.transYParameters, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the translation in the Z direction.
+          /// </summary>
+          public double TransZ
+          {
+               get => this.transZ;
+
+               set => this.RaiseAndSetIfChanged(ref this.transZ, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the translation in the Z direction parameters.
+          /// </summary>
+          public HTuple TransZParameters
+          {
+               get => this.transZParameters;
+
+               set => this.RaiseAndSetIfChanged(ref this.transZParameters, value);
           }
 
           /// <summary>
@@ -1065,37 +1094,7 @@ namespace H13OcrQuickStart.ViewModels
                set => this.RaiseAndSetIfChanged(ref this.worldPoseIndex, value);
           }
 
-          /// <summary>
-          /// Gets or sets the name of the halcon calibration plate.
-          /// </summary>
-          public string HalconCalibrationPlateName
-          {
-               get => this.halconCalibrationPlateName;
-
-               set => this.RaiseAndSetIfChanged(ref this.halconCalibrationPlateName, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the parameters for the name of the halcon calibration plate.
-          /// </summary>
-          public HTuple HalconCalibrationPlateParameters
-          {
-               get => this.halconCalibrationPlateParameters;
-
-               set => this.RaiseAndSetIfChanged(ref this.halconCalibrationPlateParameters, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the name of the folder where calibration images are located.
-          /// </summary>
-          public string CalibrationImageFolderName
-          {
-               get => this.calibrationImageFolderName;
-
-               set => this.RaiseAndSetIfChanged(ref this.calibrationImageFolderName, value);
-          }
-
-          #endregion Properties
+          #endregion Public Properties
 
           #region Public Methods
 
@@ -1126,23 +1125,12 @@ namespace H13OcrQuickStart.ViewModels
                }
           }
 
-          #endregion public methods
+          #endregion Public Methods
 
           #region Protected Methods
 
           /// <summary>
-          /// Implements the asynchronous process method for this process. 
-          /// </summary>
-          /// <returns>A ProcessingResult instance.</returns>
-          protected override async Task<ProcessingResult> ProcessAsync()
-          {
-               //// Set any properties needed by the processor Process method before calling ProcessAsync. 
-               // this.Processor.<Some property used by the processor Process method>  = this.MainViewModelRef.<view model>.<property to use>;
-               return await base.ProcessAsync();
-          }
-
-          /// <summary>
-          /// Builds a DisplayCollection that will be displayed whenever a monitored display object is changed. 
+          /// Builds a DisplayCollection that will be displayed whenever a monitored display object is changed.
           /// </summary>
           /// <returns>the DisplayCollection.</returns>
           protected override DisplayCollection BuildDisplayItem()
@@ -1150,7 +1138,7 @@ namespace H13OcrQuickStart.ViewModels
                DisplayCollection tempDC = new DisplayCollection()
                {
                     //// Set to true to clear any existing display before adding new objects.
-                    //// Set to false to display new objects over existing ones. 
+                    //// Set to false to display new objects over existing ones.
                     ClearDisplayFirst = true
                };
 
@@ -1161,7 +1149,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Overrides the Dispose method of IDisposable that actually disposes of managed resources. 
+          /// Overrides the Dispose method of IDisposable that actually disposes of managed resources.
           /// </summary>
           /// <param name="disposing">A boolean value indicating whether the class is being disposed.</param>
           protected override void Dispose(bool disposing)
@@ -1170,7 +1158,7 @@ namespace H13OcrQuickStart.ViewModels
                {
                     if (disposing)
                     {
-                         //// Dispose of managed resources here. 
+                         //// Dispose of managed resources here.
                     }
 
                     //// Dispose of unmanaged resources here.
@@ -1182,8 +1170,19 @@ namespace H13OcrQuickStart.ViewModels
                     this.isDisposed = true;
                }
 
-               // Call base.Dispose, passing parameter. 
+               // Call base.Dispose, passing parameter.
                base.Dispose(disposing);
+          }
+
+          /// <summary>
+          /// Implements the asynchronous process method for this process.
+          /// </summary>
+          /// <returns>A ProcessingResult instance.</returns>
+          protected override async Task<ProcessingResult> ProcessAsync()
+          {
+               //// Set any properties needed by the processor Process method before calling ProcessAsync.
+               // this.Processor.<Some property used by the processor Process method>  = this.MainViewModelRef.<view model>.<property to use>;
+               return await base.ProcessAsync();
           }
 
           #endregion Protected Methods
@@ -1191,25 +1190,32 @@ namespace H13OcrQuickStart.ViewModels
           #region Private Methods
 
           /// <summary>.
-          /// Implements the asynchronous method to set the parameters. 
+          /// Implements the asynchronous method to acquire calibration images.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
-          private async Task<ProcessingResult> SetParametersAsync()
+          private async Task<ProcessingResult> AcquireCalibrationImagesAsync()
           {
-               return await Task.Factory.StartNew(() => this.Processor.SetInitialParameters(
-                   this.CameraType,
-                   this.FocalLength,
-                   this.ImageWidth,
-                   this.ImageHeight,
-                   this.SensorSizeX * 0.001,
-                   this.SensorSizeY * 0.001,
-                   0,
-                   0,
-                   this.HalconCalibrationPlateName));
+               await Task.Factory.StartNew(() => this.MainViewModelRef.AcquireAcquisitionVM.Processor.Process());
+               return await Task.Factory.StartNew(() => this.Processor.ProcessAcquiredCalibrationImage(this.MainViewModelRef.AcquireAcquisitionVM.Image));
           }
 
           /// <summary>.
-          /// Implements the asynchronous method to load the calibration images from file. 
+          /// Implements the asynchronous method to perform the calibration.
+          /// </summary>
+          /// <returns>A ProcessingResult instance.</returns>
+          private async Task<ProcessingResult> CalibrateAsync()
+          {
+               return await Task.Factory.StartNew(() => this.Processor.Calibrate(
+                   this.ImageWidth,
+                   this.ImageHeight,
+                   this.RectifiedImageWidth,
+                   this.RectifiedImageHeight,
+                   this.CalibratedScale * 0.001,
+                   this.WorldPoseIndex));
+          }
+
+          /// <summary>.
+          /// Implements the asynchronous method to load the calibration images from file.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
           private async Task<ProcessingResult> LoadCalibImagesFromFileAsync()
@@ -1240,41 +1246,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>.
-          /// Implements the asynchronous method to acquire calibration images. 
-          /// </summary>
-          /// <returns>A ProcessingResult instance.</returns>
-          private async Task<ProcessingResult> AcquireCalibrationImagesAsync()
-          {
-               await Task.Factory.StartNew(() => this.MainViewModelRef.AcquireAcquisitionVM.Processor.Process());
-               return await Task.Factory.StartNew(() => this.Processor.ProcessAcquiredCalibrationImage(this.MainViewModelRef.AcquireAcquisitionVM.Image));
-          }
-
-          /// <summary>.
-          /// Implements the asynchronous method to set all calibration images. 
-          /// </summary>
-          /// <returns>A ProcessingResult instance.</returns>
-          private async Task<ProcessingResult> ResetCalibrationImagesAsync()
-          {
-               return await Task.Factory.StartNew(() => this.Processor.ResetCalibrationImages());
-          }
-
-          /// <summary>.
-          /// Implements the asynchronous method to perform the calibration. 
-          /// </summary>
-          /// <returns>A ProcessingResult instance.</returns>
-          private async Task<ProcessingResult> CalibrateAsync()
-          {
-               return await Task.Factory.StartNew(() => this.Processor.Calibrate(
-                   this.ImageWidth,
-                   this.ImageHeight,
-                   this.RectifiedImageWidth,
-                   this.RectifiedImageHeight,
-                   this.CalibratedScale * 0.001,
-                   this.WorldPoseIndex));
-          }
-
-          /// <summary>.
-          /// Implements the asynchronous method to load a calibration map. 
+          /// Implements the asynchronous method to load a calibration map.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
           private async Task<ProcessingResult> LoadCalibrationMapAsync()
@@ -1304,7 +1276,25 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Implements the asynchronous method to save a calibration map. 
+          /// Implements the asynchronous method to rectify an image.
+          /// </summary>
+          /// <returns>A ProcessingResult instance.</returns>
+          private async Task<ProcessingResult> RectifyImageAsync()
+          {
+               return await Task.Factory.StartNew(() => this.Processor.RectifyImage(this.CalibrationTestImage));
+          }
+
+          /// <summary>.
+          /// Implements the asynchronous method to set all calibration images.
+          /// </summary>
+          /// <returns>A ProcessingResult instance.</returns>
+          private async Task<ProcessingResult> ResetCalibrationImagesAsync()
+          {
+               return await Task.Factory.StartNew(() => this.Processor.ResetCalibrationImages());
+          }
+
+          /// <summary>
+          /// Implements the asynchronous method to save a calibration map.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
           private async Task<ProcessingResult> SaveCalibrationMapAsync()
@@ -1334,16 +1324,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Implements the asynchronous method to rectify an image. 
-          /// </summary>
-          /// <returns>A ProcessingResult instance.</returns>
-          private async Task<ProcessingResult> RectifyImageAsync()
-          {
-               return await Task.Factory.StartNew(() => this.Processor.RectifyImage(this.CalibrationTestImage));
-          }
-
-          /// <summary>
-          /// Implements the asynchronous method to save a rectified image. 
+          /// Implements the asynchronous method to save a rectified image.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
           private async Task<ProcessingResult> SaveRectifiedAsync()
@@ -1370,30 +1351,6 @@ namespace H13OcrQuickStart.ViewModels
 
                     return result;
                }
-          }
-
-          /// <summary>
-          /// Set the height of the rectified image according to its aspect ratio. 
-          /// </summary>
-          /// <param name="rectifiedWidth">The rectified width.</param>
-          private void SetRectifiedImageHeightToAspectRatio(int rectifiedWidth)
-          {
-               double ratio = (double)this.ImageHeight / (double)this.ImageWidth;
-               this.rectifiedImageSizeProgramaticCall = true;
-               this.RectifiedImageHeight = (int)Math.Round((double)rectifiedWidth * ratio);
-               this.rectifiedImageSizeProgramaticCall = false;
-          }
-
-          /// <summary>
-          /// Set the width of the rectified image according to its aspect ratio. 
-          /// </summary>
-          /// <param name="rectifiedHeight">The rectified height.</param>
-          private void SetRectifiedImageWidthToAspectRatio(int rectifiedHeight)
-          {
-               double ratio = (double)this.ImageWidth / (double)this.ImageHeight;
-               this.rectifiedImageSizeProgramaticCall = true;
-               this.RectifiedImageWidth = (int)Math.Round((double)rectifiedHeight * ratio);
-               this.rectifiedImageSizeProgramaticCall = false;
           }
 
           /// <summary>
@@ -1425,6 +1382,48 @@ namespace H13OcrQuickStart.ViewModels
                     "calplate_320mm.cpd",
                     "calplate_640mm.cpd",
                     "calplate_1200mm.cpd");
+          }
+
+          /// <summary>.
+          /// Implements the asynchronous method to set the parameters.
+          /// </summary>
+          /// <returns>A ProcessingResult instance.</returns>
+          private async Task<ProcessingResult> SetParametersAsync()
+          {
+               return await Task.Factory.StartNew(() => this.Processor.SetInitialParameters(
+                   this.CameraType,
+                   this.FocalLength,
+                   this.ImageWidth,
+                   this.ImageHeight,
+                   this.SensorSizeX * 0.001,
+                   this.SensorSizeY * 0.001,
+                   0,
+                   0,
+                   this.HalconCalibrationPlateName));
+          }
+
+          /// <summary>
+          /// Set the height of the rectified image according to its aspect ratio.
+          /// </summary>
+          /// <param name="rectifiedWidth">The rectified width.</param>
+          private void SetRectifiedImageHeightToAspectRatio(int rectifiedWidth)
+          {
+               double ratio = (double)this.ImageHeight / (double)this.ImageWidth;
+               this.rectifiedImageSizeProgramaticCall = true;
+               this.RectifiedImageHeight = (int)Math.Round((double)rectifiedWidth * ratio);
+               this.rectifiedImageSizeProgramaticCall = false;
+          }
+
+          /// <summary>
+          /// Set the width of the rectified image according to its aspect ratio.
+          /// </summary>
+          /// <param name="rectifiedHeight">The rectified height.</param>
+          private void SetRectifiedImageWidthToAspectRatio(int rectifiedHeight)
+          {
+               double ratio = (double)this.ImageWidth / (double)this.ImageHeight;
+               this.rectifiedImageSizeProgramaticCall = true;
+               this.RectifiedImageWidth = (int)Math.Round((double)rectifiedHeight * ratio);
+               this.rectifiedImageSizeProgramaticCall = false;
           }
 
           /// <summary>

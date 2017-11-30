@@ -13,6 +13,8 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      public interface IMainViewModel
      {
+          #region Public Properties
+
           /// <summary>
           /// Gets or sets the app state.
           /// </summary>
@@ -38,9 +40,15 @@ namespace H13OcrQuickStart.ViewModels
           /// </summary>
           string StatusText { get; set; }
 
+          #endregion Public Properties
+
+          #region Public Methods
+
           /// <summary>
           /// Implements the Dispose method of IDisposable.
           /// </summary>
           void Dispose();
+
+          #endregion Public Methods
      }
 }

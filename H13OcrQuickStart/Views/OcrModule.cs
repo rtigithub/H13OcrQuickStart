@@ -13,21 +13,14 @@ namespace H13OcrQuickStart
      using Rti.ViewROIManager;
 
      /// <summary>
-     /// Main window partial with added code for the Ocr module. 
+     /// Main window partial with added code for the Ocr module.
      /// </summary>
      public sealed partial class MainWindow
      {
-          /// <summary>
-          /// Initializes the new module.
-          /// </summary>
-          /// <param name="manager">The ViewROIManager instance to use.</param>
-          private void InitializeOcrModule(ViewROIManager manager)
-          {
-               this.BindOcrControls(manager);
-          }
+          #region Private Methods
 
           /// <summary>
-          /// Sets up the reactive bindings for all Ocr controls. 
+          /// Sets up the reactive bindings for all Ocr controls.
           /// </summary>
           /// <param name="manager">The ViewROIManager instance to use.</param>
           private void BindOcrControls(ViewROIManager manager)
@@ -42,5 +35,16 @@ namespace H13OcrQuickStart
                     .ObserveOn(RxApp.MainThreadScheduler)
                     .Subscribe(x => manager.ShowDisplayCollection(x)));
           }
+
+          /// <summary>
+          /// Initializes the new module.
+          /// </summary>
+          /// <param name="manager">The ViewROIManager instance to use.</param>
+          private void InitializeOcrModule(ViewROIManager manager)
+          {
+               this.BindOcrControls(manager);
+          }
+
+          #endregion Private Methods
      }
 }

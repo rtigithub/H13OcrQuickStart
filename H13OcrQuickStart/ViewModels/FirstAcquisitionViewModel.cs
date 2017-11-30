@@ -17,35 +17,11 @@ namespace H13OcrQuickStart.ViewModels
      using Models;
 
      /// <summary>
-     /// View model for the new AcquireAcquisition process. 
+     /// View model for the new AcquireAcquisition process.
      /// </summary>
      public class FirstAcquisitionViewModel : ProcessViewModelBase<MainViewModel, FirstAcquisitionProcessor>
      {
           #region Private Declarations
-
-          /// <summary>
-          /// Stores the Interaction to get a file name from the user.
-          /// </summary>
-          private Interaction<Unit, string> getFileName;
-
-          /// <summary>
-          /// Stores the Interaction to get a file name from the user for a save operation.
-          /// </summary>
-          private Interaction<Unit, string> getSaveFileName;
-
-          /// <summary>
-          /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call. 
-          /// </summary>
-          private ObservableAsPropertyHelper<ProcessingResult> processingResults;
-
-          //// Create an ObservableAsPropertyHelper<ProcessingResult> for each command with a ProcessingResult you need to monitor.   
-
-          //// Create backing fields for the properties as needed. 
-
-          /// <summary>
-          /// Stores the image width.
-          /// </summary>
-          private ObservableAsPropertyHelper<int> acquiredImageWidth;
 
           /// <summary>
           /// Stores the image height.
@@ -53,10 +29,17 @@ namespace H13OcrQuickStart.ViewModels
           private ObservableAsPropertyHelper<int> acquiredImageHeight;
 
           /// <summary>
+          /// Stores the image width.
+          /// </summary>
+          private ObservableAsPropertyHelper<int> acquiredImageWidth;
+
+          //// Create backing fields for the properties as needed.
+          /// <summary>
           /// Stores the number of bits per channel.
           /// </summary>
           private int bitsPerChannel = -1;
 
+          //// Create an ObservableAsPropertyHelper<ProcessingResult> for each command with a ProcessingResult you need to monitor.
           /// <summary>
           /// Store the list of bits per channel parameters.
           /// </summary>
@@ -128,6 +111,16 @@ namespace H13OcrQuickStart.ViewModels
           private HTuple genericParameters = new HTuple();
 
           /// <summary>
+          /// Stores the Interaction to get a file name from the user.
+          /// </summary>
+          private Interaction<Unit, string> getFileName;
+
+          /// <summary>
+          /// Stores the Interaction to get a file name from the user for a save operation.
+          /// </summary>
+          private Interaction<Unit, string> getSaveFileName;
+
+          /// <summary>
           /// Stores the horizontal resolution.
           /// </summary>
           private int horizontalResolution = 1;
@@ -163,7 +156,7 @@ namespace H13OcrQuickStart.ViewModels
           private HTuple imageWidthParameters = new HTuple();
 
           /// <summary>
-          /// Stores a value indicating whether the class has been disposed. 
+          /// Stores a value indicating whether the class has been disposed.
           /// </summary>
           private bool isDisposed = false;
 
@@ -198,7 +191,12 @@ namespace H13OcrQuickStart.ViewModels
           private HTuple portParameters = new HTuple();
 
           /// <summary>
-          /// Stores the file name to save the image to. 
+          /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call.
+          /// </summary>
+          private ObservableAsPropertyHelper<ProcessingResult> processingResults;
+
+          /// <summary>
+          /// Stores the file name to save the image to.
           /// </summary>
           private string saveImageFileName = string.Empty;
 
@@ -242,7 +240,7 @@ namespace H13OcrQuickStart.ViewModels
           #region Constructors
 
           /// <summary>
-          /// Initializes a new instance of the AcquireAcquisitionViewModel class. 
+          /// Initializes a new instance of the AcquireAcquisitionViewModel class.
           /// </summary>
           /// <param name="mainVM">A reference to the main view model.</param>
           /// <param name="processor">An instance of the processor class for this view model.</param>
@@ -252,18 +250,18 @@ namespace H13OcrQuickStart.ViewModels
                this.getFileName = new Interaction<Unit, string>();
                this.getSaveFileName = new Interaction<Unit, string>();
 
-               //// If a CanExecute condition needs to be set, do it here and recreate the Command using 
-               //// the CanExecute object.                        
-               //// this.CanExecute = this.WhenAny(x => x.MainViewModelRef.<some property>, x => x.Value == false); 
-               //// this.Command = ReactiveCommand.CreateFromTask(_ => this.ProcessAsync(), this.CanExecute);  
+               //// If a CanExecute condition needs to be set, do it here and recreate the Command using
+               //// the CanExecute object.
+               //// this.CanExecute = this.WhenAny(x => x.MainViewModelRef.<some property>, x => x.Value == false);
+               //// this.Command = ReactiveCommand.CreateFromTask(_ => this.ProcessAsync(), this.CanExecute);
 
                this.LiveVideoCanExecute = this.WhenAnyValue(x => x.Processor.IsInitialized)
                     .ObserveOn(RxApp.MainThreadScheduler);
 
                this.Command = ReactiveCommand.CreateFromTask(_ => this.ProcessAsync(), this.LiveVideoCanExecute);
 
-               // To force immediate disposal of large or Iconic objects, uncomment the Do clause line, 
-               // otherwise the GarbageCollection will do it after enough memory is used. 
+               // To force immediate disposal of large or Iconic objects, uncomment the Do clause line,
+               // otherwise the GarbageCollection will do it after enough memory is used.
                this.Command
                     // .Do(_ => this.ProcessingResults?.Dispose())
                     .ToProperty(this, x => x.ProcessingResults, out this.processingResults);
@@ -288,7 +286,7 @@ namespace H13OcrQuickStart.ViewModels
                         this.DebugDisplay = x;
                    }));
 
-               //// Set up the display to rebuild if a reactive display property changes            
+               //// Set up the display to rebuild if a reactive display property changes
                this.DisposeCollection.Add(this.WhenAny(x => x.Processor.AcquiredImage, x => x.Value)
                    .Where(x => x.IsValid())
                    .SubscribeOn(RxApp.TaskpoolScheduler)
@@ -301,15 +299,15 @@ namespace H13OcrQuickStart.ViewModels
                         this.MainViewModelRef.AppState = 0;
                    }));
 
-               //// This reacts to the execution of the command by resetting the AppState. Modify as needed. 
+               //// This reacts to the execution of the command by resetting the AppState. Modify as needed.
                this.DisposeCollection.Add(this.Command
                    .Subscribe(_ =>
                    {
                         this.MainViewModelRef.AppState = this.MainViewModelRef.AppState == 0 ? this.MainViewModelRef.LastAppState : this.MainViewModelRef.AppState;
                    }));
 
-               // This observable serves to push error messages from the live video process that 
-               // would not come through the ProcessingResult returned when the video was stated. 
+               // This observable serves to push error messages from the live video process that
+               // would not come through the ProcessingResult returned when the video was stated.
                this.DisposeCollection.Add(this.WhenAnyValue(x => x.Processor.ErrorMessage)
                    .Subscribe(x => this.MainViewModelRef.StatusText = x));
 
@@ -349,66 +347,23 @@ namespace H13OcrQuickStart.ViewModels
                     .Subscribe(x => this.Processor.CanGrabNextFrame = !x));
           }
 
-          #endregion  Constructors
+          #endregion Constructors
 
-          #region Private Destructors
 
-          #endregion Private Destructors
 
           #region Public Properties
 
           //// Create additional reactive commands as needed.
 
           /// <summary>
-          /// Gets or sets the command for triggering live video. 
+          /// Gets the image height.
           /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> LiveVideoCommand
-          {
-               get;
-
-               protected set;
-          }
+          public int AcquiredImageHeight => this.acquiredImageHeight.Value;
 
           /// <summary>
-          /// Gets or sets the command for initializing the frame grabber. 
+          /// Gets the image width.
           /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> InitializeCommand
-          {
-               get;
-
-               protected set;
-          }
-
-          /// <summary>
-          /// Gets or sets the command for saving an image. 
-          /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> SaveImageCommand
-          {
-               get;
-
-               protected set;
-          }
-
-          /// <summary>
-          /// Gets or sets the command for selecting a file. 
-          /// </summary>
-          public ReactiveCommand<Unit, ProcessingResult> SelectFileCommand
-          {
-               get;
-
-               protected set;
-          }
-
-          /// <summary>
-          /// Gets the Interaction to return a file name from the user.
-          /// </summary>
-          public Interaction<Unit, string> GetFileName => this.getFileName;
-
-          /// <summary>
-          /// Gets the Interaction to return a file name from the user for a save operation.
-          /// </summary>
-          public Interaction<Unit, string> GetSaveFileName => this.getSaveFileName;
-
+          public int AcquiredImageWidth => this.acquiredImageWidth.Value;
 
           /// <summary>
           /// Gets or sets the acquisition interface list.
@@ -421,46 +376,6 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets an observable that indicates whether the command to trigger live video can execute. 
-          /// </summary>
-          public IObservable<bool> LiveVideoCanExecute
-          {
-               get;
-
-               set;
-          }
-
-          /// <summary>
-          /// Gets or sets the acquired image.
-          /// </summary>
-          public HImage Image
-          {
-               get => this.image;
-
-               set => this.RaiseAndSetIfChanged(ref this.image, value);
-          }
-
-          /// <summary>
-          /// Gets or sets a value indicate whether the processor is processing an image for display.
-          /// </summary>
-          public bool IsProcessing
-          {
-               get => this.isProcessing;
-
-               set => this.RaiseAndSetIfChanged(ref this.isProcessing, value);
-          }
-
-          /// <summary>
-          /// Gets the image width. 
-          /// </summary>
-          public int AcquiredImageWidth => this.acquiredImageWidth.Value;
-
-          /// <summary>
-          /// Gets the image height. 
-          /// </summary>
-          public int AcquiredImageHeight => this.acquiredImageHeight.Value;
-
-          /// <summary>
           /// Gets or sets the bits per channel.
           /// </summary>
           public int BitsPerChannel
@@ -471,7 +386,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets the bits per channel parameters. 
+          /// Gets or sets the bits per channel parameters.
           /// </summary>
           public HTuple BitsPerChannelParameters
           {
@@ -491,7 +406,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets or sets the camera type parameters. 
+          /// Gets or sets the camera type parameters.
           /// </summary>
           public HTuple CameraTypeParameters
           {
@@ -611,6 +526,16 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
+          /// Gets the Interaction to return a file name from the user.
+          /// </summary>
+          public Interaction<Unit, string> GetFileName => this.getFileName;
+
+          /// <summary>
+          /// Gets the Interaction to return a file name from the user for a save operation.
+          /// </summary>
+          public Interaction<Unit, string> GetSaveFileName => this.getSaveFileName;
+
+          /// <summary>
           /// Gets or sets the horizontal resolution.
           /// </summary>
           public int HorizontalResolution
@@ -628,6 +553,16 @@ namespace H13OcrQuickStart.ViewModels
                get => this.horizontalResolutionParameters;
 
                set => this.RaiseAndSetIfChanged(ref this.horizontalResolutionParameters, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the acquired image.
+          /// </summary>
+          public HImage Image
+          {
+               get => this.image;
+
+               set => this.RaiseAndSetIfChanged(ref this.image, value);
           }
 
           /// <summary>
@@ -671,6 +606,26 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
+          /// Gets or sets the command for initializing the frame grabber.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> InitializeCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
+          /// Gets or sets a value indicate whether the processor is processing an image for display.
+          /// </summary>
+          public bool IsProcessing
+          {
+               get => this.isProcessing;
+
+               set => this.RaiseAndSetIfChanged(ref this.isProcessing, value);
+          }
+
+          /// <summary>
           /// Gets or sets the lineIn.
           /// </summary>
           public int LineIn
@@ -691,9 +646,34 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Gets the processing results. 
+          /// Gets or sets an observable that indicates whether the command to trigger live video can execute.
           /// </summary>
-          public ProcessingResult ProcessingResults => this.processingResults.Value;
+          public IObservable<bool> LiveVideoCanExecute
+          {
+               get;
+
+               set;
+          }
+
+          /// <summary>
+          /// Gets or sets the command for triggering live video.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> LiveVideoCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
+          /// Gets or sets a value indicating whether the system is acquiring live video.
+          /// </summary>
+          public bool LiveVideoMode
+          {
+               get => this.liveVideoMode;
+
+               set => this.RaiseAndSetIfChanged(ref this.liveVideoMode, value);
+          }
 
           /// <summary>
           /// Gets or sets the port.
@@ -716,6 +696,21 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
+          /// Gets the processing results.
+          /// </summary>
+          public ProcessingResult ProcessingResults => this.processingResults.Value;
+
+          /// <summary>
+          /// Gets or sets the command for saving an image.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> SaveImageCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
           /// Gets or sets file name to save the image to.
           /// </summary>
           public string SaveImageFileName
@@ -726,6 +721,16 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
+          /// Gets or sets the command for selecting a file.
+          /// </summary>
+          public ReactiveCommand<Unit, ProcessingResult> SelectFileCommand
+          {
+               get;
+
+               protected set;
+          }
+
+          /// <summary>
           /// Gets or sets visibility state of the selectFile button.
           /// </summary>
           public System.Windows.Visibility SelectFileVisibility
@@ -733,26 +738,6 @@ namespace H13OcrQuickStart.ViewModels
                get => this.selectFileVisibility;
 
                set => this.RaiseAndSetIfChanged(ref this.selectFileVisibility, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the start row.
-          /// </summary>
-          public int StartRow
-          {
-               get => this.startRow;
-
-               set => this.RaiseAndSetIfChanged(ref this.startRow, value);
-          }
-
-          /// <summary>
-          /// Gets or sets the start row parameters.
-          /// </summary>
-          public HTuple StartRowParameters
-          {
-               get => this.startRowParameters;
-
-               set => this.RaiseAndSetIfChanged(ref this.startRowParameters, value);
           }
 
           /// <summary>
@@ -776,6 +761,26 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
+          /// Gets or sets the start row.
+          /// </summary>
+          public int StartRow
+          {
+               get => this.startRow;
+
+               set => this.RaiseAndSetIfChanged(ref this.startRow, value);
+          }
+
+          /// <summary>
+          /// Gets or sets the start row parameters.
+          /// </summary>
+          public HTuple StartRowParameters
+          {
+               get => this.startRowParameters;
+
+               set => this.RaiseAndSetIfChanged(ref this.startRowParameters, value);
+          }
+
+          /// <summary>
           /// Gets or sets the vertical resolution.
           /// </summary>
           public int VerticalResolution
@@ -795,16 +800,6 @@ namespace H13OcrQuickStart.ViewModels
                set => this.RaiseAndSetIfChanged(ref this.verticalResolutionParameters, value);
           }
 
-          /// <summary>
-          /// Gets or sets a value indicating whether the system is acquiring live video.
-          /// </summary>
-          public bool LiveVideoMode
-          {
-               get => this.liveVideoMode;
-
-               set => this.RaiseAndSetIfChanged(ref this.liveVideoMode, value);
-          }
-
           /////// <summary>
           /////// Gets or sets the MyCommand.
           /////// </summary>
@@ -817,7 +812,7 @@ namespace H13OcrQuickStart.ViewModels
           //// Create additional CanExecute observables as needed.
 
           ///// <summary>
-          ///// Gets or sets the can executer observable for my command. 
+          ///// Gets or sets the can executer observable for my command.
           ///// </summary>
           ////public IObservable<bool> MyCommandCanExecute
           ////{
@@ -826,10 +821,10 @@ namespace H13OcrQuickStart.ViewModels
           ////    set;
           ////}
 
-          //// Create a ProcessingResult property for each command with an ObservableAsPropertyHelper<ProcessingResult> you need to monitor. 
+          //// Create a ProcessingResult property for each command with an ObservableAsPropertyHelper<ProcessingResult> you need to monitor.
 
           /////// <summary>
-          /////// Gets the processing results for MyCommand. 
+          /////// Gets the processing results for MyCommand.
           /////// </summary>
           ////public ProcessingResult MyProcessingResults
           ////{
@@ -843,15 +838,56 @@ namespace H13OcrQuickStart.ViewModels
 
           //// Create properties that expose any display object properties in the Processor model.
 
-          #endregion Properties
+          #endregion Public Properties
 
-          #region Public Methods
 
-          #endregion public methods
 
           #region Protected Methods
+
           /// <summary>
-          /// Implements the asynchronous process method for this process. 
+          /// Builds a DisplayCollection that will be displayed whenever a monitored display object is changed.
+          /// </summary>
+          /// <returns>the DisplayCollection.</returns>
+          protected override DisplayCollection BuildDisplayItem()
+          {
+               DisplayCollection tempDC = new DisplayCollection()
+               {
+                    //// Set to true to clear any existing display before adding new objects.
+                    //// Set to false to display new objects over existing ones.
+                    ClearDisplayFirst = true
+               };
+
+               tempDC.AddDisplayObject(this.Processor.AcquiredImage.CopyObj(1, -1));
+
+               return tempDC;
+          }
+
+          /// <summary>
+          /// Overrides the Dispose method of IDisposable that actually disposes of managed resources.
+          /// </summary>
+          /// <param name="disposing">A boolean value indicating whether the class is being disposed.</param>
+          protected override void Dispose(bool disposing)
+          {
+               if (!this.isDisposed)
+               {
+                    if (disposing)
+                    {
+                         //// Dispose of managed resources here.
+                    }
+
+                    //// Dispose of unmanaged resources here.
+
+                    this.image?.Dispose();
+
+                    this.isDisposed = true;
+               }
+
+               // Call base.Dispose, passing parameter.
+               base.Dispose(disposing);
+          }
+
+          /// <summary>
+          /// Implements the asynchronous process method for this process.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
           protected override async Task<ProcessingResult> ProcessAsync()
@@ -871,48 +907,6 @@ namespace H13OcrQuickStart.ViewModels
                }
           }
 
-          /// <summary>
-          /// Builds a DisplayCollection that will be displayed whenever a monitored display object is changed. 
-          /// </summary>
-          /// <returns>the DisplayCollection.</returns>
-          protected override DisplayCollection BuildDisplayItem()
-          {
-               DisplayCollection tempDC = new DisplayCollection()
-               {
-                    //// Set to true to clear any existing display before adding new objects.
-                    //// Set to false to display new objects over existing ones. 
-                    ClearDisplayFirst = true
-               };
-
-               tempDC.AddDisplayObject(this.Processor.AcquiredImage.CopyObj(1, -1));
-
-               return tempDC;
-          }
-
-          /// <summary>
-          /// Overrides the Dispose method of IDisposable that actually disposes of managed resources. 
-          /// </summary>
-          /// <param name="disposing">A boolean value indicating whether the class is being disposed.</param>
-          protected override void Dispose(bool disposing)
-          {
-               if (!this.isDisposed)
-               {
-                    if (disposing)
-                    {
-                         //// Dispose of managed resources here. 
-                    }
-
-                    //// Dispose of unmanaged resources here.
-
-                    this.image?.Dispose();
-
-                    this.isDisposed = true;
-               }
-
-               // Call base.Dispose, passing parameter. 
-               base.Dispose(disposing);
-          }
-
           #endregion Protected Methods
 
           #region Private Methods
@@ -924,37 +918,16 @@ namespace H13OcrQuickStart.ViewModels
           ////    // No parameters:
           ////    return await Task.Factory.StartNew(() => this.Processor.MyProcess());
           ////    // Create Processor.MyProcess().
-          ////    
+          ////
           ////    // With parameters.
-          ////    // Dummy parameters. Change this. 
+          ////    // Dummy parameters. Change this.
           ////    Tuple<object> parameters = new Tuple<object>(new object());
           ////    return await Task.Factory.StartNew(() => this.Processor.MyProcess(parameters));
-          ////    // Create Processor.MyProcess(object parameters) and handle any parameters passes. 
+          ////    // Create Processor.MyProcess(object parameters) and handle any parameters passes.
           ////}
 
           /// <summary>
-          /// Implements the asynchronous method to start or stop live video. 
-          /// </summary>
-          /// <returns>A ProcessingResult instance.</returns>
-          private async Task<ProcessingResult> LiveVideoAsync()
-          {
-               this.LiveVideoMode = !this.Processor.AcquiringLiveVideo;
-
-               if (this.MainViewModelRef.AcquireCalibrationVM.CorrectNewImages)
-               {
-                    return await Task.Factory.StartNew(() =>
-                         this.Processor.AcquireCalibratedLiveVideo(
-                              this.LiveVideoMode,
-                              this.MainViewModelRef.AcquireCalibrationVM.CalibrationMap));
-               }
-               else
-               {
-                    return await Task.Factory.StartNew(() => this.Processor.AcquireLiveVideo(this.LiveVideoMode));
-               }
-          }
-
-          /// <summary>
-          /// Implements the asynchronous method to initialize the camera. 
+          /// Implements the asynchronous method to initialize the camera.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
           private async Task<ProcessingResult> InitializeCameraAsync()
@@ -979,7 +952,28 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Implements the asynchronous method to save an image. 
+          /// Implements the asynchronous method to start or stop live video.
+          /// </summary>
+          /// <returns>A ProcessingResult instance.</returns>
+          private async Task<ProcessingResult> LiveVideoAsync()
+          {
+               this.LiveVideoMode = !this.Processor.AcquiringLiveVideo;
+
+               if (this.MainViewModelRef.AcquireCalibrationVM.CorrectNewImages)
+               {
+                    return await Task.Factory.StartNew(() =>
+                         this.Processor.AcquireCalibratedLiveVideo(
+                              this.LiveVideoMode,
+                              this.MainViewModelRef.AcquireCalibrationVM.CalibrationMap));
+               }
+               else
+               {
+                    return await Task.Factory.StartNew(() => this.Processor.AcquireLiveVideo(this.LiveVideoMode));
+               }
+          }
+
+          /// <summary>
+          /// Implements the asynchronous method to save an image.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
           private async Task<ProcessingResult> SaveImageAsync()
@@ -1009,7 +1003,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>.
-          /// Implements the asynchronous method to Select a File. 
+          /// Implements the asynchronous method to Select a File.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
           private async Task<ProcessingResult> SelectFileAsync()
@@ -1154,7 +1148,7 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           /// <summary>
-          /// Updates the Acquisition interface controls for the selected acquisition interface. 
+          /// Updates the Acquisition interface controls for the selected acquisition interface.
           /// </summary>
           private void UpdateInterface()
           {
@@ -1165,4 +1159,3 @@ namespace H13OcrQuickStart.ViewModels
           #endregion Private Methods
      }
 }
-

@@ -15,62 +15,34 @@ namespace H13OcrQuickStart
      using Rti.ViewROIManager;
 
      /// <summary>
-     /// Main window partial with added code for the Acquirecalibration module. 
+     /// Main window partial with added code for the Acquirecalibration module.
      /// </summary>
      public sealed partial class MainWindow
      {
+          #region Private Fields
+
           /// <summary>
           /// Stores the camera calibration page.
           /// </summary>
           private View.AcquireCalibrationPage calibrationAcquirePage = new View.AcquireCalibrationPage();
 
+          #endregion Private Fields
+
+          #region Private Methods
+
           /// <summary>
-          /// Initializes the Acquirecalibration module.
+          /// Handles the click event for the Acquire calibration ribbon item.
           /// </summary>
-          private void InitializeAcquireCalibrationModule(ViewROIManager manager)
+          /// <param name="sender">The calling object.</param>
+          /// <param name="e">The Routed Event Arguments</param>
+          private void AcquireCalibrationRibbonItem_Click(object sender, RoutedEventArgs e)
           {
-               this.MainViewModel.AcquireCalibrationVM.GetFileName.RegisterHandler(
-                     async interaction =>
-                     {
-                          string filename = await this.utilities.GetFileName();
-                          interaction.SetOutput(filename);
-                     });
-
-               this.MainViewModel.AcquireCalibrationVM.GetSaveFileName.RegisterHandler(
-                    async interaction =>
-                    {
-                         string filename = await this.utilities.GetFileNameToSave();
-                         interaction.SetOutput(filename);
-                    });
-
-               this.MainViewModel.AcquireCalibrationVM.GetCalibratioinMapSaveFileName.RegisterHandler(
-                    async interaction =>
-                    {
-                         string filename = await this.utilities.GetCalibrationMapFileNameToSave();
-                         interaction.SetOutput(filename);
-                    });
-
-               this.MainViewModel.AcquireCalibrationVM.GetFolderName.RegisterHandler(
-                    async interaction =>
-                    {
-                         string foldername = await this.utilities.GetFolder();
-                         interaction.SetOutput(foldername);
-                    });
-
-               RibbonMenuItem cameraCalibrationMenuItem = new RibbonMenuItem()
-               {
-                    Name = "AcquireCalibrationItem",
-                    Header = "Acquire Calibration"
-               };
-
-               cameraCalibrationMenuItem.Click += this.AcquireCalibrationRibbonItem_Click;
-               this.UtilitiesTab.Items.Add(cameraCalibrationMenuItem);
-
-               this.BindAcquireCalibrationControls(manager);
+               this.Frame1.Visibility = Visibility.Visible;
+               this.Frame1.Content = this.calibrationAcquirePage;
           }
 
           /// <summary>
-          /// Sets up the reactive bindings for all Acquire camera calibration controls. 
+          /// Sets up the reactive bindings for all Acquire camera calibration controls.
           /// </summary>
           private void BindAcquireCalibrationControls(ViewROIManager manager)
           {
@@ -142,7 +114,7 @@ namespace H13OcrQuickStart
                         }
                    }));
 
-               // ComboBoxFocalLength              
+               // ComboBoxFocalLength
                this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.AcquireCalibrationVM.FocalLengthParameters)
                   .Subscribe(_ => this.calibrationAcquirePage.ComboBoxFocalLength.ItemsSource = this.MainViewModel.AcquireCalibrationVM.FocalLengthParameters.ToDArr()));
 
@@ -293,14 +265,50 @@ namespace H13OcrQuickStart
           }
 
           /// <summary>
-          /// Handles the click event for the Acquire calibration ribbon item.
+          /// Initializes the Acquirecalibration module.
           /// </summary>
-          /// <param name="sender">The calling object.</param>
-          /// <param name="e">The Routed Event Arguments</param>
-          private void AcquireCalibrationRibbonItem_Click(object sender, RoutedEventArgs e)
+          private void InitializeAcquireCalibrationModule(ViewROIManager manager)
           {
-               this.Frame1.Visibility = Visibility.Visible;
-               this.Frame1.Content = this.calibrationAcquirePage;
+               this.MainViewModel.AcquireCalibrationVM.GetFileName.RegisterHandler(
+                     async interaction =>
+                     {
+                          string filename = await this.utilities.GetFileName();
+                          interaction.SetOutput(filename);
+                     });
+
+               this.MainViewModel.AcquireCalibrationVM.GetSaveFileName.RegisterHandler(
+                    async interaction =>
+                    {
+                         string filename = await this.utilities.GetFileNameToSave();
+                         interaction.SetOutput(filename);
+                    });
+
+               this.MainViewModel.AcquireCalibrationVM.GetCalibratioinMapSaveFileName.RegisterHandler(
+                    async interaction =>
+                    {
+                         string filename = await this.utilities.GetCalibrationMapFileNameToSave();
+                         interaction.SetOutput(filename);
+                    });
+
+               this.MainViewModel.AcquireCalibrationVM.GetFolderName.RegisterHandler(
+                    async interaction =>
+                    {
+                         string foldername = await this.utilities.GetFolder();
+                         interaction.SetOutput(foldername);
+                    });
+
+               RibbonMenuItem cameraCalibrationMenuItem = new RibbonMenuItem()
+               {
+                    Name = "AcquireCalibrationItem",
+                    Header = "Acquire Calibration"
+               };
+
+               cameraCalibrationMenuItem.Click += this.AcquireCalibrationRibbonItem_Click;
+               this.UtilitiesTab.Items.Add(cameraCalibrationMenuItem);
+
+               this.BindAcquireCalibrationControls(manager);
           }
+
+          #endregion Private Methods
      }
 }

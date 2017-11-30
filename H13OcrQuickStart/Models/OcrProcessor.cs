@@ -13,7 +13,7 @@ namespace H13OcrQuickStart.Models
      using Rti.DisplayUtilities;
 
      /// <summary>
-     /// Model class for a new process. 
+     /// Model class for a new process.
      /// </summary>
      public class OcrProcessor : ProcessorBase
      {
@@ -40,9 +40,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Constructors
 
-          #region Private Destructors
 
-          #endregion Private Destructors
 
           #region Public Properties
 
@@ -148,9 +146,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Public Methods
 
-          #region internal methods
 
-          #endregion internal methods
 
           #region Protected Methods
 
@@ -177,9 +173,5 @@ namespace H13OcrQuickStart.Models
           }
 
           #endregion Protected Methods
-
-          #region private methods
-
-          #endregion private methods
      }
 }

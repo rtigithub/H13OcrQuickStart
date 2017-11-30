@@ -13,19 +13,29 @@ namespace H13OcrQuickStart.ViewModels
      using ReactiveUI;
 
      /// <summary>
-     /// Main view model partial with added code for the acquisition module and stubs for the camera calibration module. 
+     /// Main view model partial with added code for the acquisition module and stubs for the camera calibration module.
      /// </summary>
      public partial class MainViewModel
      {
+          #region Private Fields
+
           /// <summary>
           /// Stores the instance of the AcquireAcquisitionViewModel.
           /// </summary>
           private FirstAcquisitionViewModel acquisitionAcquireVM;
 
+          #endregion Private Fields
+
+          #region Public Properties
+
           /// <summary>
-          /// Gets the acquisitionAcquireVM. 
+          /// Gets the acquisitionAcquireVM.
           /// </summary>
           public FirstAcquisitionViewModel AcquireAcquisitionVM => this.acquisitionAcquireVM;
+
+          #endregion Public Properties
+
+          #region Private Methods
 
           /// <summary>
           /// Initializes the AcquireAcquisitionViewModel instance.
@@ -39,7 +49,7 @@ namespace H13OcrQuickStart.ViewModels
                     .Select(e => e.ErrorMessage)
                     .Subscribe(e => this.StatusText = e));
 
-               //// Add any desired result to the data set for UI display or use. 
+               //// Add any desired result to the data set for UI display or use.
                //// Template:
                ////this.DisposeCollection.Add(
                ////    this.WhenAnyValue(x => x.AcquireAcquisitionVM.ProcessingResults)
@@ -49,5 +59,7 @@ namespace H13OcrQuickStart.ViewModels
 
                this.InitializeAcquireCalibrationViewModel();
           }
+
+          #endregion Private Methods
      }
 }

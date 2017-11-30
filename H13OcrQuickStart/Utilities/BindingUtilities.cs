@@ -28,6 +28,8 @@ namespace H13OcrQuickStart.Utilities
      /// </summary>
      public static class BindingUtilities
      {
+          #region Private Fields
+
           /// <summary>
           /// Constant for the regex string for floating point numbers.
           /// </summary>
@@ -37,6 +39,10 @@ namespace H13OcrQuickStart.Utilities
           /// Constant for the regex string for integers.
           /// </summary>
           private const string RegexInteger = @"^-?\d+$";
+
+          #endregion Private Fields
+
+          #region Public Methods
 
           /// <summary>
           /// BindComboBox creates reactive combo box bindings for the items source, selected item,
@@ -396,5 +402,7 @@ namespace H13OcrQuickStart.Utilities
 
               ((RadioButton)control).SetBinding(RadioButton.IsCheckedProperty, bind);
           }
+
+          #endregion Public Methods
      }
 }

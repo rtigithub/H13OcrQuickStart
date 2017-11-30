@@ -13,6 +13,8 @@ namespace H13OcrQuickStart.Models
      /// </summary>
      public interface IProcessingResult
      {
+          #region Public Properties
+
           /// <summary>
           /// Gets or sets the error message.
           /// </summary>
@@ -40,9 +42,15 @@ namespace H13OcrQuickStart.Models
                set;
           }
 
+          #endregion Public Properties
+
+          #region Public Methods
+
           /// <summary>
           /// Implements the Dispose method of IDisposable.
           /// </summary>
           void Dispose();
+
+          #endregion Public Methods
      }
 }

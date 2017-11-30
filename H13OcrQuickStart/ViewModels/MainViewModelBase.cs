@@ -123,9 +123,7 @@ namespace H13OcrQuickStart.ViewModels
 
           #endregion Public Properties
 
-          #region Protected Properties
 
-          #endregion Protected Properties
 
           #region Public Methods
 
@@ -194,9 +192,5 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           #endregion Protected Methods
-
-          #region Private Methods
-
-          #endregion Private Methods
      }
 }

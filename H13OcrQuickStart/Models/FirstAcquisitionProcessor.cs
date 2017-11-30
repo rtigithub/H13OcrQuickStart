@@ -15,7 +15,7 @@ namespace H13OcrQuickStart.Models
      using Rti.Halcon;
 
      /// <summary>
-     /// Model class for a new Acquire Acquisition process. 
+     /// Model class for a new Acquire Acquisition process.
      /// </summary>
      public class FirstAcquisitionProcessor : ProcessorBase
      {
@@ -84,7 +84,7 @@ namespace H13OcrQuickStart.Models
           #region Constructors
 
           /// <summary>
-          /// Initializes a new instance of the AcquireAcquisitionProcessor class. 
+          /// Initializes a new instance of the AcquireAcquisitionProcessor class.
           /// </summary>
           public FirstAcquisitionProcessor()
                : base()
@@ -142,9 +142,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Constructors
 
-          #region Private Destructors
 
-          #endregion Private Destructors
 
           #region Public Properties
 
@@ -622,9 +620,7 @@ namespace H13OcrQuickStart.Models
 
           #endregion Public Methods
 
-          #region internal methods
 
-          #endregion internal methods
 
           #region Protected Methods
 

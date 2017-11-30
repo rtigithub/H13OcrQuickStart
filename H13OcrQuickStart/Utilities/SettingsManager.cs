@@ -67,9 +67,7 @@ namespace H13OcrQuickStart.Utilities
 
           #endregion Public Constructors
 
-          #region Private Destructors
 
-          #endregion Private Destructors
 
           #region Public Properties
 
@@ -168,9 +166,5 @@ namespace H13OcrQuickStart.Utilities
           #endregion IDisposable Members
 
           #endregion Protected Methods
-
-          #region Private Methods
-
-          #endregion Private Methods
      }
 }

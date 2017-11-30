@@ -13,21 +13,31 @@ namespace H13OcrQuickStart.ViewModels
      using ReactiveUI;
 
      /// <summary>
-     /// Main view model partial with added code for the camera calibration module. 
+     /// Main view model partial with added code for the camera calibration module.
      /// </summary>
      public partial class MainViewModel
      {
-          /// <summary> 
+          #region Private Fields
+
+          /// <summary>
           /// Stores the AcquireCalibrationViewModel instance.
           /// </summary>
           private FirstCalibrationViewModel calibrationAcquireVM;
 
+          #endregion Private Fields
+
+          #region Public Properties
+
           public FirstCalibrationViewModel AcquireCalibrationVM => this.calibrationAcquireVM;
+
+          #endregion Public Properties
+
+          #region Private Methods
 
           /// <summary>
           /// Initializes the AcquireCalibrationViewModel instance.
           /// </summary>
-          void InitializeAcquireCalibrationViewModel()
+          private void InitializeAcquireCalibrationViewModel()
           {
                this.calibrationAcquireVM = new FirstCalibrationViewModel(this, new FirstCalibrationProcessor());
 
@@ -36,7 +46,7 @@ namespace H13OcrQuickStart.ViewModels
                     .Select(e => e.ErrorMessage)
                     .Subscribe(e => this.StatusText = e));
 
-               //// Add any desired result to the data set for UI display or use. 
+               //// Add any desired result to the data set for UI display or use.
                //// Template:
                ////this.DisposeCollection.Add(
                ////    this.WhenAnyValue(x => x.AcquireCalibrationVM.ProcessingResults)
@@ -50,5 +60,7 @@ namespace H13OcrQuickStart.ViewModels
                    .Where(x => x.ResultsCollection.ContainsKey("CalibrationError"))
                    .Subscribe(x => this.StatusText = "Calibration succeeded. Calibration Error = " + ((double)x.ResultsCollection["CalibrationError"]).ToString()));
           }
+
+          #endregion Private Methods
      }
 }

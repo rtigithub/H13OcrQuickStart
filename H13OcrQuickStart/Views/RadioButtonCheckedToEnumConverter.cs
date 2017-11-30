@@ -14,6 +14,8 @@ namespace H13OcrQuickStart.View
      /// </summary>
      public class RadioButtonCheckedToEnumConverter : IValueConverter
      {
+          #region Public Methods
+
           /// <summary>
           /// Converts from the enumeration type to the value type, a boolean for the IsChecked property.
           /// </summary>
@@ -35,5 +37,7 @@ namespace H13OcrQuickStart.View
           /// <returns>The enumeration value.</returns>
           public object ConvertBack(object value, Type enumType, object parameter, System.Globalization.CultureInfo culture) =>
               value.Equals(true) ? parameter : Binding.DoNothing;
+
+          #endregion Public Methods
      }
 }

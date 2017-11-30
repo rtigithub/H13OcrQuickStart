@@ -77,17 +77,7 @@ namespace H13OcrQuickStart.ViewModels
 
           #endregion Constructors
 
-          #region Destructors
 
-          #endregion Destructors
-
-          #region Events
-
-          #endregion Events
-
-          #region Enumerations
-
-          #endregion Enumerations
 
           #region Properties
 
@@ -113,13 +103,7 @@ namespace H13OcrQuickStart.ViewModels
 
           #endregion Properties
 
-          #region public Methods
 
-          #endregion public Methods
-
-          #region internal methods
-
-          #endregion internal methods
 
           #region Protected Methods
 
@@ -186,9 +170,5 @@ namespace H13OcrQuickStart.ViewModels
           }
 
           #endregion Protected Methods
-
-          #region private methods
-
-          #endregion private methods
      }
 }

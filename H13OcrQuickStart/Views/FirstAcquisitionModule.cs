@@ -15,50 +15,34 @@ namespace H13OcrQuickStart
      using Rti.ViewROIManager;
 
      /// <summary>
-     /// Main window partial with added code for the Acquire acquisition module. 
+     /// Main window partial with added code for the Acquire acquisition module.
      /// </summary>
      public sealed partial class MainWindow
      {
+          #region Private Fields
+
           /// <summary>
           /// Stores the Acquire acquisition page.
           /// </summary>
           private View.AcquireAcquisitionPage acquisitionAcquirePage = new View.AcquireAcquisitionPage();
 
+          #endregion Private Fields
+
+          #region Private Methods
+
           /// <summary>
-          /// Initializes the acquisition module. 
+          /// Handles the click event for the Acquire acquisition ribbon item.
           /// </summary>
-          private void InitializeAcquireAcquisitionModule(ViewROIManager manager)
+          /// <param name="sender">The calling object.</param>
+          /// <param name="e">The Routed Event Arguments</param>
+          private void AcquireAcquisitionRibbonItem_Click(object sender, RoutedEventArgs e)
           {
-               this.MainViewModel.AcquireAcquisitionVM.GetFileName.RegisterHandler(
-                    async interaction =>
-                    {
-                         string filename = await this.utilities.GetFileName();
-                         interaction.SetOutput(filename);
-                    });
-
-               this.MainViewModel.AcquireAcquisitionVM.GetSaveFileName.RegisterHandler(
-                    async interaction =>
-                    {
-                         string filename = await this.utilities.GetFileNameToSave();
-                         interaction.SetOutput(filename);
-                    });
-
-               RibbonMenuItem acquisitionMenuItem = new RibbonMenuItem()
-               {
-                    Name = "AcquireAcquisitionItem",
-                    Header = "Acquire Acquisition"
-               };
-
-               acquisitionMenuItem.Click += this.AcquireAcquisitionRibbonItem_Click;
-               this.UtilitiesTab.Items.Add(acquisitionMenuItem);
-
-               this.BindAcquireAcquisitionControls(manager);
-
-               this.InitializeAcquireCalibrationModule(manager);
+               this.Frame1.Visibility = Visibility.Visible;
+               this.Frame1.Content = this.acquisitionAcquirePage;
           }
 
           /// <summary>
-          /// Sets up the reactive bindings for all Acquire Acquisition controls. 
+          /// Sets up the reactive bindings for all Acquire Acquisition controls.
           /// </summary>
           private void BindAcquireAcquisitionControls(ViewROIManager manager)
           {
@@ -372,14 +356,38 @@ namespace H13OcrQuickStart
           }
 
           /// <summary>
-          /// Handles the click event for the Acquire acquisition ribbon item.
+          /// Initializes the acquisition module.
           /// </summary>
-          /// <param name="sender">The calling object.</param>
-          /// <param name="e">The Routed Event Arguments</param>
-          private void AcquireAcquisitionRibbonItem_Click(object sender, RoutedEventArgs e)
+          private void InitializeAcquireAcquisitionModule(ViewROIManager manager)
           {
-               this.Frame1.Visibility = Visibility.Visible;
-               this.Frame1.Content = this.acquisitionAcquirePage;
+               this.MainViewModel.AcquireAcquisitionVM.GetFileName.RegisterHandler(
+                    async interaction =>
+                    {
+                         string filename = await this.utilities.GetFileName();
+                         interaction.SetOutput(filename);
+                    });
+
+               this.MainViewModel.AcquireAcquisitionVM.GetSaveFileName.RegisterHandler(
+                    async interaction =>
+                    {
+                         string filename = await this.utilities.GetFileNameToSave();
+                         interaction.SetOutput(filename);
+                    });
+
+               RibbonMenuItem acquisitionMenuItem = new RibbonMenuItem()
+               {
+                    Name = "AcquireAcquisitionItem",
+                    Header = "Acquire Acquisition"
+               };
+
+               acquisitionMenuItem.Click += this.AcquireAcquisitionRibbonItem_Click;
+               this.UtilitiesTab.Items.Add(acquisitionMenuItem);
+
+               this.BindAcquireAcquisitionControls(manager);
+
+               this.InitializeAcquireCalibrationModule(manager);
           }
+
+          #endregion Private Methods
      }
 }

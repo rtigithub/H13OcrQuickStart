@@ -1,6 +1,4 @@
-﻿
-
-namespace H13OcrQuickStart.View
+﻿namespace H13OcrQuickStart.View
 {
      using System.Windows.Controls;
 
@@ -9,9 +7,13 @@ namespace H13OcrQuickStart.View
      /// </summary>
      public partial class AcquireAcquisitionPage : Page
      {
+          #region Public Constructors
+
           public AcquireAcquisitionPage()
           {
                InitializeComponent();
           }
+
+          #endregion Public Constructors
      }
 }

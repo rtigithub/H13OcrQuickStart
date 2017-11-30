@@ -42,22 +42,6 @@ namespace H13OcrQuickStart
           #region private fields
 
           /// <summary>
-          /// A boolean value indicating whether the class is disposed. 
-          /// </summary>
-          private bool isDisposed = false;
-
-          /// <summary>
-          /// Stores the CompositeDisposable that holds all subscription disposables. 
-          /// </summary>                
-          private System.Reactive.Disposables.CompositeDisposable disposeCollection =
-              new System.Reactive.Disposables.CompositeDisposable();
-
-          /// <summary>
-          /// Stores the instance of the ViewROIManager.
-          /// </summary>
-          private ViewROIManager viewROIManager = new ViewROIManager();
-
-          /// <summary>
           /// Stores a value indicating whether ViewROIManager can react to zoom changes.
           /// </summary>
           private bool canReactToZoom = true;
@@ -73,11 +57,27 @@ namespace H13OcrQuickStart
           private ItemsPanelTemplate contextMenuItemsPanelTemplate;
 
           /// <summary>
-          /// Stores an instance of the UtilityLibrary class. 
+          /// Stores the CompositeDisposable that holds all subscription disposables.
+          /// </summary>
+          private System.Reactive.Disposables.CompositeDisposable disposeCollection =
+              new System.Reactive.Disposables.CompositeDisposable();
+
+          /// <summary>
+          /// A boolean value indicating whether the class is disposed.
+          /// </summary>
+          private bool isDisposed = false;
+
+          /// <summary>
+          /// Stores an instance of the UtilityLibrary class.
           /// </summary>
           private UtilityLibrary utilities = new UtilityLibrary();
 
-          #endregion Private Fields
+          /// <summary>
+          /// Stores the instance of the ViewROIManager.
+          /// </summary>
+          private ViewROIManager viewROIManager = new ViewROIManager();
+
+          #endregion private fields
 
           #region Public Constructors
 
@@ -104,11 +104,6 @@ namespace H13OcrQuickStart
           #region Public Properties
 
           /// <summary>
-          /// Gets the disposeCollection.
-          /// </summary>
-          public System.Reactive.Disposables.CompositeDisposable DisposeCollection => this.disposeCollection;
-
-          /// <summary>
           /// Gets the context menu data template.
           /// </summary>
           public DataTemplate ContextMenuDataTemplate => this.contextMenuDataTemplate;
@@ -117,6 +112,11 @@ namespace H13OcrQuickStart
           /// Gets the context menu items panel template.
           /// </summary>
           public ItemsPanelTemplate ContextMenuItemsPanelTemplate => this.contextMenuItemsPanelTemplate;
+
+          /// <summary>
+          /// Gets the disposeCollection.
+          /// </summary>
+          public System.Reactive.Disposables.CompositeDisposable DisposeCollection => this.disposeCollection;
 
           /// <summary>
           /// Gets or sets the ViewModel through the ViewModelProperty.
@@ -133,7 +133,7 @@ namespace H13OcrQuickStart
           #region Interface Member Properties
 
           /// <summary>
-          /// Gets or sets the ViewModel as an object. Needed for RxUI binding. 
+          /// Gets or sets the ViewModel as an object. Needed for RxUI binding.
           /// </summary>
           object ReactiveUI.IViewFor.ViewModel
           {
@@ -143,7 +143,7 @@ namespace H13OcrQuickStart
           }
 
           /// <summary>
-          /// Gets or sets the ViewModel. 
+          /// Gets or sets the ViewModel.
           /// </summary>
           ViewModel ReactiveUI.IViewFor<ViewModel>.ViewModel
           {
@@ -159,7 +159,7 @@ namespace H13OcrQuickStart
           #region IDisposable Members
 
           /// <summary>
-          /// Implements the Dispose method of IDisposable. 
+          /// Implements the Dispose method of IDisposable.
           /// </summary>
           public void Dispose()
           {
@@ -167,13 +167,11 @@ namespace H13OcrQuickStart
                GC.SuppressFinalize(this);
           }
 
-          #endregion
+          #endregion IDisposable Members
 
           #endregion Public Methods
 
-          #region Protected Methods        
 
-          #endregion Protected Methods
 
           #region Private Methods
 
@@ -191,36 +189,47 @@ namespace H13OcrQuickStart
                     case "6400%":
                          scale = 100.0 / 3200.0;
                          break;
+
                     case "3200%":
                          scale = 100.0 / 3200.0;
                          break;
+
                     case "1600%":
                          scale = 100.0 / 1600.0;
                          break;
+
                     case "800%":
                          scale = 100.0 / 800.0;
                          break;
+
                     case "400%":
                          scale = 100.0 / 400.0;
                          break;
+
                     case "200%":
                          scale = 100.0 / 200.0;
                          break;
+
                     case "100%":
                          scale = 1.0;
                          break;
+
                     case "75%":
                          scale = 100.0 / 75.0;
                          break;
+
                     case "50%":
                          scale = 100.0 / 50.0;
                          break;
+
                     case "33%":
                          scale = 100.0 / 33.3;
                          break;
+
                     case "Fit":
                          scale = 0;
                          break;
+
                     default:
                          scale = 1.0;
                          break;
@@ -230,40 +239,15 @@ namespace H13OcrQuickStart
           }
 
           /// <summary>
-          /// Implements the Dispose method of IDisposable that actually disposes of managed resources. 
-          /// </summary>
-          /// <param name="disposing">A boolean value indicating whether the class is being disposed.</param>
-          private void Dispose(bool disposing)
-          {
-               if (!this.isDisposed)
-               {
-                    if (disposing)
-                    {
-                         // Code to dispose the managed resources
-                         // held by the class 
-                         this.disposeCollection?.Dispose();
-
-                         this.utilities?.Dispose();
-
-                         this.MainViewModel?.Dispose();
-                    }
-
-                    //// Dispose of unmanaged resources.   
-               }
-
-               this.isDisposed = true;
-          }
-
-          /// <summary>
           /// Create a DataTemplate for parsing the menu objects.
           /// </summary>
           /// <returns>the DataTemplate.</returns>
           private DataTemplate CreateDataTemplate()
           {
                StringReader stringReader = new StringReader(
-                   @"<DataTemplate 
-                    xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">        
-                    <MenuItem Header=""{Binding DisplayName }"" Command=""{Binding MenuCommand}""/> 
+                   @"<DataTemplate
+                    xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">
+                    <MenuItem Header=""{Binding DisplayName }"" Command=""{Binding MenuCommand}""/>
                 </DataTemplate>");
                XmlReader xmlReader = XmlReader.Create(stringReader);
                return XamlReader.Load(xmlReader) as DataTemplate;
@@ -277,11 +261,36 @@ namespace H13OcrQuickStart
           {
                StringReader stringReader = new StringReader(
                    @"<ItemsPanelTemplate
-                    xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation""> 
-                        <StackPanel Margin=""-38,0,-55,0"" Background=""White""/>            
+                    xmlns=""http://schemas.microsoft.com/winfx/2006/xaml/presentation"">
+                        <StackPanel Margin=""-38,0,-55,0"" Background=""White""/>
                    </ItemsPanelTemplate>");
                XmlReader xmlReader = XmlReader.Create(stringReader);
                return XamlReader.Load(xmlReader) as ItemsPanelTemplate;
+          }
+
+          /// <summary>
+          /// Implements the Dispose method of IDisposable that actually disposes of managed resources.
+          /// </summary>
+          /// <param name="disposing">A boolean value indicating whether the class is being disposed.</param>
+          private void Dispose(bool disposing)
+          {
+               if (!this.isDisposed)
+               {
+                    if (disposing)
+                    {
+                         // Code to dispose the managed resources
+                         // held by the class
+                         this.disposeCollection?.Dispose();
+
+                         this.utilities?.Dispose();
+
+                         this.MainViewModel?.Dispose();
+                    }
+
+                    //// Dispose of unmanaged resources.
+               }
+
+               this.isDisposed = true;
           }
 
           /// <summary>
@@ -318,14 +327,14 @@ namespace H13OcrQuickStart
 
                //// Call additional Initialize<Name>Module() methods for each new module.
 
-               // Uncomment this line to bind the Process button to the command of a 
+               // Uncomment this line to bind the Process button to the command of a
                // new ProcessViewModel created in MainViewModel.cs.
                // Change "ProcessVM" to the name of the new ProcessViewModel.
                ////this.BindCommand(this.MainViewModel, vm => vm.ProcessVM.Command, x => x.ProcessButton);
                this.BindCommand(this.MainViewModel, vm => vm.LoadImageVM.Command, x => x.buttonLoadImage);
 
-               //// Note: To use radio buttons bound to an enumeration it is necessary to create the radio button group, 
-               //// add new values to the RadioButtonSelection enumeration (in Model.Enums.cs), bind the property 
+               //// Note: To use radio buttons bound to an enumeration it is necessary to create the radio button group,
+               //// add new values to the RadioButtonSelection enumeration (in Model.Enums.cs), bind the property
                //// of the Enum type in a view model, and to bind each radio button with a call to BindingUtilites.SetRadioButtonBinding.
                //// Template: BindingUtilities.SetRadioButtonBinding(this.Option1Button, this.MainViewModel.SelectChannelVM, "SelectedOptionProperty", "Option1");
 
@@ -345,7 +354,7 @@ namespace H13OcrQuickStart
                // Create the ItemsPanelTemplate for the context menu.
                this.contextMenuItemsPanelTemplate = this.CreateItemsPanelTemplate();
 
-               // Bind hWindowControlWPF1 to the ViewRoiManager.              
+               // Bind hWindowControlWPF1 to the ViewRoiManager.
                BindingUtilities.BindHalconWindow(
                    this.viewROIManager,
                    this.hWindowControlWPF1,
@@ -361,7 +370,7 @@ namespace H13OcrQuickStart
                    .ObserveOn(RxApp.MainThreadScheduler)
                    .BindTo(this.viewROIManager, vm => vm.ZoomScale));
 
-               // Reset the zoom combo box to "Fit" for a new image, but prevent redisplay of the image. 
+               // Reset the zoom combo box to "Fit" for a new image, but prevent redisplay of the image.
                this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.LoadImageVM.Display)
                   .Where(x => x.DisplayList.Count > 0)
                   .ObserveOn(RxApp.MainThreadScheduler)
@@ -372,7 +381,7 @@ namespace H13OcrQuickStart
                        this.canReactToZoom = true;
                   }));
 
-               // Displays 
+               // Displays
                this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.LoadImageVM.Display)
                    .Where(x => x.DisplayList.Count > 0)
                    .ObserveOn(RxApp.MainThreadScheduler)
@@ -390,7 +399,7 @@ namespace H13OcrQuickStart
                //// Add manually created subscriptions to debug display collections here by duplicating the above code and changing the ViewModel.
                //// Processing modules added with the templates will handle the main display bindings automatically.
 
-               // Save settings on closing.            
+               // Save settings on closing.
                this.disposeCollection.Add(this.Events().Closing
                    .Subscribe(_ => this.MainViewModel.SettingsVM.SaveSettings()));
           }

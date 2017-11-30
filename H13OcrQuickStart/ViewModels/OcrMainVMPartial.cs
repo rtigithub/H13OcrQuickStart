@@ -13,19 +13,29 @@ namespace H13OcrQuickStart.ViewModels
      using ReactiveUI;
 
      /// <summary>
-     /// Main view model partial with added code for the processor module. 
+     /// Main view model partial with added code for the processor module.
      /// </summary>
      public partial class MainViewModel
      {
+          #region Private Fields
+
           /// <summary>
           /// Stores the instance of the Processor View Model.
           /// </summary>
           private OcrViewModel processorOcrVM;
 
+          #endregion Private Fields
+
+          #region Public Properties
+
           /// <summary>
           /// Gets the instance of the Ocr View Model.
           /// </summary>
           public OcrViewModel OcrVM => this.processorOcrVM;
+
+          #endregion Public Properties
+
+          #region Private Methods
 
           /// <summary>
           /// Initializes the Ocr View Model.
@@ -39,7 +49,7 @@ namespace H13OcrQuickStart.ViewModels
                     .Select(e => e.ErrorMessage)
                     .Subscribe(e => this.StatusText = e));
 
-               //// Add any desired result to the data set for UI display or use. 
+               //// Add any desired result to the data set for UI display or use.
                //// Template:
                ////this.DisposeCollection.Add(
                ////    this.WhenAnyValue(x => x.OcrVM.ProcessingResults)
@@ -47,5 +57,7 @@ namespace H13OcrQuickStart.ViewModels
                ////    .Where(x => x.ResultsCollection.ContainsKey("MyNamedResultValue"))
                ////    .Subscribe(x => this.ProcessingResultsDataSet.Tables[0].Rows.Add(x.ResultsCollection["MyNamedResultValue"])));
           }
+
+          #endregion Private Methods
      }
 }

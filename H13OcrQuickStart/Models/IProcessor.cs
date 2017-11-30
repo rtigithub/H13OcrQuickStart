@@ -13,6 +13,8 @@ namespace H13OcrQuickStart.Models
      /// </summary>
      public interface IProcessor
      {
+          #region Public Properties
+
           /// <summary>
           /// Gets or sets the debug DisplayCollection.
           /// </summary>
@@ -49,6 +51,10 @@ namespace H13OcrQuickStart.Models
                set;
           }
 
+          #endregion Public Properties
+
+          #region Public Methods
+
           /// <summary>
           /// Implements the Dispose method of IDisposable.
           /// </summary>
@@ -59,5 +65,7 @@ namespace H13OcrQuickStart.Models
           /// </summary>
           /// <returns>A structure containing the processing results and error information.</returns>
           ProcessingResult Process();
+
+          #endregion Public Methods
      }
 }

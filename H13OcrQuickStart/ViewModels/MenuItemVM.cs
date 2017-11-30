@@ -15,6 +15,8 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      public class MenuItemVM
      {
+          #region Public Constructors
+
           /// <summary>
           /// Initializes a new instance of the MenuItemVM class.
           /// </summary>
@@ -26,6 +28,10 @@ namespace H13OcrQuickStart.ViewModels
                this.MenuCommand = command;
           }
 
+          #endregion Public Constructors
+
+          #region Public Properties
+
           /// <summary>
           /// Gets or sets the display name.
           /// </summary>
@@ -35,5 +41,7 @@ namespace H13OcrQuickStart.ViewModels
           /// Gets or sets the command to be bound to the menu item.
           /// </summary>
           public ReactiveCommand<Unit, ProcessingResult> MenuCommand { get; protected set; }
+
+          #endregion Public Properties
      }
 }

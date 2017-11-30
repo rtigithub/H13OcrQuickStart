@@ -15,9 +15,11 @@ namespace H13OcrQuickStart
      /// </summary>
      public partial class App : Application
      {
+          #region Public Constructors
+
           /// <summary>
           /// Initializes a new instance of the App class.
-          /// </summary>        
+          /// </summary>
           public App()
           {
                IDisposable disposableViewModel = null;
@@ -29,7 +31,6 @@ namespace H13OcrQuickStart
                     disposableViewModel = MainWindow.DataContext as IDisposable;
 
                     MainWindow.Show();
-
                };
 
                // Dispose on unhandled exception
@@ -50,5 +51,7 @@ namespace H13OcrQuickStart
                     }
                };
           }
+
+          #endregion Public Constructors
      }
 }

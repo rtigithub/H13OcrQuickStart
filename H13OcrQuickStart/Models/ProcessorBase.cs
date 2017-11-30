@@ -234,9 +234,5 @@ namespace H13OcrQuickStart.Models
           }
 
           #endregion Protected Methods
-
-          #region Private Methods
-
-          #endregion Private Methods
      }
 }

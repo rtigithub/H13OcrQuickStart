@@ -1,7 +1,7 @@
-﻿// *********************************************************************** 
-// Assembly : H13OcrQuickStart Author : Resolution Technology, Inc. 
-// Created : 06-15-2017 
-// Last Modified On : 06-15-2017 
+﻿// ***********************************************************************
+// Assembly : H13OcrQuickStart Author : Resolution Technology, Inc.
+// Created : 06-15-2017
+// Last Modified On : 06-15-2017
 // ***********************************************************************
 // <copyright file="ICameraCalibrationProcessor.cs" company="Resolution Technology, Inc.">
 //     Copyright © 2016, 2017
@@ -19,6 +19,8 @@ namespace H13OcrQuickStart.Models
      /// </summary>
      public interface ICameraCalibrationProcessor
      {
+          #region Public Properties
+
           /// <summary>
           /// Gets or sets a value indicating whether calibration images set.
           /// </summary>
@@ -60,6 +62,10 @@ namespace H13OcrQuickStart.Models
           /// </summary>
           /// <value>The rectified test image.</value>
           HImage RectifiedTestImage { get; set; }
+
+          #endregion Public Properties
+
+          #region Public Methods
 
           /// <summary>
           /// Calibrates the specified image.
@@ -147,5 +153,7 @@ namespace H13OcrQuickStart.Models
           /// <param name="halconCalibrationPlateName">Name of the halcon calibration plate.</param>
           /// <returns>A ProcessingResult instance.</returns>
           ProcessingResult SetInitialParameters(string cameraType, double focalLength, int imageWidth, int imageHeight, double sensorSizeX, double sensorSizeY, double rotation, double tilt, string halconCalibrationPlateName);
+
+          #endregion Public Methods
      }
 }

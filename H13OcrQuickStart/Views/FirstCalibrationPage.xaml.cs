@@ -1,6 +1,4 @@
-﻿
-
-namespace H13OcrQuickStart.View
+﻿namespace H13OcrQuickStart.View
 {
      using System.Windows.Controls;
 
@@ -9,10 +7,13 @@ namespace H13OcrQuickStart.View
      /// </summary>
      public partial class AcquireCalibrationPage : Page
      {
+          #region Public Constructors
+
           public AcquireCalibrationPage()
           {
                InitializeComponent();
           }
 
+          #endregion Public Constructors
      }
 }
