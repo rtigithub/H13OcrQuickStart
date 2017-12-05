@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="AcquireCalibrationModule.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart
 {
@@ -17,6 +22,10 @@ namespace H13OcrQuickStart
      /// <summary>
      /// Main window partial with added code for the Acquirecalibration module.
      /// </summary>
+     /// <seealso cref="System.Windows.Window" />
+     /// <seealso cref="ReactiveUI.IViewFor{H13OcrQuickStart.ViewModels.MainViewModel}" />
+     /// <seealso cref="System.IDisposable" />
+     /// <seealso cref="System.Windows.Markup.IComponentConnector" />
      public sealed partial class MainWindow
      {
           #region Private Fields
@@ -44,6 +53,7 @@ namespace H13OcrQuickStart
           /// <summary>
           /// Sets up the reactive bindings for all Acquire camera calibration controls.
           /// </summary>
+          /// <param name="manager">The manager.</param>
           private void BindAcquireCalibrationControls(ViewROIManager manager)
           {
                string RegexFloat = @"^-?\d+\.?\d*$";
@@ -267,6 +277,7 @@ namespace H13OcrQuickStart
           /// <summary>
           /// Initializes the Acquirecalibration module.
           /// </summary>
+          /// <param name="manager">The manager.</param>
           private void InitializeAcquireCalibrationModule(ViewROIManager manager)
           {
                this.MainViewModel.AcquireCalibrationVM.GetFileName.RegisterHandler(

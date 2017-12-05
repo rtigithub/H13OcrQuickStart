@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="ICameraCalibrationViewModel.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {

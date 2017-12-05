@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="ProcessorBase.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Models
 {
@@ -13,6 +18,9 @@ namespace H13OcrQuickStart.Models
      /// <summary>
      /// Base class for specific process models.
      /// </summary>
+     /// <seealso cref="ReactiveUI.ReactiveObject" />
+     /// <seealso cref="System.IDisposable" />
+     /// <seealso cref="H13OcrQuickStart.Models.IProcessor" />
      public abstract class ProcessorBase : ReactiveObject, IDisposable, IProcessor
      {
           #region Private Fields
@@ -70,6 +78,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the display collection for any debug output.
           /// </summary>
+          /// <value>The debug display.</value>
           public DisplayCollection DebugDisplay
           {
                get => this.debugDisplay;
@@ -80,6 +89,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the CompositeDisposable object.
           /// </summary>
+          /// <value>The dispose collection.</value>
           public System.Reactive.Disposables.CompositeDisposable DisposeCollection
           {
                get => this.disposeCollection;
@@ -90,6 +100,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the error code.
           /// </summary>
+          /// <value>The error code.</value>
           public ProcessingErrorCode ErrorCode
           {
                get => this.errorCode;
@@ -100,6 +111,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the error message.
           /// </summary>
+          /// <value>The error message.</value>
           public string ErrorMessage
           {
                get => this.errorMessage;

@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="ProcessingResultsBase.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Models
 {
@@ -12,6 +17,8 @@ namespace H13OcrQuickStart.Models
      /// <summary>
      /// Base class for processing results.
      /// </summary>
+     /// <seealso cref="System.IDisposable" />
+     /// <seealso cref="H13OcrQuickStart.Models.IProcessingResult" />
      public abstract class ProcessingResultsBase : IDisposable, IProcessingResult
      {
           #region Private Fields
@@ -58,6 +65,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the error message.
           /// </summary>
+          /// <value>The error message.</value>
           public string ErrorMessage
           {
                get => this.errorMessage;
@@ -68,6 +76,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the ResultsCollection Dictionary.
           /// </summary>
+          /// <value>The results collection.</value>
           public abstract Dictionary<string, object> ResultsCollection
           {
                get;
@@ -78,6 +87,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the error code.
           /// </summary>
+          /// <value>The status code.</value>
           public ProcessingErrorCode StatusCode
           {
                get => this.statusCode;

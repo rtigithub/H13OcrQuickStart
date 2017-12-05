@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="AcquireAcquisitionMainVMPartial.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -15,6 +20,7 @@ namespace H13OcrQuickStart.ViewModels
      /// <summary>
      /// Main view model partial with added code for the acquisition module and stubs for the camera calibration module.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.ViewModels.MainViewModelBase" />
      public partial class MainViewModel
      {
           #region Private Fields
@@ -31,6 +37,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the acquisitionAcquireVM.
           /// </summary>
+          /// <value>The acquire acquisition vm.</value>
           public FirstAcquisitionViewModel AcquireAcquisitionVM => this.acquisitionAcquireVM;
 
           #endregion Public Properties

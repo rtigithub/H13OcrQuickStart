@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="SettingsManagerBase.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Utilities
 {
@@ -16,6 +21,8 @@ namespace H13OcrQuickStart.Utilities
      /// the main view model.
      /// </summary>
      /// <typeparam name="MainVMClass">The main view model class.</typeparam>
+     /// <seealso cref="ReactiveUI.ReactiveObject" />
+     /// <seealso cref="System.IDisposable" />
      public abstract class SettingsManagerBase<MainVMClass> : ReactiveObject, IDisposable
          where MainVMClass : IMainViewModel
      {
@@ -79,6 +86,7 @@ namespace H13OcrQuickStart.Utilities
           /// <summary>
           /// Gets the disposeCollection.
           /// </summary>
+          /// <value>The dispose collection.</value>
           [XmlIgnore]
           public System.Reactive.Disposables.CompositeDisposable DisposeCollection =>
                this.disposeCollection;
@@ -86,6 +94,7 @@ namespace H13OcrQuickStart.Utilities
           /// <summary>
           /// Gets or sets a value indicating whether the class is loading settings.
           /// </summary>
+          /// <value><c>true</c> if this instance is loading; otherwise, <c>false</c>.</value>
           [XmlIgnore]
           public bool IsLoading
           {
@@ -97,6 +106,7 @@ namespace H13OcrQuickStart.Utilities
           /// <summary>
           /// Gets or sets a reference to the MainViewModel.
           /// </summary>
+          /// <value>The main view model reference.</value>
           [XmlIgnore]
           public MainVMClass MainViewModelRef
           {
@@ -113,6 +123,7 @@ namespace H13OcrQuickStart.Utilities
           /// <summary>
           /// Gets a dynamic reference to the MainViewModel.
           /// </summary>
+          /// <value>The main view model reference dynamic.</value>
           [XmlIgnore]
           public dynamic MainViewModelRefDynamic => this.MainViewModelRef;
 

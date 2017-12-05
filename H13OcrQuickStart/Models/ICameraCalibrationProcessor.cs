@@ -1,13 +1,12 @@
 ﻿// ***********************************************************************
-// Assembly : H13OcrQuickStart Author : Resolution Technology, Inc.
-// Created : 06-15-2017
-// Last Modified On : 06-15-2017
-// ***********************************************************************
+// Assembly         : H13OcrQuickStart Author : Resolution Technology, Inc.
+// Author           : Resolution Technology, Inc.
+// Created          : 06-15-2017
+// Last Modified On : 12-05-2017
 // <copyright file="ICameraCalibrationProcessor.cs" company="Resolution Technology, Inc.">
 //     Copyright © 2016, 2017
 // </copyright>
-// <summary>
-// </summary>
+// <summary></summary>
 // ***********************************************************************
 
 using HalconDotNet;

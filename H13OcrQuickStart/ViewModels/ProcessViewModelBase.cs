@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="ProcessViewModelBase.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -18,6 +23,8 @@ namespace H13OcrQuickStart.ViewModels
      /// </summary>
      /// <typeparam name="MainVMClass">Class type of the main view model class.</typeparam>
      /// <typeparam name="ProcessorModelClass">Class type of the processor class.</typeparam>
+     /// <seealso cref="ReactiveUI.ReactiveObject" />
+     /// <seealso cref="System.IDisposable" />
      public abstract class ProcessViewModelBase<MainVMClass, ProcessorModelClass> : ReactiveObject, IDisposable
          where MainVMClass : IMainViewModel
          where ProcessorModelClass : IProcessor
@@ -64,9 +71,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Initializes a new instance of the ProcessViewModelBase class in the derived class.
           /// </summary>
-          /// <param name="mainViewModel">
-          /// A reference to the main view model that owns the derived class.
-          /// </param>
+          /// <param name="mainViewModel">A reference to the main view model that owns the derived class.</param>
           /// <param name="processor">Processor class for this process.</param>
           public ProcessViewModelBase(IMainViewModel mainViewModel, IProcessor processor)
           {
@@ -93,6 +98,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the command can execute.
           /// </summary>
+          /// <value>The can execute.</value>
           public IObservable<bool> CanExecute
           {
                get;
@@ -103,6 +109,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command for processing an image.
           /// </summary>
+          /// <value>The command.</value>
           public ReactiveCommand<Unit, ProcessingResult> Command
           {
                get;
@@ -113,6 +120,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the debug display.
           /// </summary>
+          /// <value>The debug display.</value>
           public DisplayCollection DebugDisplay
           {
                get => this.debugDisplay;
@@ -123,6 +131,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the image display.
           /// </summary>
+          /// <value>The display.</value>
           public DisplayCollection Display
           {
                get => this.display;
@@ -133,17 +142,20 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the disposeCollection.
           /// </summary>
+          /// <value>The dispose collection.</value>
           public System.Reactive.Disposables.CompositeDisposable DisposeCollection =>
                this.disposeCollection;
 
           /// <summary>
           /// Gets a value indicating whether the LoadImageCommand is executing.
           /// </summary>
+          /// <value><c>true</c> if this instance is loading; otherwise, <c>false</c>.</value>
           public bool IsLoading => this.isLoading.Value;
 
           /// <summary>
           /// Gets of sets a reference to the MainViewModel.
           /// </summary>
+          /// <value>The main view model reference.</value>
           public MainVMClass MainViewModelRef
           {
                get;
@@ -154,11 +166,13 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets a dynamic reference to the MainViewModel.
           /// </summary>
+          /// <value>The main view model reference dynamic.</value>
           public dynamic MainViewModelRefDynamic => this.MainViewModelRef;
 
           /// <summary>
           /// Gets of sets a reference to the processor model for this class.
           /// </summary>
+          /// <value>The processor.</value>
           public ProcessorModelClass Processor
           {
                get;

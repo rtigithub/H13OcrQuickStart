@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="LoadProcessViewModel.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -18,6 +23,7 @@ namespace H13OcrQuickStart.ViewModels
      /// <summary>
      /// LoadProcessViewModel class for image load processing.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.ViewModels.ProcessViewModelBase{H13OcrQuickStart.ViewModels.MainViewModel, H13OcrQuickStart.Models.LoadImageProcessor}" />
      public class LoadProcessViewModel : ProcessViewModelBase<MainViewModel, LoadImageProcessor>
      {
           #region Private Fields
@@ -136,6 +142,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the file name.
           /// </summary>
+          /// <value>The name of the file.</value>
           public string FileName
           {
                get => this.fileName;
@@ -146,11 +153,13 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the getFileName Interaction.
           /// </summary>
+          /// <value>The name of the get file.</value>
           public Interaction<Unit, string> GetFileName => getFileName;
 
           /// <summary>
           /// Gets or sets the image.
           /// </summary>
+          /// <value>The image.</value>
           public HImage Image
           {
                get => this.image;
@@ -161,16 +170,19 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the image height.
           /// </summary>
+          /// <value>The height of the image.</value>
           public int ImageHeight => this.imageHeight.Value;
 
           /// <summary>
           /// Gets the image width.
           /// </summary>
+          /// <value>The width of the image.</value>
           public int ImageWidth => this.imageWidth.Value;
 
           /// <summary>
           /// Gets the processing results.
           /// </summary>
+          /// <value>The processing results.</value>
           public ProcessingResult ProcessingResults => this.processingResults.Value;
 
           #endregion Public Properties

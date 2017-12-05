@@ -12,7 +12,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Resolution Technology, Inc.")]
 [assembly: AssemblyProduct("H13OcrQuickStart")]
-[assembly: AssemblyCopyright("Copyright ©  2016, 2017")]
+[assembly: AssemblyCopyright("Copyright ©  2016, 2017 Resolution Technology, Inc.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

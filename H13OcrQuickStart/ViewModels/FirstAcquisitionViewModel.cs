@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="AcquireAcquisitionViewModel.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -19,6 +24,7 @@ namespace H13OcrQuickStart.ViewModels
      /// <summary>
      /// View model for the new AcquireAcquisition process.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.ViewModels.ProcessViewModelBase{H13OcrQuickStart.ViewModels.MainViewModel, H13OcrQuickStart.Models.FirstAcquisitionProcessor}" />
      public class FirstAcquisitionViewModel : ProcessViewModelBase<MainViewModel, FirstAcquisitionProcessor>
      {
           #region Private Fields
@@ -356,16 +362,19 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the image height.
           /// </summary>
+          /// <value>The height of the acquired image.</value>
           public int AcquiredImageHeight => this.acquiredImageHeight.Value;
 
           /// <summary>
           /// Gets the image width.
           /// </summary>
+          /// <value>The width of the acquired image.</value>
           public int AcquiredImageWidth => this.acquiredImageWidth.Value;
 
           /// <summary>
           /// Gets or sets the acquisition interface list.
           /// </summary>
+          /// <value>The acquisition interfaces.</value>
           public ReactiveList<string> AcquisitionInterfaces
           {
                get;
@@ -376,6 +385,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the bits per channel.
           /// </summary>
+          /// <value>The bits per channel.</value>
           public int BitsPerChannel
           {
                get => this.bitsPerChannel;
@@ -386,6 +396,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the bits per channel parameters.
           /// </summary>
+          /// <value>The bits per channel parameters.</value>
           public HTuple BitsPerChannelParameters
           {
                get => this.bitsPerChannelParameters;
@@ -396,6 +407,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the camera type.
           /// </summary>
+          /// <value>The type of the camera.</value>
           public string CameraType
           {
                get => this.cameraType;
@@ -406,6 +418,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the camera type parameters.
           /// </summary>
+          /// <value>The camera type parameters.</value>
           public HTuple CameraTypeParameters
           {
                get => this.cameraTypeParameters;
@@ -416,6 +429,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the color space.
           /// </summary>
+          /// <value>The color space.</value>
           public string ColorSpace
           {
                get => this.colorSpace;
@@ -426,6 +440,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the color space parameters.
           /// </summary>
+          /// <value>The color space parameters.</value>
           public HTuple ColorSpaceParameters
           {
                get => this.colorSpaceParameters;
@@ -436,6 +451,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the current acquisition interface name.
           /// </summary>
+          /// <value>The name of the current acquisition interface.</value>
           public string CurrentAcquisitionInterfaceName
           {
                get => this.currentAcquisitionInterfaceName;
@@ -446,6 +462,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the device.
           /// </summary>
+          /// <value>The device.</value>
           public string Device
           {
                get => this.device;
@@ -456,6 +473,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the device parameters.
           /// </summary>
+          /// <value>The device parameters.</value>
           public HTuple DeviceParameters
           {
                get => this.deviceParameters;
@@ -466,6 +484,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the externalTrigger.
           /// </summary>
+          /// <value>The external trigger.</value>
           public string ExternalTrigger
           {
                get => this.externalTrigger;
@@ -476,6 +495,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the externalTrigger parameters.
           /// </summary>
+          /// <value>The external trigger parameters.</value>
           public HTuple ExternalTriggerParameters
           {
                get => this.externalTriggerParameters;
@@ -486,6 +506,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the field.
           /// </summary>
+          /// <value>The field.</value>
           public string Field
           {
                get => this.field;
@@ -496,6 +517,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the field parameters.
           /// </summary>
+          /// <value>The field parameters.</value>
           public HTuple FieldParameters
           {
                get => this.fieldParameters;
@@ -506,6 +528,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the generic value.
           /// </summary>
+          /// <value>The generic.</value>
           public string Generic
           {
                get => this.generic;
@@ -516,6 +539,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the generic parameters.
           /// </summary>
+          /// <value>The generic parameters.</value>
           public HTuple GenericParameters
           {
                get => this.genericParameters;
@@ -526,16 +550,19 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the Interaction to return a file name from the user.
           /// </summary>
+          /// <value>The name of the get file.</value>
           public Interaction<Unit, string> GetFileName => this.getFileName;
 
           /// <summary>
           /// Gets the Interaction to return a file name from the user for a save operation.
           /// </summary>
+          /// <value>The name of the get save file.</value>
           public Interaction<Unit, string> GetSaveFileName => this.getSaveFileName;
 
           /// <summary>
           /// Gets or sets the horizontal resolution.
           /// </summary>
+          /// <value>The horizontal resolution.</value>
           public int HorizontalResolution
           {
                get => this.horizontalResolution;
@@ -546,6 +573,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the horizontal resolution parameters.
           /// </summary>
+          /// <value>The horizontal resolution parameters.</value>
           public HTuple HorizontalResolutionParameters
           {
                get => this.horizontalResolutionParameters;
@@ -556,6 +584,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the acquired image.
           /// </summary>
+          /// <value>The image.</value>
           public HImage Image
           {
                get => this.image;
@@ -566,6 +595,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the image height.
           /// </summary>
+          /// <value>The height of the image.</value>
           public int ImageHeight
           {
                get => this.imageHeight;
@@ -576,6 +606,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the imageHeight parameters.
           /// </summary>
+          /// <value>The image height parameters.</value>
           public HTuple ImageHeightParameters
           {
                get => this.imageHeightParameters;
@@ -586,6 +617,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the image width.
           /// </summary>
+          /// <value>The width of the image.</value>
           public int ImageWidth
           {
                get => this.imageWidth;
@@ -596,6 +628,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the image width parameters.
           /// </summary>
+          /// <value>The image width parameters.</value>
           public HTuple ImageWidthParameters
           {
                get => this.imageWidthParameters;
@@ -606,6 +639,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command for initializing the frame grabber.
           /// </summary>
+          /// <value>The initialize command.</value>
           public ReactiveCommand<Unit, ProcessingResult> InitializeCommand
           {
                get;
@@ -616,6 +650,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets a value indicate whether the processor is processing an image for display.
           /// </summary>
+          /// <value><c>true</c> if this instance is processing; otherwise, <c>false</c>.</value>
           public bool IsProcessing
           {
                get => this.isProcessing;
@@ -626,6 +661,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the lineIn.
           /// </summary>
+          /// <value>The line in.</value>
           public int LineIn
           {
                get => this.lineIn;
@@ -636,6 +672,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the lineIn parameters.
           /// </summary>
+          /// <value>The line in parameters.</value>
           public HTuple LineInParameters
           {
                get => this.lineInParameters;
@@ -646,6 +683,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the command to trigger live video can execute.
           /// </summary>
+          /// <value>The live video can execute.</value>
           public IObservable<bool> LiveVideoCanExecute
           {
                get;
@@ -656,6 +694,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command for triggering live video.
           /// </summary>
+          /// <value>The live video command.</value>
           public ReactiveCommand<Unit, ProcessingResult> LiveVideoCommand
           {
                get;
@@ -666,6 +705,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets a value indicating whether the system is acquiring live video.
           /// </summary>
+          /// <value><c>true</c> if [live video mode]; otherwise, <c>false</c>.</value>
           public bool LiveVideoMode
           {
                get => this.liveVideoMode;
@@ -676,6 +716,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the port.
           /// </summary>
+          /// <value>The port.</value>
           public int Port
           {
                get => this.port;
@@ -686,6 +727,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the port parameters.
           /// </summary>
+          /// <value>The port parameters.</value>
           public HTuple PortParameters
           {
                get => this.portParameters;
@@ -696,11 +738,13 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the processing results.
           /// </summary>
+          /// <value>The processing results.</value>
           public ProcessingResult ProcessingResults => this.processingResults.Value;
 
           /// <summary>
           /// Gets or sets the command for saving an image.
           /// </summary>
+          /// <value>The save image command.</value>
           public ReactiveCommand<Unit, ProcessingResult> SaveImageCommand
           {
                get;
@@ -711,6 +755,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets file name to save the image to.
           /// </summary>
+          /// <value>The name of the save image file.</value>
           public string SaveImageFileName
           {
                get => this.saveImageFileName;
@@ -721,6 +766,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command for selecting a file.
           /// </summary>
+          /// <value>The select file command.</value>
           public ReactiveCommand<Unit, ProcessingResult> SelectFileCommand
           {
                get;
@@ -731,6 +777,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets visibility state of the selectFile button.
           /// </summary>
+          /// <value>The select file visibility.</value>
           public System.Windows.Visibility SelectFileVisibility
           {
                get => this.selectFileVisibility;
@@ -741,6 +788,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the start column.
           /// </summary>
+          /// <value>The start column.</value>
           public int StartColumn
           {
                get => this.startColumn;
@@ -751,6 +799,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the start column parameters.
           /// </summary>
+          /// <value>The start column parameters.</value>
           public HTuple StartColumnParameters
           {
                get => this.startColumnParameters;
@@ -761,6 +810,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the start row.
           /// </summary>
+          /// <value>The start row.</value>
           public int StartRow
           {
                get => this.startRow;
@@ -771,6 +821,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the start row parameters.
           /// </summary>
+          /// <value>The start row parameters.</value>
           public HTuple StartRowParameters
           {
                get => this.startRowParameters;
@@ -781,6 +832,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the vertical resolution.
           /// </summary>
+          /// <value>The vertical resolution.</value>
           public int VerticalResolution
           {
                get => this.verticalResolution;
@@ -791,6 +843,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the vertical resolution parameters.
           /// </summary>
+          /// <value>The vertical resolution parameters.</value>
           public HTuple VerticalResolutionParameters
           {
                get => this.verticalResolutionParameters;
@@ -998,7 +1051,8 @@ namespace H13OcrQuickStart.ViewModels
                }
           }
 
-          /// <summary>.
+          /// <summary>
+          /// .
           /// Implements the asynchronous method to Select a File.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>

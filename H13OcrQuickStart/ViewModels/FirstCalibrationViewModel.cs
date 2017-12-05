@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="CameraCalibrationViewModel.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -19,6 +24,8 @@ namespace H13OcrQuickStart.ViewModels
      /// <summary>
      /// View model for the new Acquire Calibration process.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.ViewModels.ProcessViewModelBase{H13OcrQuickStart.ViewModels.MainViewModel, H13OcrQuickStart.Models.FirstCalibrationProcessor}" />
+     /// <seealso cref="H13OcrQuickStart.ViewModels.ICameraCalibrationViewModel" />
      public class FirstCalibrationViewModel : ProcessViewModelBase<MainViewModel, FirstCalibrationProcessor>, ICameraCalibrationViewModel
      {
           #region Private Fields
@@ -110,7 +117,8 @@ namespace H13OcrQuickStart.ViewModels
 
           // assumes defaults are valid.
           // <summary>
-          /// Stores the name parameters of the halcon calibration plate.
+          /// <summary>
+          /// The halcon calibration plate parameters
           /// </summary>
           private HTuple halconCalibrationPlateParameters = new HTuple();
 
@@ -441,6 +449,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command to acquire calibration images.
           /// </summary>
+          /// <value>The acquire calibration images command.</value>
           public ReactiveCommand<Unit, ProcessingResult> AcquireCalibrationImagesCommand
           {
                get;
@@ -451,6 +460,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets a value indicating whether all parameters are valid.
           /// </summary>
+          /// <value><c>true</c> if the initial parameters are valid; otherwise, <c>false</c>.</value>
           public bool AreInitialParametersValid
           {
                get => this.areInitialParametersValid;
@@ -461,6 +471,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the Calibrate command can execute.
           /// </summary>
+          /// <value>The calibrate can execute observable.</value>
           public IObservable<bool> CalibrateCanExecute
           {
                get;
@@ -471,6 +482,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command to perform a calibration.
           /// </summary>
+          /// <value>The calibrate command.</value>
           public ReactiveCommand<Unit, ProcessingResult> CalibrateCommand
           {
                get;
@@ -481,6 +493,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the calibrated scale.
           /// </summary>
+          /// <value>The calibrated scale.</value>
           public double CalibratedScale
           {
                get => this.calibratedScale;
@@ -491,6 +504,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the name of the folder where calibration images are located.
           /// </summary>
+          /// <value>The name of the calibration image folder.</value>
           public string CalibrationImageFolderName
           {
                get => this.calibrationImageFolderName;
@@ -501,6 +515,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the calibration map.
           /// </summary>
+          /// <value>The calibration map.</value>
           public HImage CalibrationMap
           {
                get => this.calibrationMap;
@@ -511,6 +526,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the file name for loading the calibration map.
           /// </summary>
+          /// <value>The name of the calibration map load file.</value>
           public string CalibrationMapLoadFileName
           {
                get => this.calibrationMapLoadFileName;
@@ -521,6 +537,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the file name for saving the calibration map.
           /// </summary>
+          /// <value>The name of the calibration map save file.</value>
           public string CalibrationMapSaveFileName
           {
                get => this.calibrationMapSaveFileName;
@@ -531,6 +548,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the calibration test image.
           /// </summary>
+          /// <value>The calibration test image.</value>
           public HImage CalibrationTestImage
           {
                get => this.calibrationTestImage;
@@ -541,6 +559,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the camera type.
           /// </summary>
+          /// <value>The camera type.</value>
           public string CameraType
           {
                get => this.cameraType;
@@ -551,6 +570,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the camera type parameters.
           /// </summary>
+          /// <value>The camera type parameters.</value>
           public HTuple CameraTypeParameters
           {
                get => this.cameraTypeParameters;
@@ -561,6 +581,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets a value indicating whether new images should be corrected.
           /// </summary>
+          /// <value><c>true</c> if new images should be corrected; otherwise, <c>false</c>.</value>
           public bool CorrectNewImages
           {
                get => this.correctNewImages;
@@ -571,6 +592,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the focal length.
           /// </summary>
+          /// <value>The focal length.</value>
           public double FocalLength
           {
                get => this.focalLength;
@@ -581,6 +603,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the focal length parameters.
           /// </summary>
+          /// <value>The focal length parameters.</value>
           public HTuple FocalLengthParameters
           {
                get => this.focalLengthParameters;
@@ -591,26 +614,31 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the Interaction to return a file name to save a calibration map.
           /// </summary>
+          /// <value>The name of the get calibratioin map save file.</value>
           public Interaction<Unit, string> GetCalibratioinMapSaveFileName => this.getCalibratioinMapSaveFileName;
 
           /// <summary>
           /// Gets the Interaction to return a file name to load a file.
           /// </summary>
+          /// <value>The name of the get file.</value>
           public Interaction<Unit, string> GetFileName => this.getFileName;
 
           /// <summary>
           /// Gets the Interaction to return a folder name from the user.
           /// </summary>
+          /// <value>The name of the get folder.</value>
           public Interaction<Unit, string> GetFolderName => this.getFolderName;
 
           /// <summary>
           /// Gets the Interaction to return a file name to save a file.
           /// </summary>
+          /// <value>The name of the get save file.</value>
           public Interaction<Unit, string> GetSaveFileName => this.getSaveFileName;
 
           /// <summary>
           /// Gets or sets the name of the halcon calibration plate.
           /// </summary>
+          /// <value>The name of the halcon calibration plate.</value>
           public string HalconCalibrationPlateName
           {
                get => this.halconCalibrationPlateName;
@@ -621,6 +649,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the parameters for the name of the halcon calibration plate.
           /// </summary>
+          /// <value>The halcon calibration plate parameters.</value>
           public HTuple HalconCalibrationPlateParameters
           {
                get => this.halconCalibrationPlateParameters;
@@ -631,6 +660,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the image height.
           /// </summary>
+          /// <value>The height of the image.</value>
           public int ImageHeight
           {
                get => this.imageHeight;
@@ -641,6 +671,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the image height parameters.
           /// </summary>
+          /// <value>The image height parameters.</value>
           public HTuple ImageHeightParameters
           {
                get => this.imageHeightParameters;
@@ -651,6 +682,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the image width.
           /// </summary>
+          /// <value>The width of the image.</value>
           public int ImageWidth
           {
                get => this.imageWidth;
@@ -661,6 +693,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the image width parameters.
           /// </summary>
+          /// <value>The image width parameters.</value>
           public HTuple ImageWidthParameters
           {
                get => this.imageWidthParameters;
@@ -671,6 +704,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets a value indicating whether the processor is busy.
           /// </summary>
+          /// <value><c>true</c> if the process is busy; otherwise, <c>false</c>.</value>
           public bool IsBusy
           {
                get => this.isBusy;
@@ -681,6 +715,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets a value indicating whether calibration test image is present.
           /// </summary>
+          /// <value><c>true</c> if this instance is calibration test image present; otherwise, <c>false</c>.</value>
           public bool IsCalibrationTestImagePresent
           {
                get => this.isCalibrationTestImagePresent;
@@ -691,6 +726,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the command to load calibration images from file can execute.
           /// </summary>
+          /// <value>The load calibration images from file can execute observable.</value>
           public IObservable<bool> LoadCalibImagesFromFileCanExecute
           {
                get;
@@ -701,6 +737,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command to load calibration images from file.
           /// </summary>
+          /// <value>The load calibration images from file command.</value>
           public ReactiveCommand<Unit, ProcessingResult> LoadCalibImagesFromFileCommand
           {
                get;
@@ -711,6 +748,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command to load a calibration map.
           /// </summary>
+          /// <value>The load calibration map command.</value>
           public ReactiveCommand<Unit, ProcessingResult> LoadCalibrationMapCommand
           {
                get;
@@ -721,6 +759,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets a value indicating whether processor is loading a calibration test image.
           /// </summary>
+          /// <value><c>true</c> if the test image is loading; otherwise, <c>false</c>.</value>
           public bool LoadingTestImage
           {
                get => this.loadingTestImage;
@@ -731,6 +770,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the LoadTestCalibrationImage command can execute.
           /// </summary>
+          /// <value>The load test calibration image can execute observable.</value>
           public IObservable<bool> LoadTestCalibrationImageCanExecute
           {
                get;
@@ -741,6 +781,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command to load a test calibration image from file.
           /// </summary>
+          /// <value>The load test calibration image command.</value>
           public ReactiveCommand<Unit, Unit> LoadTestCalibrationImageCommand
           {
                get;
@@ -751,16 +792,19 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the processing results.
           /// </summary>
+          /// <value>The processing results.</value>
           public ProcessingResult ProcessingResults => this.processingResults.Value;
 
           /// <summary>
           /// Gets the processing results calibrate.
           /// </summary>
+          /// <value>The processing results for the calibrate command.</value>
           public ProcessingResult ProcessingResultsCalibrate => this.processingResultsCalibrate.Value;
 
           /// <summary>
           /// Gets or sets the rectified image height.
           /// </summary>
+          /// <value>The height of the rectified image.</value>
           public int RectifiedImageHeight
           {
                get => this.rectifiedImageHeight;
@@ -771,6 +815,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rectified image width.
           /// </summary>
+          /// <value>The width of the rectified image.</value>
           public int RectifiedImageWidth
           {
                get => this.rectifiedImageWidth;
@@ -781,6 +826,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the file name for saving the rectified test image.
           /// </summary>
+          /// <value>The file in which to save the rectified test image.</value>
           public string RectifiedTestImageSaveName
           {
                get => this.rectifiedTestImageSaveName;
@@ -791,6 +837,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the RectifyImage command can execute.
           /// </summary>
+          /// <value>The rectify image can execute observable.</value>
           public IObservable<bool> RectifyImageCanExecute
           {
                get;
@@ -801,6 +848,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command to rectify an image.
           /// </summary>
+          /// <value>The rectify image command.</value>
           public ReactiveCommand<Unit, ProcessingResult> RectifyImageCommand
           {
                get;
@@ -811,6 +859,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the  command to reset calibration images.
           /// </summary>
+          /// <value>The reset calibration images command.</value>
           public ReactiveCommand<Unit, ProcessingResult> ResetCalibrationImagesCommand
           {
                get;
@@ -821,6 +870,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rotation.
           /// </summary>
+          /// <value>The rotation.</value>
           public double Rotation
           {
                get => this.rotation;
@@ -831,6 +881,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rotation parameters.
           /// </summary>
+          /// <value>The rotation parameters.</value>
           public HTuple RotationParameters
           {
                get => this.rotationParameters;
@@ -841,6 +892,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rotation in the X direction.
           /// </summary>
+          /// <value>The rotation in the x direction.</value>
           public double RotX
           {
                get => this.rotX;
@@ -851,6 +903,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rotation in the X direction parameters.
           /// </summary>
+          /// <value>The rotation in the x direction parameters.</value>
           public HTuple RotXParameters
           {
                get => this.rotXParameters;
@@ -861,6 +914,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rotation in the Y direction.
           /// </summary>
+          /// <value>The rotation in the y direction.</value>
           public double RotY
           {
                get => this.rotY;
@@ -871,6 +925,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rotation in the Y direction parameters.
           /// </summary>
+          /// <value>The rotation in the y direction parameters.</value>
           public HTuple RotYParameters
           {
                get => this.rotYParameters;
@@ -881,6 +936,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rotation in the Z direction.
           /// </summary>
+          /// <value>The rotation in the z direction.</value>
           public double RotZ
           {
                get => this.rotZ;
@@ -891,6 +947,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the rotation in the Z direction parameters.
           /// </summary>
+          /// <value>The rotation in the z direction parameters.</value>
           public HTuple RotZParameters
           {
                get => this.rotZParameters;
@@ -901,6 +958,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the SaveCalibrationMap command can execute.
           /// </summary>
+          /// <value>The save calibration map can execute observable.</value>
           public IObservable<bool> SaveCalibrationMapCanExecute
           {
                get;
@@ -911,6 +969,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command to save a calibration map.
           /// </summary>
+          /// <value>The save calibration map command.</value>
           public ReactiveCommand<Unit, ProcessingResult> SaveCalibrationMapCommand
           {
                get;
@@ -921,6 +980,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the SaveRectifiedImage command can execute.
           /// </summary>
+          /// <value>The save rectified image can execute observable.</value>
           public IObservable<bool> SaveRectifiedImageCanExecute
           {
                get;
@@ -931,6 +991,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the command to save a rectified image.
           /// </summary>
+          /// <value>The save rectified image command.</value>
           public ReactiveCommand<Unit, ProcessingResult> SaveRectifiedImageCommand
           {
                get;
@@ -941,6 +1002,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the sensor size in the X direction.
           /// </summary>
+          /// <value>The sensor size x.</value>
           public double SensorSizeX
           {
                get => this.sensorSizeX;
@@ -951,6 +1013,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the sensor size in the X direction parameters.
           /// </summary>
+          /// <value>The sensor size x parameters.</value>
           public HTuple SensorSizeXParameters
           {
                get => this.sensorSizeXParameters;
@@ -961,6 +1024,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the sensor size in the Y direction.
           /// </summary>
+          /// <value>The sensor size y.</value>
           public double SensorSizeY
           {
                get => this.sensorSizeY;
@@ -971,6 +1035,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the sensor size in the Y direction parameters.
           /// </summary>
+          /// <value>The sensor size y parameters.</value>
           public HTuple SensorSizeYParameters
           {
                get => this.sensorSizeYParameters;
@@ -981,6 +1046,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets an observable that indicates whether the SetParameters command can execute.
           /// </summary>
+          /// <value>The set parameters can execute observable.</value>
           public IObservable<bool> SetParametersCanExecute
           {
                get;
@@ -995,6 +1061,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the SetParametersCommand.
           /// </summary>
+          /// <value>The set parameters command.</value>
           public ReactiveCommand<Unit, ProcessingResult> SetParametersCommand
           {
                get;
@@ -1005,6 +1072,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the tilt.
           /// </summary>
+          /// <value>The tilt.</value>
           public double Tilt
           {
                get => this.tilt;
@@ -1015,6 +1083,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the tilt parameters.
           /// </summary>
+          /// <value>The tilt parameters.</value>
           public HTuple TiltParameters
           {
                get => this.tiltParameters;
@@ -1025,6 +1094,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the translation in the X direction.
           /// </summary>
+          /// <value>The translation in the x direction.</value>
           public double TransX
           {
                get => this.transX;
@@ -1035,6 +1105,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the translation in the X direction parameters.
           /// </summary>
+          /// <value>The translation in the x direction parameters.</value>
           public HTuple TransXParameters
           {
                get => this.transXParameters;
@@ -1045,6 +1116,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the translation in the Y direction.
           /// </summary>
+          /// <value>The translation in the y direction.</value>
           public double TransY
           {
                get => this.transY;
@@ -1055,6 +1127,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the translation in the Y direction parameters.
           /// </summary>
+          /// <value>The translation in the y direction parameters.</value>
           public HTuple TransYParameters
           {
                get => this.transYParameters;
@@ -1065,6 +1138,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the translation in the Z direction.
           /// </summary>
+          /// <value>The translation in the z direction.</value>
           public double TransZ
           {
                get => this.transZ;
@@ -1075,6 +1149,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the translation in the Z direction parameters.
           /// </summary>
+          /// <value>The translation in the z direction parameters.</value>
           public HTuple TransZParameters
           {
                get => this.transZParameters;
@@ -1085,6 +1160,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the index into the poses in the camera parameters to use as the world pose.
           /// </summary>
+          /// <value>The index of the world pose.</value>
           public int WorldPoseIndex
           {
                get => this.worldPoseIndex;
@@ -1187,7 +1263,8 @@ namespace H13OcrQuickStart.ViewModels
 
           #region Private Methods
 
-          /// <summary>.
+          /// <summary>
+          /// .
           /// Implements the asynchronous method to acquire calibration images.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
@@ -1197,7 +1274,8 @@ namespace H13OcrQuickStart.ViewModels
                return await Task.Factory.StartNew(() => this.Processor.ProcessAcquiredCalibrationImage(this.MainViewModelRef.AcquireAcquisitionVM.Image));
           }
 
-          /// <summary>.
+          /// <summary>
+          /// .
           /// Implements the asynchronous method to perform the calibration.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
@@ -1212,7 +1290,8 @@ namespace H13OcrQuickStart.ViewModels
                    this.WorldPoseIndex));
           }
 
-          /// <summary>.
+          /// <summary>
+          /// .
           /// Implements the asynchronous method to load the calibration images from file.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
@@ -1243,7 +1322,8 @@ namespace H13OcrQuickStart.ViewModels
                }
           }
 
-          /// <summary>.
+          /// <summary>
+          /// .
           /// Implements the asynchronous method to load a calibration map.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
@@ -1282,7 +1362,8 @@ namespace H13OcrQuickStart.ViewModels
                return await Task.Factory.StartNew(() => this.Processor.RectifyImage(this.CalibrationTestImage));
           }
 
-          /// <summary>.
+          /// <summary>
+          /// .
           /// Implements the asynchronous method to set all calibration images.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>
@@ -1382,7 +1463,8 @@ namespace H13OcrQuickStart.ViewModels
                     "calplate_1200mm.cpd");
           }
 
-          /// <summary>.
+          /// <summary>
+          /// .
           /// Implements the asynchronous method to set the parameters.
           /// </summary>
           /// <returns>A ProcessingResult instance.</returns>

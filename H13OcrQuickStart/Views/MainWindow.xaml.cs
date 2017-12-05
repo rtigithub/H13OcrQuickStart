@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="MainWindow.xaml.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart
 {
@@ -27,6 +32,10 @@ namespace H13OcrQuickStart
      /// <summary>
      /// Interaction logic for MainWindow.
      /// </summary>
+     /// <seealso cref="System.Windows.Window" />
+     /// <seealso cref="ReactiveUI.IViewFor{H13OcrQuickStart.ViewModels.MainViewModel}" />
+     /// <seealso cref="System.IDisposable" />
+     /// <seealso cref="System.Windows.Markup.IComponentConnector" />
      public sealed partial class MainWindow : Window, ReactiveUI.IViewFor<ViewModel>, IDisposable
      {
           #region Public Fields
@@ -106,21 +115,25 @@ namespace H13OcrQuickStart
           /// <summary>
           /// Gets the context menu data template.
           /// </summary>
+          /// <value>The context menu data template.</value>
           public DataTemplate ContextMenuDataTemplate => this.contextMenuDataTemplate;
 
           /// <summary>
           /// Gets the context menu items panel template.
           /// </summary>
+          /// <value>The context menu items panel template.</value>
           public ItemsPanelTemplate ContextMenuItemsPanelTemplate => this.contextMenuItemsPanelTemplate;
 
           /// <summary>
           /// Gets the disposeCollection.
           /// </summary>
+          /// <value>The dispose collection.</value>
           public System.Reactive.Disposables.CompositeDisposable DisposeCollection => this.disposeCollection;
 
           /// <summary>
           /// Gets or sets the ViewModel through the ViewModelProperty.
           /// </summary>
+          /// <value>The main view model.</value>
           public ViewModel MainViewModel
           {
                get => (ViewModel)GetValue(ViewModelProperty);
@@ -131,6 +144,7 @@ namespace H13OcrQuickStart
           /// <summary>
           /// Gets or sets the ViewModel as an object. Needed for RxUI binding.
           /// </summary>
+          /// <value>The view model.</value>
           object ReactiveUI.IViewFor.ViewModel
           {
                get => this.MainViewModel;
@@ -141,6 +155,7 @@ namespace H13OcrQuickStart
           /// <summary>
           /// Gets or sets the ViewModel.
           /// </summary>
+          /// <value>The view model.</value>
           ViewModel ReactiveUI.IViewFor<ViewModel>.ViewModel
           {
                get => this.MainViewModel;

@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="OcrModule.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart
 {
@@ -15,6 +20,10 @@ namespace H13OcrQuickStart
      /// <summary>
      /// Main window partial with added code for the Ocr module.
      /// </summary>
+     /// <seealso cref="System.Windows.Window" />
+     /// <seealso cref="ReactiveUI.IViewFor{H13OcrQuickStart.ViewModels.MainViewModel}" />
+     /// <seealso cref="System.IDisposable" />
+     /// <seealso cref="System.Windows.Markup.IComponentConnector" />
      public sealed partial class MainWindow
      {
           #region Private Methods

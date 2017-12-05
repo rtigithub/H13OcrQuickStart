@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="ProcessingResult.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Models
 {
@@ -12,6 +17,7 @@ namespace H13OcrQuickStart.Models
      /// <summary>
      /// This class encapsulates the results from a generic process.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.Models.ProcessingResultsBase" />
      public class ProcessingResult : ProcessingResultsBase
      {
           #region Private Fields
@@ -44,6 +50,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets a dictionary of results.
           /// </summary>
+          /// <value>The results collection.</value>
           public override Dictionary<string, object> ResultsCollection
           {
                get => this.resultsCollection;

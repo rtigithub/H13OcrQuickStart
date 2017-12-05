@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="OcrProcessor.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Models
 {
@@ -16,6 +21,7 @@ namespace H13OcrQuickStart.Models
      /// <summary>
      /// Model class for a new process.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.Models.ProcessorBase" />
      public class OcrProcessor : ProcessorBase
      {
           #region Private Fields
@@ -209,17 +215,34 @@ namespace H13OcrQuickStart.Models
 
           #region Private Methods
 
+          /// <summary>
+          /// Corrects the text orientation.
+          /// </summary>
+          /// <param name="image">The image.</param>
+          /// <param name="regionOfInterest">The region of interest.</param>
           private void CorrectTextOrientation(HImage image, HRegion regionOfInterest)
           {
                double phi = FindTextLineOrientation(image, regionOfInterest);
                TransformImage(image, phi);
           }
 
+          /// <summary>
+          /// Finds the text line orientation.
+          /// </summary>
+          /// <param name="image">The image.</param>
+          /// <param name="regionOfInterest">The region of interest.</param>
+          /// <returns>System.Double.</returns>
+          /// <exception cref="NotImplementedException"></exception>
           private double FindTextLineOrientation(HImage image, HRegion regionOfInterest)
           {
                throw new NotImplementedException();
           }
 
+          /// <summary>
+          /// Processes the image.
+          /// </summary>
+          /// <param name="image">The image.</param>
+          /// <returns>ProcessingResult.</returns>
           private ProcessingResult ProcessImage(HImage image)
           {
                var result = new ProcessingResult();
@@ -258,6 +281,12 @@ namespace H13OcrQuickStart.Models
                return result;
           }
 
+          /// <summary>
+          /// Transforms the image.
+          /// </summary>
+          /// <param name="image">The image.</param>
+          /// <param name="phi">The phi.</param>
+          /// <exception cref="NotImplementedException"></exception>
           private void TransformImage(HImage image, double phi)
           {
                throw new NotImplementedException();

@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="MainViewModelBase.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -14,6 +19,9 @@ namespace H13OcrQuickStart.ViewModels
      /// <summary>
      /// MainViewModelBase is the base class for MainViewModel.
      /// </summary>
+     /// <seealso cref="ReactiveUI.ReactiveObject" />
+     /// <seealso cref="System.IDisposable" />
+     /// <seealso cref="H13OcrQuickStart.ViewModels.IMainViewModel" />
      public abstract class MainViewModelBase : ReactiveObject, IDisposable, IMainViewModel
      {
           #region Private Fields
@@ -79,6 +87,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the application state.
           /// </summary>
+          /// <value>The state of the application.</value>
           public int AppState
           {
                get => this.appState;
@@ -89,11 +98,13 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the disposeCollection.
           /// </summary>
+          /// <value>The dispose collection.</value>
           public System.Reactive.Disposables.CompositeDisposable DisposeCollection => this.disposeCollection;
 
           /// <summary>
           /// Gets or sets the MenuItems reactive list.
           /// </summary>
+          /// <value>The menu items.</value>
           public ReactiveList<MenuItemVM> MenuItems
           {
                get;
@@ -104,6 +115,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the processing results DataSet.
           /// </summary>
+          /// <value>The processing results data set.</value>
           public DataSet ProcessingResultsDataSet
           {
                get => this.processingResultsDataSet;
@@ -114,6 +126,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the status text.
           /// </summary>
+          /// <value>The status text.</value>
           public string StatusText
           {
                get => this.statusText;

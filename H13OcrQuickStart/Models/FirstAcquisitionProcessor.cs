@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="AcquireAcquisitionProcessor.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Models
 {
@@ -17,6 +22,7 @@ namespace H13OcrQuickStart.Models
      /// <summary>
      /// Model class for a new Acquire Acquisition process.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.Models.ProcessorBase" />
      public class FirstAcquisitionProcessor : ProcessorBase
      {
           #region Private Fields
@@ -48,6 +54,9 @@ namespace H13OcrQuickStart.Models
           private string[] acquisitionParameterNames;
 
           // Stores the calibration map in use.
+          /// <summary>
+          /// The calibration map
+          /// </summary>
           private HImage calibrationMap = new HImage();
 
           /// <summary>
@@ -62,6 +71,9 @@ namespace H13OcrQuickStart.Models
           private Dictionary<string, HTuple> dictionaryParameterDefaults = new Dictionary<string, HTuple>();
 
           // Stores a value indicating whether to calibrate new images.
+          /// <summary>
+          /// The do calibration
+          /// </summary>
           private bool doCalibration = false;
 
           /// <summary>
@@ -149,6 +161,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the acquired image.
           /// </summary>
+          /// <value>The acquired image.</value>
           public HImage AcquiredImage
           {
                get => this.acquiredImage;
@@ -159,6 +172,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the image height.
           /// </summary>
+          /// <value>The height of the acquired image.</value>
           public int AcquiredImageHeight
           {
                get => this.acquiredImageHeight;
@@ -169,6 +183,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the image width.
           /// </summary>
+          /// <value>The width of the acquired image.</value>
           public int AcquiredImageWidth
           {
                get => this.acquiredImageWidth;
@@ -179,6 +194,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets a value indicating whether live video is playing.
           /// </summary>
+          /// <value><c>true</c> if [acquiring live video]; otherwise, <c>false</c>.</value>
           public bool AcquiringLiveVideo
           {
                get => this.acquiringLiveVideo;
@@ -189,11 +205,13 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets the acquisition parameter names.
           /// </summary>
+          /// <value>The acquisition parameter names.</value>
           public string[] AcquisitionParameterNames => this.acquisitionParameterNames;
 
           /// <summary>
           /// Gets or sets a value indicating whether the next live video frame can be grabbed safely.
           /// </summary>
+          /// <value><c>true</c> if this instance can grab next frame; otherwise, <c>false</c>.</value>
           public bool CanGrabNextFrame
           {
                get => this.canGrabNextFrame;
@@ -204,11 +222,13 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets the dictionary of parameter defaults.
           /// </summary>
+          /// <value>The dictionary parameter defaults.</value>
           public Dictionary<string, HTuple> DictionaryParameterDefaults => this.dictionaryParameterDefaults;
 
           /// <summary>
           /// Gets or sets a value indicating whether the frame grabber is initialized.
           /// </summary>
+          /// <value><c>true</c> if this instance is initialized; otherwise, <c>false</c>.</value>
           public bool IsInitialized
           {
                get => this.isInitialized;
@@ -252,6 +272,7 @@ namespace H13OcrQuickStart.Models
           /// Starts live video asynchronously or sets the boolean value to stop it.
           /// </summary>
           /// <param name="trigger">A value indicating whether to start or stop the video.</param>
+          /// <param name="map">The map.</param>
           /// <returns>A ProcessingResult instance.</returns>
           public ProcessingResult AcquireCalibratedLiveVideo(bool trigger, HImage map)
           {

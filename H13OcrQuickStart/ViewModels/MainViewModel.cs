@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="MainViewModel.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -17,6 +22,7 @@ namespace H13OcrQuickStart.ViewModels
      /// <summary>
      /// Main view model that contains all the others and provides interconnectivity.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.ViewModels.MainViewModelBase" />
      public partial class MainViewModel : MainViewModelBase
      {
           #region Private Fields
@@ -84,6 +90,7 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the last application state.
           /// </summary>
+          /// <value>The last state of the application.</value>
           public int LastAppState
           {
                get;
@@ -94,11 +101,13 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets the loadImageVM.
           /// </summary>
+          /// <value>The load image vm.</value>
           public LoadProcessViewModel LoadImageVM => this.loadImageVM;
 
           /// <summary>
           /// Gets the settingsVM.
           /// </summary>
+          /// <value>The settings vm.</value>
           public Utilities.SettingsManager SettingsVM => this.settingsVM;
 
           #endregion Public Properties

@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="SettingsManager.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Utilities
 {
@@ -18,6 +23,7 @@ namespace H13OcrQuickStart.Utilities
      /// <summary>
      /// SettingsManager class manages a set of reactive properties to preserve them via serialization.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.Utilities.SettingsManagerBase{H13OcrQuickStart.ViewModels.MainViewModel}" />
      public class SettingsManager : SettingsManagerBase<MainViewModel>
      {
           //// Modify these  two constants as needed to set the directory and file name of the settings file.
@@ -60,6 +66,7 @@ namespace H13OcrQuickStart.Utilities
           /// <summary>
           /// Initializes a new instance of the SettingsManager class. Used by the Deserializer only.
           /// </summary>
+          /// <remarks>This is the no-parameters overload needed for deserialization.</remarks>
           public SettingsManager()
               : base()
           {
@@ -72,6 +79,7 @@ namespace H13OcrQuickStart.Utilities
           /// <summary>
           /// Gets the Path and name for the settings file.
           /// </summary>
+          /// <value>The location.</value>
           public static string Location
           {
                get

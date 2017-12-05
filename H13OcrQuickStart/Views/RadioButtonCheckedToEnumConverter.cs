@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="RadioButtonCheckedToEnumConverter.cs" company="Resolution Technology, Inc.">
-//     Copyright (c) Resolution Technology, Inc. All rights reserved.
+//     Copyright ©  2016, 2017 Resolution Technology, Inc.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.View
 {
@@ -12,6 +17,7 @@ namespace H13OcrQuickStart.View
      /// <summary>
      /// IValueConverter from radio button checked property to an enumeration type determined from usage.
      /// </summary>
+     /// <seealso cref="System.Windows.Data.IValueConverter" />
      public class RadioButtonCheckedToEnumConverter : IValueConverter
      {
           #region Public Methods

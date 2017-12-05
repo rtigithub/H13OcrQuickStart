@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="LoadImageProcessor.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Models
 {
@@ -14,6 +19,7 @@ namespace H13OcrQuickStart.Models
      /// <summary>
      /// Processor class for Loading and displaying an image.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.Models.ProcessorBase" />
      public class LoadImageProcessor : ProcessorBase
      {
           #region Private Fields
@@ -72,6 +78,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the loaded unprocessed image.
           /// </summary>
+          /// <value>The image.</value>
           public HImage Image
           {
                get => this.image;
@@ -82,6 +89,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the image height.
           /// </summary>
+          /// <value>The height of the image.</value>
           public int ImageHeight
           {
                get => this.imageHeight;
@@ -92,6 +100,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the image width.
           /// </summary>
+          /// <value>The width of the image.</value>
           public int ImageWidth
           {
                get => this.imageWidth;

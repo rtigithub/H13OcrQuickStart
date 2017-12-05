@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="OcrViewModel.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -19,12 +24,19 @@ namespace H13OcrQuickStart.ViewModels
      /// <summary>
      /// View model for the Ocr process.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.ViewModels.ProcessViewModelBase{H13OcrQuickStart.ViewModels.MainViewModel, H13OcrQuickStart.Models.OcrProcessor}" />
      public class OcrViewModel : ProcessViewModelBase<MainViewModel, OcrProcessor>
      {
           #region Private Fields
 
+          /// <summary>
+          /// The halcon image
+          /// </summary>
           private HImage halconImage = new HImage();
 
+          /// <summary>
+          /// The image width
+          /// </summary>
           private int imageWidth, imageHeight;
 
           /// <summary>
@@ -173,15 +185,28 @@ namespace H13OcrQuickStart.ViewModels
 
           #region Public Properties
 
+          /// <summary>
+          /// Gets or sets the halcon image.
+          /// </summary>
+          /// <value>The halcon image.</value>
           public HImage HalconImage { get => this.halconImage; set => this.RaiseAndSetIfChanged(ref this.halconImage, value); }
 
+          /// <summary>
+          /// Gets or sets the height of the image.
+          /// </summary>
+          /// <value>The height of the image.</value>
           public int ImageHeight { get => this.imageHeight; set => this.RaiseAndSetIfChanged(ref this.imageHeight, value); }
 
+          /// <summary>
+          /// Gets or sets the width of the image.
+          /// </summary>
+          /// <value>The width of the image.</value>
           public int ImageWidth { get => this.imageWidth; set => this.RaiseAndSetIfChanged(ref this.imageWidth, value); }
 
           /// <summary>
           /// Gets the processing results.
           /// </summary>
+          /// <value>The processing results.</value>
           public ProcessingResult ProcessingResults
           {
                get

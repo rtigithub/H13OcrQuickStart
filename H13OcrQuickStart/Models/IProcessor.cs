@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="IProcessor.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Models
 {
@@ -18,6 +23,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the debug DisplayCollection.
           /// </summary>
+          /// <value>The debug display.</value>
           DisplayCollection DebugDisplay
           {
                get;
@@ -27,6 +33,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the CompositeDisposable object.
           /// </summary>
+          /// <value>The dispose collection.</value>
           System.Reactive.Disposables.CompositeDisposable DisposeCollection
           {
                get;
@@ -36,6 +43,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the error code.
           /// </summary>
+          /// <value>The error code.</value>
           ProcessingErrorCode ErrorCode
           {
                get;
@@ -45,6 +53,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets the error message.
           /// </summary>
+          /// <value>The error message.</value>
           string ErrorMessage
           {
                get;

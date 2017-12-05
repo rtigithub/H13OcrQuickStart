@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="BindingUtilities.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 [module: System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.DocumentationRules", "SA1649:FileHeaderFileNameDocumentationMustMatchTypeName",
     Justification = "Allow the name of the file to be used.")]
 
@@ -49,15 +54,11 @@ namespace H13OcrQuickStart.Utilities
           /// text, and selected index.
           /// </summary>
           /// <typeparam name="TParameter">The type of the property bound to in the view model.</typeparam>
-          /// <typeparam name="TTargetClass">
-          /// The type of the view model that owns the bound properties.
-          /// </typeparam>
+          /// <typeparam name="TTargetClass">The type of the view model that owns the bound properties.</typeparam>
           /// <param name="comboName">The name of the combo box.</param>
           /// <param name="targetClassName">The name of the view model that owns the bound properties.</param>
           /// <param name="targetPropertyName">The name of the property bound to in the view model.</param>
-          /// <param name="targetItemsName">
-          /// The name of the items property bound to in the view model.
-          /// </param>
+          /// <param name="targetItemsName">The name of the items property bound to in the view model.</param>
           /// <param name="windowClass">The main window class instance. (Pass "this")</param>
           public static void BindComboBox<TParameter, TTargetClass>(
                string comboName,
@@ -161,9 +162,7 @@ namespace H13OcrQuickStart.Utilities
           /// </summary>
           /// <param name="manager">The View Roi Manager.</param>
           /// <param name="halconWindow">The Halcon window.</param>
-          /// <param name="imageBorderName">
-          /// The name of the Border Control containing the Halcon window control.
-          /// </param>
+          /// <param name="imageBorderName">The name of the Border Control containing the Halcon window control.</param>
           /// <param name="loadImageViewModelName">The name of the load image view model to use.</param>
           /// <param name="windowClass">The main window class instance. (Pass "this")</param>
           public static void BindHalconWindow(
@@ -332,6 +331,7 @@ namespace H13OcrQuickStart.Utilities
           /// <typeparam name="TProperty">The type of the property.</typeparam>
           /// <param name="expression">The expression containing the property.</param>
           /// <returns>The member expression of the property.</returns>
+          /// <exception cref="ArgumentException">Not a member access - expression</exception>
           public static MemberExpression GetMemberExpression<TEntity, TProperty>(Expression<Func<TEntity, TProperty>> expression)
           {
                MemberExpression memberExpression = null;
@@ -360,6 +360,7 @@ namespace H13OcrQuickStart.Utilities
           /// <typeparam name="TProperty">The type of the property.</typeparam>
           /// <param name="expression">The expression containing the property.</param>
           /// <returns>The property information.</returns>
+          /// <exception cref="InvalidOperationException"></exception>
           public static PropertyInfo GetProperty<TEntity, TProperty>(Expression<Func<TEntity, TProperty>> expression)
           {
                var member = GetMemberExpression(expression).Member;
@@ -377,14 +378,10 @@ namespace H13OcrQuickStart.Utilities
           /// </summary>
           /// <param name="control">The UI control to bind.</param>
           /// <param name="viewModel">The view model to set as the data source.</param>
-          /// <param name="pathString">
-          /// The name of the property of the view model to which to bind data.
-          /// </param>
+          /// <param name="pathString">The name of the property of the view model to which to bind data.</param>
           /// <param name="parameter">The converter parameter.</param>
-          /// <remarks>
-          /// Insure that the enumeration value is present in RadioButtonSelection, otherwise a red
-          /// outline will appear when the control is selected and conversion will not function.
-          /// </remarks>
+          /// <remarks>Insure that the enumeration value is present in RadioButtonSelection, otherwise a red
+          /// outline will appear when the control is selected and conversion will not function.</remarks>
           public static void SetRadioButtonBinding(Control control, object viewModel, string pathString, string parameter)
           {
                Binding bind = new Binding()

@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="AcquireCalibrationMainVMPartial.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -15,6 +20,7 @@ namespace H13OcrQuickStart.ViewModels
      /// <summary>
      /// Main view model partial with added code for the camera calibration module.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.ViewModels.MainViewModelBase" />
      public partial class MainViewModel
      {
           #region Private Fields
@@ -28,6 +34,10 @@ namespace H13OcrQuickStart.ViewModels
 
           #region Public Properties
 
+          /// <summary>
+          /// Gets the acquire calibration vm.
+          /// </summary>
+          /// <value>The acquire calibration vm.</value>
           public FirstCalibrationViewModel AcquireCalibrationVM => this.calibrationAcquireVM;
 
           #endregion Public Properties

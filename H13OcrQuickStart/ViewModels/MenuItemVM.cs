@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="MenuItemVM.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.ViewModels
 {
@@ -35,11 +40,13 @@ namespace H13OcrQuickStart.ViewModels
           /// <summary>
           /// Gets or sets the display name.
           /// </summary>
+          /// <value>The display name.</value>
           public string DisplayName { get; set; }
 
           /// <summary>
           /// Gets or sets the command to be bound to the menu item.
           /// </summary>
+          /// <value>The menu command.</value>
           public ReactiveCommand<Unit, ProcessingResult> MenuCommand { get; protected set; }
 
           #endregion Public Properties

@@ -1,8 +1,13 @@
-﻿//-----------------------------------------------------------------------
+﻿// ***********************************************************************
+// Assembly         : H13OcrQuickStart
+// Author           : 
+// Created          : 11-30-2017
+// Last Modified On : 12-05-2017
 // <copyright file="AcquireCalibrationProcessor.cs" company="Resolution Technology, Inc.">
 //     Copyright (c) Resolution Technology, Inc. All rights reserved.
 // </copyright>
-//-----------------------------------------------------------------------
+// <summary></summary>
+// ***********************************************************************
 
 namespace H13OcrQuickStart.Models
 {
@@ -13,6 +18,8 @@ namespace H13OcrQuickStart.Models
      /// <summary>
      /// Model class for a new Acquire Calibration process.
      /// </summary>
+     /// <seealso cref="H13OcrQuickStart.Models.ProcessorBase" />
+     /// <seealso cref="H13OcrQuickStart.Models.ICameraCalibrationProcessor" />
      public class FirstCalibrationProcessor : ProcessorBase, ICameraCalibrationProcessor
      {
           #region Private Fields
@@ -125,6 +132,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets a value indicating whether the calibration images are set.
           /// </summary>
+          /// <value><c>true</c> if calibration images set; otherwise, <c>false</c>.</value>
           public bool AreCalibrationImagesSet
           {
                get => this.areCalibrationImagesSet;
@@ -135,6 +143,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets a value indicating whether the calibration parameters are set.
           /// </summary>
+          /// <value><c>true</c> if calibration parameters set; otherwise, <c>false</c>.</value>
           public bool AreCalibrationParametersSet
           {
                get => this.areCalibrationParametersSet;
@@ -145,6 +154,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets a value indicating whether the calibration is complete.
           /// </summary>
+          /// <value><c>true</c> if calibration is done; otherwise, <c>false</c>.</value>
           public bool CalibrationIsDone
           {
                get => this.calibrationIsDone;
@@ -156,6 +166,7 @@ namespace H13OcrQuickStart.Models
           /// Gets or sets the projection map that describes the mapping between the image plane and a the
           /// plane z=0 of a world coordinate system.
           /// </summary>
+          /// <value>The calibration map.</value>
           public HImage CalibrationMap
           {
                get => this.calibrationMap;
@@ -166,6 +177,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets a value indicating whether the calibration map is present.
           /// </summary>
+          /// <value><c>true</c> if the calibration map is present; otherwise, <c>false</c>.</value>
           public bool IsCalibrationMapPresent
           {
                get => this.isCalibrationMapPresent;
@@ -176,6 +188,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets a value indicating whether the rectified test image is present.
           /// </summary>
+          /// <value><c>true</c> if whether a rectified test image is present; otherwise, <c>false</c>.</value>
           public bool IsRectifiedTestImagePresent
           {
                get => this.isRectifiedTestImagePresent;
@@ -186,6 +199,7 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// Gets or sets rectified test image.
           /// </summary>
+          /// <value>The rectified test image.</value>
           public HImage RectifiedTestImage
           {
                get => this.rectifiedTestImage;
