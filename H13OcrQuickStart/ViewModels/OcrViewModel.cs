@@ -23,7 +23,7 @@ namespace H13OcrQuickStart.ViewModels
      {
           #region Private Fields
 
- 
+
           /// <summary>
           /// Stores a value indicating whether the class has been disposed.
           /// </summary>
@@ -33,6 +33,10 @@ namespace H13OcrQuickStart.ViewModels
           /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call.
           /// </summary>
           private ObservableAsPropertyHelper<ProcessingResult> processingResults;
+
+          private HImage halconImage = new HImage();
+
+          private int imageWidth, imageHeight;
 
           #endregion Private Fields
 
@@ -112,12 +116,36 @@ namespace H13OcrQuickStart.ViewModels
                         this.MainViewModelRef.AppState = this.MainViewModelRef.AppState == 0 ? this.MainViewModelRef.LastAppState : this.MainViewModelRef.AppState;
                    }));
 
-               this.DisposeCollection.Add(this.WhenAnyValue(x => x.MainViewModelRef.AcquireAcquisitionVM.Image)
-                    .Where(x => x != null)
-                    .Where(x => x.IsInitialized())
+               this.DisposeCollection.Add(this.WhenAnyValue(x => x.HalconImage)
+                    .Where(x => x.IsValid())
                     .Select(_ => System.Reactive.Unit.Default)
                     .InvokeCommand(this.Command));
 
+               //this.DisposeCollection.Add(this.WhenAnyValue(x => x.MainViewModelRef.LoadImageVM.Image)
+               //     .Where(x => x != null)
+               //     .Where(x => x.IsInitialized())
+               //     .Select(_ => System.Reactive.Unit.Default)
+               //     .InvokeCommand(this.Command));
+
+               this.DisposeCollection.Add(this.WhenAnyValue(x => x.MainViewModelRef.LoadImageVM.Image)
+                    .Where(x => x.IsValid())
+                    .SubscribeOn(RxApp.TaskpoolScheduler)
+                    .Subscribe(x => this.HalconImage = x));
+
+               this.DisposeCollection.Add(this.WhenAnyValue(x => x.MainViewModelRef.AcquireAcquisitionVM.Image)
+                    .Where(x => x.IsValid())
+                    .SubscribeOn(RxApp.TaskpoolScheduler)
+                    .Subscribe(x => this.HalconImage = x));
+
+               this.DisposeCollection.Add(this.WhenAnyValue(x => x.HalconImage)
+                    .Where(x => x.IsValid())
+                    .SubscribeOn(RxApp.TaskpoolScheduler)
+                    .Subscribe(x =>
+                    {
+                         x.GetImageSize(out int imageWidth, out int imageHeight);
+                         this.ImageWidth = imageWidth;
+                         this.ImageHeight = imageHeight;
+                    }));
           }
 
           #endregion Public Constructors
@@ -157,6 +185,10 @@ namespace H13OcrQuickStart.ViewModels
                }
           }
 
+          public HImage HalconImage { get => this.halconImage; set => this.RaiseAndSetIfChanged(ref this.halconImage, value); }
+          public int ImageWidth { get => this.imageWidth; set => this.RaiseAndSetIfChanged(ref this.imageWidth, value); }
+          public int ImageHeight { get => this.imageHeight; set => this.RaiseAndSetIfChanged(ref this.imageHeight, value); }
+
           #endregion Public Properties
 
           //// Create a ProcessingResult property for each command with an ObservableAsPropertyHelper<ProcessingResult> you need to monitor.
@@ -194,7 +226,7 @@ namespace H13OcrQuickStart.ViewModels
                //// Add any display objects needed as in these sample lines.
                tempDC.AddDisplayObject(this.Processor.ProcessedImage.CopyObj(1, -1));
                ////tempDC.AddDisplayObject(this.Processor.ProcessedRegion.CopyObj(1, -1), Rti.ViewRoiCore.HalconColors.Red, 1, Rti.ViewRoiCore.DrawModes.Margin);
-               tempDC.AddDisplayObject(this.Processor.ProcessedRegion.CopyObj(1, -1), true, Rti.ViewRoiCore.ColoredCounts.Twelve, 2 , Rti.ViewRoiCore.DrawModes.Margin);
+               tempDC.AddDisplayObject(this.Processor.ProcessedRegion.CopyObj(1, -1), true, Rti.ViewRoiCore.ColoredCounts.Twelve, 2, Rti.ViewRoiCore.DrawModes.Margin);
 
                return tempDC;
           }
@@ -234,7 +266,7 @@ namespace H13OcrQuickStart.ViewModels
                // To pass parameters, use this version to call the Processor.Process(object parameters) overload.
                // Create a defined non-generic Tuple containing the parameters.
                // Dummy parameters. Change this.
-               Tuple<HImage> parameters = new Tuple<HImage>(this.MainViewModelRef.AcquireAcquisitionVM.Image.CopyObj(1, -1));
+               Tuple<HImage> parameters = new Tuple<HImage>(this.HalconImage.CopyObj(1, -1));
                //// Example: Tuple<HImage, double> parameters = new Tuple<HImage, double>(this.MainViewModelRef.LoadImageVM.Image, this.PropertyNameOfDoubleType);
                return await Task.Factory.StartNew(() => this.Processor.Process(parameters));
           }

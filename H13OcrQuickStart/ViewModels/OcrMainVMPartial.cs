@@ -63,7 +63,8 @@ namespace H13OcrQuickStart.ViewModels
                    .Where(x => x.ResultsCollection.ContainsKey("OcrResults"))
                    .Subscribe(x =>
                    {
-                        this.ProcessingResultsDataSet.Tables[0].Rows.Add(x.ResultsCollection["OcrResults"]);
+                        var result = x.ResultsCollection["OcrResults"];
+                        this.ProcessingResultsDataSet.Tables[0].Rows.Add(result);
                    }
                    ));
           }

@@ -80,17 +80,25 @@ namespace H13OcrQuickStart.Models
 
                try
                {
-                    this.ProcessedImage.Dispose();
-                    ProcessedImage = image.CountChannels().I == 3 ? image.Rgb1ToGray() : image.AccessChannel(1);
-                    using (var textResultId = this.ProcessedImage.FindText(textModel))
+                    if (image.IsValid())
                     {
-                         this.ProcessedRegion.Dispose();
-                         using (var textRegions = textResultId.GetTextObject("all_lines"))
+                         this.ProcessedImage.Dispose();
+                         ProcessedImage = image.CountChannels().I == 3 ? image.Rgb1ToGray() : image.AccessChannel(1);
+                         using (var textResultId = this.ProcessedImage.FindText(textModel))
                          {
-                              this.ProcessedRegion = textRegions.ToHRegion().Union1();
+                              this.ProcessedRegion.Dispose();
+                              using (var textRegions = textResultId.GetTextObject("all_lines"))
+                              {
+                                   this.ProcessedRegion = textRegions.ToHRegion().Union1();
+                              }
+                              string ocrResults = String.Join(String.Empty, textResultId.GetTextResult("class").ToSArr());
+                              result.ResultsCollection.Add("OcrResults", ocrResults);
                          }
-                         string ocrResults = String.Join(String.Empty, textResultId.GetTextResult("class").ToSArr());
-                         result.ResultsCollection.Add("OcrResults", ocrResults);
+                    }
+                    else
+                    {
+                         result.StatusCode = ProcessingErrorCode.LoadImageError;
+                         result.ErrorMessage = "No image loaded.";
                     }
                }
                catch (HalconException halconException)

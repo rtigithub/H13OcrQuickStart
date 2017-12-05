@@ -169,6 +169,7 @@ namespace H13OcrQuickStart.ViewModels
 
                //// Add fields here.
                //// Template: resultsDataTable.Columns.Add("My Column", Type.GetType("System.<the type>"));
+               resultsDataTable.Columns.Add("OCR Results", Type.GetType("System.String"));
 
                this.ProcessingResultsDataSet.Tables.Add(resultsDataTable);
           }

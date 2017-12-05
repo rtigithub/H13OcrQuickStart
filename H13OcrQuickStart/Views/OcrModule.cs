@@ -26,10 +26,10 @@ namespace H13OcrQuickStart
           private void BindOcrControls(ViewROIManager manager)
           {
                // Bind image aspect for acquired images.
-               this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.AcquireAcquisitionVM.AcquiredImageHeight)
+               this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.OcrVM.ImageHeight)
                   .Subscribe(x => manager.ImageHeight = x));
 
-               this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.AcquireAcquisitionVM.AcquiredImageWidth)
+               this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.OcrVM.ImageWidth)
                    .Subscribe(x => manager.ImageWidth = x));
 
                this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.OcrVM.Display)

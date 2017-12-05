@@ -57,8 +57,6 @@
             </Grid.RowDefinitions>
             <Button Content="Load Image" x:Name="buttonLoadImage" Grid.Row="0" VerticalAlignment="Top" Height="36"
                     Margin="86,10,86,0" HorizontalContentAlignment="Center" />
-            <Button x:Name="ProcessButton" Content="Process" DockPanel.Dock="Top" Margin="86,10,86,0" VerticalAlignment="Top"
-                    HorizontalContentAlignment="Center" Grid.Row="1" Height="36" />
 
             <DataGrid AutoGenerateColumns="True" x:Name="dataGrid1" Grid.Row="6" Margin="3,0"
                       CanUserAddRows="False" ColumnWidth="*" />
