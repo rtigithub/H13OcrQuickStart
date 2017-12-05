@@ -73,62 +73,6 @@ namespace H13OcrQuickStart.Models
           #endregion Public Properties
 
           //// Create properties for objects and display objects set in the process methods. Not including output results.
-          #region Private Methods
-          private ProcessingResult ProcessImage(HImage image)
-          {
-               var result = new ProcessingResult();
-
-               try
-               {
-                    if (image.IsValid())
-                    {
-                         this.ProcessedImage.Dispose();
-                         ProcessedImage = image.CountChannels().I == 3 ? image.Rgb1ToGray() : image.AccessChannel(1);
-                         using (var textResultId = this.ProcessedImage.FindText(textModel))
-                         {
-                              this.ProcessedRegion.Dispose();
-                              using (var textRegions = textResultId.GetTextObject("all_lines"))
-                              {
-                                   this.ProcessedRegion = textRegions.ToHRegion().Union1();
-                              }
-                              string ocrResults = String.Join(String.Empty, textResultId.GetTextResult("class").ToSArr());
-                              result.ResultsCollection.Add("OcrResults", ocrResults);
-                         }
-                    }
-                    else
-                    {
-                         result.StatusCode = ProcessingErrorCode.LoadImageError;
-                         result.ErrorMessage = "No image loaded.";
-                    }
-               }
-               catch (HalconException halconException)
-               {
-                    result.StatusCode = ProcessingErrorCode.HalconException;
-                    result.ErrorMessage = "An error occurred during processing: " + halconException.Message;
-               }
-               finally
-               {
-               }
-               return result;
-          }
-
-          private void CorrectTextOrientation(HImage image, HRegion regionOfInterest)
-          {
-               double phi = FindTextLineOrientation(image, regionOfInterest);
-               TransformImage(image, phi);
-          }
-
-          private void TransformImage(HImage image, double phi)
-          {
-               throw new NotImplementedException();
-          }
-
-          private double FindTextLineOrientation(HImage image, HRegion regionOfInterest)
-          {
-               throw new NotImplementedException();
-          }
-
-          #endregion
 
           #region Public Methods
 
@@ -262,5 +206,63 @@ namespace H13OcrQuickStart.Models
           }
 
           #endregion Protected Methods
+
+          #region Private Methods
+
+          private void CorrectTextOrientation(HImage image, HRegion regionOfInterest)
+          {
+               double phi = FindTextLineOrientation(image, regionOfInterest);
+               TransformImage(image, phi);
+          }
+
+          private double FindTextLineOrientation(HImage image, HRegion regionOfInterest)
+          {
+               throw new NotImplementedException();
+          }
+
+          private ProcessingResult ProcessImage(HImage image)
+          {
+               var result = new ProcessingResult();
+
+               try
+               {
+                    if (image.IsValid())
+                    {
+                         this.ProcessedImage.Dispose();
+                         ProcessedImage = image.CountChannels().I == 3 ? image.Rgb1ToGray() : image.AccessChannel(1);
+                         using (var textResultId = this.ProcessedImage.FindText(textModel))
+                         {
+                              this.ProcessedRegion.Dispose();
+                              using (var textRegions = textResultId.GetTextObject("all_lines"))
+                              {
+                                   this.ProcessedRegion = textRegions.ToHRegion().Union1();
+                              }
+                              string ocrResults = String.Join(String.Empty, textResultId.GetTextResult("class").ToSArr());
+                              result.ResultsCollection.Add("OcrResults", ocrResults);
+                         }
+                    }
+                    else
+                    {
+                         result.StatusCode = ProcessingErrorCode.LoadImageError;
+                         result.ErrorMessage = "No image loaded.";
+                    }
+               }
+               catch (HalconException halconException)
+               {
+                    result.StatusCode = ProcessingErrorCode.HalconException;
+                    result.ErrorMessage = "An error occurred during processing: " + halconException.Message;
+               }
+               finally
+               {
+               }
+               return result;
+          }
+
+          private void TransformImage(HImage image, double phi)
+          {
+               throw new NotImplementedException();
+          }
+
+          #endregion Private Methods
      }
 }

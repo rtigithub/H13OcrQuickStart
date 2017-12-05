@@ -23,6 +23,9 @@ namespace H13OcrQuickStart.ViewModels
      {
           #region Private Fields
 
+          private HImage halconImage = new HImage();
+
+          private int imageWidth, imageHeight;
 
           /// <summary>
           /// Stores a value indicating whether the class has been disposed.
@@ -33,10 +36,6 @@ namespace H13OcrQuickStart.ViewModels
           /// Stores the ProcessingResult returned from ProcessAsync.ToProperty call.
           /// </summary>
           private ObservableAsPropertyHelper<ProcessingResult> processingResults;
-
-          private HImage halconImage = new HImage();
-
-          private int imageWidth, imageHeight;
 
           #endregion Private Fields
 
@@ -174,6 +173,12 @@ namespace H13OcrQuickStart.ViewModels
 
           #region Public Properties
 
+          public HImage HalconImage { get => this.halconImage; set => this.RaiseAndSetIfChanged(ref this.halconImage, value); }
+
+          public int ImageHeight { get => this.imageHeight; set => this.RaiseAndSetIfChanged(ref this.imageHeight, value); }
+
+          public int ImageWidth { get => this.imageWidth; set => this.RaiseAndSetIfChanged(ref this.imageWidth, value); }
+
           /// <summary>
           /// Gets the processing results.
           /// </summary>
@@ -184,10 +189,6 @@ namespace H13OcrQuickStart.ViewModels
                     return this.processingResults.Value;
                }
           }
-
-          public HImage HalconImage { get => this.halconImage; set => this.RaiseAndSetIfChanged(ref this.halconImage, value); }
-          public int ImageWidth { get => this.imageWidth; set => this.RaiseAndSetIfChanged(ref this.imageWidth, value); }
-          public int ImageHeight { get => this.imageHeight; set => this.RaiseAndSetIfChanged(ref this.imageHeight, value); }
 
           #endregion Public Properties
 

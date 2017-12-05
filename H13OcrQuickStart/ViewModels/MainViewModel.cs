@@ -124,7 +124,7 @@ namespace H13OcrQuickStart.ViewModels
                          this.acquisitionAcquireVM?.Dispose();
 
                          this.calibrationAcquireVM.Dispose();
-                                                  
+
                          this.processorOcrVM?.Dispose();
                     }
 

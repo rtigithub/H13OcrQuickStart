@@ -63,8 +63,8 @@
         </Grid>
         <Grid x:Name="ImageGrid" Background ="CadetBlue" Grid.Row="2" Grid.Column="1" Margin="0,1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition x:Name="LiveImage"/>
-                <ColumnDefinition x:Name="ProcessImage"/>
+                <ColumnDefinition x:Name="LiveImage" />
+                <ColumnDefinition x:Name="ProcessImage" />
             </Grid.ColumnDefinitions>
             <Border  x:Name="ImageBorder1" Margin="2,0" MinWidth="320" MinHeight="240">
                 <my:HWindowControlWPF x:Name="HalconWpf1" />
@@ -76,17 +76,17 @@
         <DockPanel Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" x:Name="toolBarPanel1" VerticalAlignment="Stretch"
                    Background ="White" Width="Auto">
             <ComboBox x:Name="comboboxZoom" SelectedIndex="10" Width="70" HorizontalAlignment="Left" Margin="0,0,0,0">
-                <ComboBoxItem Content="6400%"/>
-                <ComboBoxItem Content="3200%"/>
-                <ComboBoxItem Content="1600%"/>
-                <ComboBoxItem Content="800%"/>
-                <ComboBoxItem Content="400%"/>
-                <ComboBoxItem Content="200%"/>
-                <ComboBoxItem Content="100%"/>
-                <ComboBoxItem Content="75%"/>
-                <ComboBoxItem Content="50%"/>
-                <ComboBoxItem Content="33%"/>
-                <ComboBoxItem Content="Fit"/>
+                <ComboBoxItem Content="6400%" />
+                <ComboBoxItem Content="3200%" />
+                <ComboBoxItem Content="1600%" />
+                <ComboBoxItem Content="800%" />
+                <ComboBoxItem Content="400%" />
+                <ComboBoxItem Content="200%" />
+                <ComboBoxItem Content="100%" />
+                <ComboBoxItem Content="75%" />
+                <ComboBoxItem Content="50%" />
+                <ComboBoxItem Content="33%" />
+                <ComboBoxItem Content="Fit" />
             </ComboBox>
             <TextBlock
                 Text="{Binding LoadImageVM.FileName, UpdateSourceTrigger=PropertyChanged}"
