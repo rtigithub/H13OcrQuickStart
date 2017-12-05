@@ -8,7 +8,7 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("H13OcrQuickStart")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Using Halcon to OCR images.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Resolution Technology, Inc.")]
 [assembly: AssemblyProduct("H13OcrQuickStart")]

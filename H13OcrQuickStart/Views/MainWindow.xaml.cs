@@ -75,7 +75,7 @@ namespace H13OcrQuickStart
           /// <summary>
           /// Stores the instance of the ViewROIManager.
           /// </summary>
-          private ViewROIManager viewROIManager = new ViewROIManager();
+          private ViewROIManager[] viewROIManagers = new ViewROIManager[4];
 
           #endregion Private Fields
 
@@ -315,7 +315,14 @@ namespace H13OcrQuickStart
                          interaction.SetOutput(filename);
                     });
 
+               for (int i = 0; i < viewROIManagers.Count(); i++)
+               {
+                    viewROIManagers[i] = new ViewROIManager();
+               }
+
                //// Call additional Initialize<Name>Module() methods for each new module.
+               this.InitializeAcquireAcquisitionModule(viewROIManagers[0]);
+               this.InitializeOcrModule(viewROIManagers[1]);
 
                // Uncomment this line to bind the Process button to the command of a
                // new ProcessViewModel created in MainViewModel.cs.
@@ -346,9 +353,9 @@ namespace H13OcrQuickStart
 
                // Bind hWindowControlWPF1 to the ViewRoiManager.
                BindingUtilities.BindHalconWindow(
-                   this.viewROIManager,
-                   this.hWindowControlWPF1,
-                   nameof(this.ImageBorder),
+                   this.viewROIManagers[0],
+                   this.HalconWpf1,
+                   nameof(this.ImageBorder1),
                    nameof(this.MainViewModel.LoadImageVM),
                    this);
 
@@ -358,7 +365,7 @@ namespace H13OcrQuickStart
                    .Select(s => (string)((ComboBoxItem)s).Content)
                    .Select(v => GetZoomScaleFromString(v))
                    .ObserveOn(RxApp.MainThreadScheduler)
-                   .BindTo(this.viewROIManager, vm => vm.ZoomScale));
+                   .BindTo(this.viewROIManagers[0], vm => vm.ZoomScale));
 
                // Reset the zoom combo box to "Fit" for a new image, but prevent redisplay of the image.
                this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.LoadImageVM.Display)
@@ -375,7 +382,14 @@ namespace H13OcrQuickStart
                this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.LoadImageVM.Display)
                    .Where(x => x.DisplayList.Count > 0)
                    .ObserveOn(RxApp.MainThreadScheduler)
-                   .Subscribe(x => this.viewROIManager.ShowDisplayCollection(x)));
+                   .Subscribe(x => this.viewROIManagers[0].ShowDisplayCollection(x)));
+
+               BindingUtilities.BindHalconWindow(
+                    this.viewROIManagers[1],
+                    this.HalconWpf2,
+                    nameof(this.ImageBorder2),
+                    nameof(this.MainViewModel.AcquireAcquisitionVM),
+                    this);
 
                //// Add manually created subscriptions to display collections here by duplicating the above code and changing the ViewModel.
                //// Processing modules added with the templates will handle the main display bindings automatically.
@@ -384,7 +398,7 @@ namespace H13OcrQuickStart
                this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.LoadImageVM.DebugDisplay)
                    .Where(x => x.DisplayList.Count > 0)
                    .ObserveOn(RxApp.MainThreadScheduler)
-                   .Subscribe(x => this.viewROIManager.ShowDisplayCollection(x)));
+                   .Subscribe(x => this.viewROIManagers[0].ShowDisplayCollection(x)));
 
                //// Add manually created subscriptions to debug display collections here by duplicating the above code and changing the ViewModel.
                //// Processing modules added with the templates will handle the main display bindings automatically.

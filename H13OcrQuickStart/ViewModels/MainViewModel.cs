@@ -51,6 +51,8 @@ namespace H13OcrQuickStart.ViewModels
 
                //// Call the initializer for any new view models.
                //// Example: this.InitializeProcessorViewModel();
+               this.InitializeAcquireAcquisitionViewModel();
+               this.InitializeOcrViewModel();
 
                // Instantiate SettingsManager, settings.
                if (File.Exists(Utilities.SettingsManager.Location))
@@ -118,6 +120,12 @@ namespace H13OcrQuickStart.ViewModels
                          this.settingsVM?.Dispose();
 
                          this.loadImageVM?.Dispose();
+
+                         this.acquisitionAcquireVM?.Dispose();
+
+                         this.calibrationAcquireVM.Dispose();
+                                                  
+                         this.processorOcrVM?.Dispose();
                     }
 
                     //// Dispose of unmanaged resources here.

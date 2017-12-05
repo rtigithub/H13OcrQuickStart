@@ -25,6 +25,13 @@ namespace H13OcrQuickStart
           /// <param name="manager">The ViewROIManager instance to use.</param>
           private void BindOcrControls(ViewROIManager manager)
           {
+               // Bind image aspect for acquired images.
+               this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.AcquireAcquisitionVM.AcquiredImageHeight)
+                  .Subscribe(x => manager.ImageHeight = x));
+
+               this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.AcquireAcquisitionVM.AcquiredImageWidth)
+                   .Subscribe(x => manager.ImageWidth = x));
+
                this.disposeCollection.Add(this.WhenAnyValue(x => x.MainViewModel.OcrVM.Display)
                     .Where(x => x.DisplayList.Count > 0)
                     .ObserveOn(RxApp.MainThreadScheduler)

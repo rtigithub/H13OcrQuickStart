@@ -56,6 +56,16 @@ namespace H13OcrQuickStart.ViewModels
                ////    .Where(x => x != null)
                ////    .Where(x => x.ResultsCollection.ContainsKey("MyNamedResultValue"))
                ////    .Subscribe(x => this.ProcessingResultsDataSet.Tables[0].Rows.Add(x.ResultsCollection["MyNamedResultValue"])));
+
+               this.DisposeCollection.Add(
+                   this.WhenAnyValue(x => x.OcrVM.ProcessingResults)
+                   .Where(x => x != null)
+                   .Where(x => x.ResultsCollection.ContainsKey("OcrResults"))
+                   .Subscribe(x =>
+                   {
+                        this.ProcessingResultsDataSet.Tables[0].Rows.Add(x.ResultsCollection["OcrResults"]);
+                   }
+                   ));
           }
 
           #endregion Private Methods

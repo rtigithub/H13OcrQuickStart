@@ -14,6 +14,7 @@ namespace H13OcrQuickStart.ViewModels
      using ReactiveUI;
      using Rti.DisplayUtilities;
      using Rti.ViewRoiCore;
+     using Rti.Halcon;
 
      /// <summary>
      /// View model for the Ocr process.
@@ -22,6 +23,7 @@ namespace H13OcrQuickStart.ViewModels
      {
           #region Private Fields
 
+ 
           /// <summary>
           /// Stores a value indicating whether the class has been disposed.
           /// </summary>
@@ -80,14 +82,14 @@ namespace H13OcrQuickStart.ViewModels
                    }));
 
                //// Set up the display to rebuild if a reactive display property changes.
-               ////this.DisposeCollection.Add(
-               ////    this.WhenAnyValue(x => x.Processor.<Display property>)
-               ////    .Where(x => x <condition>)
-               ////    .SubscribeOn(RxApp.TaskpoolScheduler)
-               ////    .Subscribe(_ =>
-               ////    {
-               ////        this.SetDisplay();
-               ////    }));
+               this.DisposeCollection.Add(
+                   this.WhenAnyValue(x => x.Processor.ProcessedRegion)
+                   .Where(x => x.IsValid())
+                   .SubscribeOn(RxApp.TaskpoolScheduler)
+                   .Subscribe(_ =>
+                   {
+                        this.SetDisplay();
+                   }));
 
                //// Set up the display to rebuild if the ProcessingResults change and
                //// a specific value in the collection is valid.
@@ -109,6 +111,13 @@ namespace H13OcrQuickStart.ViewModels
                    {
                         this.MainViewModelRef.AppState = this.MainViewModelRef.AppState == 0 ? this.MainViewModelRef.LastAppState : this.MainViewModelRef.AppState;
                    }));
+
+               this.DisposeCollection.Add(this.WhenAnyValue(x => x.MainViewModelRef.AcquireAcquisitionVM.Image)
+                    .Where(x => x != null)
+                    .Where(x => x.IsInitialized())
+                    .Select(_ => System.Reactive.Unit.Default)
+                    .InvokeCommand(this.Command));
+
           }
 
           #endregion Public Constructors
@@ -183,9 +192,9 @@ namespace H13OcrQuickStart.ViewModels
                };
 
                //// Add any display objects needed as in these sample lines.
-               ////tempDC.AddDisplayObject(this.Processor.SomeHalconDisplayObjectProperty.CopyObj(1, -1));
-               ////tempDC.AddDisplayObject(this.Processor.SomeHalconDisplayObjectProperty.CopyObj(1, -1), Rti.ViewRoiCore.HalconColors.Red, 1, Rti.ViewRoiCore.DrawModes.Margin);
-               ////tempDC.AddDisplayObject(this.Processor.SomeHalconDisplayObjectProperty.CopyObj(1, -1), true, Rti.ViewRoiCore.ColoredCounts.Twelve, 1, Rti.ViewRoiCore.DrawModes.Fill);
+               tempDC.AddDisplayObject(this.Processor.ProcessedImage.CopyObj(1, -1));
+               ////tempDC.AddDisplayObject(this.Processor.ProcessedRegion.CopyObj(1, -1), Rti.ViewRoiCore.HalconColors.Red, 1, Rti.ViewRoiCore.DrawModes.Margin);
+               tempDC.AddDisplayObject(this.Processor.ProcessedRegion.CopyObj(1, -1), true, Rti.ViewRoiCore.ColoredCounts.Twelve, 2 , Rti.ViewRoiCore.DrawModes.Margin);
 
                return tempDC;
           }
@@ -220,14 +229,14 @@ namespace H13OcrQuickStart.ViewModels
           {
                // This default version will call the Processor.Process() method with no parameters.
                // If desired, properties can be manually set in the Processor here. Passing parameters in the second version is preferred.
-               return await base.ProcessAsync();
+               //// return await base.ProcessAsync();
 
                // To pass parameters, use this version to call the Processor.Process(object parameters) overload.
                // Create a defined non-generic Tuple containing the parameters.
                // Dummy parameters. Change this.
-               //// Tuple<object> parameters = new Tuple<object>(new object());
+               Tuple<HImage> parameters = new Tuple<HImage>(this.MainViewModelRef.AcquireAcquisitionVM.Image.CopyObj(1, -1));
                //// Example: Tuple<HImage, double> parameters = new Tuple<HImage, double>(this.MainViewModelRef.LoadImageVM.Image, this.PropertyNameOfDoubleType);
-               //// return await Task.Factory.StartNew(() => this.Processor.Process(parameters));
+               return await Task.Factory.StartNew(() => this.Processor.Process(parameters));
           }
 
           #endregion Protected Methods

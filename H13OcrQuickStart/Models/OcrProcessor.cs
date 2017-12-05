@@ -11,6 +11,7 @@ namespace H13OcrQuickStart.Models
      using HalconDotNet;
      using ReactiveUI;
      using Rti.DisplayUtilities;
+     using Rti.Halcon;
 
      /// <summary>
      /// Model class for a new process.
@@ -23,6 +24,21 @@ namespace H13OcrQuickStart.Models
           /// Stores a value indicating whether the class has been disposed.
           /// </summary>
           private bool isDisposed = false;
+
+          /// <summary>
+          /// The processed image
+          /// </summary>
+          private HImage processedImage = new HImage();
+
+          /// <summary>
+          /// The processed region
+          /// </summary>
+          private HRegion processedRegion = new HRegion();
+
+          /// <summary>
+          /// The text model
+          /// </summary>
+          private HTextModel textModel = new HTextModel("auto", "Universal_Rej.occ");
 
           #endregion Private Fields
 
@@ -40,7 +56,71 @@ namespace H13OcrQuickStart.Models
 
           #endregion Public Constructors
 
+          #region Public Properties
+
+          /// <summary>
+          /// Gets or sets the processed image.
+          /// </summary>
+          /// <value>The processed image.</value>
+          public HImage ProcessedImage { get => this.processedImage; set => this.RaiseAndSetIfChanged(ref this.processedImage, value); }
+
+          /// <summary>
+          /// Gets or sets the processed region.
+          /// </summary>
+          /// <value>The processed region.</value>
+          public HRegion ProcessedRegion { get => this.processedRegion; set => this.RaiseAndSetIfChanged(ref this.processedRegion, value); }
+
+          #endregion Public Properties
+
           //// Create properties for objects and display objects set in the process methods. Not including output results.
+          #region Private Methods
+          private ProcessingResult ProcessImage(HImage image)
+          {
+               var result = new ProcessingResult();
+
+               try
+               {
+                    this.ProcessedImage.Dispose();
+                    ProcessedImage = image.CountChannels().I == 3 ? image.Rgb1ToGray() : image.AccessChannel(1);
+                    using (var textResultId = this.ProcessedImage.FindText(textModel))
+                    {
+                         this.ProcessedRegion.Dispose();
+                         using (var textRegions = textResultId.GetTextObject("all_lines"))
+                         {
+                              this.ProcessedRegion = textRegions.ToHRegion().Union1();
+                         }
+                         string ocrResults = String.Join(String.Empty, textResultId.GetTextResult("class").ToSArr());
+                         result.ResultsCollection.Add("OcrResults", ocrResults);
+                    }
+               }
+               catch (HalconException halconException)
+               {
+                    result.StatusCode = ProcessingErrorCode.HalconException;
+                    result.ErrorMessage = "An error occurred during processing: " + halconException.Message;
+               }
+               finally
+               {
+               }
+               return result;
+          }
+
+          private void CorrectTextOrientation(HImage image, HRegion regionOfInterest)
+          {
+               double phi = FindTextLineOrientation(image, regionOfInterest);
+               TransformImage(image, phi);
+          }
+
+          private void TransformImage(HImage image, double phi)
+          {
+               throw new NotImplementedException();
+          }
+
+          private double FindTextLineOrientation(HImage image, HRegion regionOfInterest)
+          {
+               throw new NotImplementedException();
+          }
+
+          #endregion
 
           #region Public Methods
 
@@ -94,13 +174,16 @@ namespace H13OcrQuickStart.Models
                this.ErrorMessage = "No errors detected.";
                ProcessingResult result = new ProcessingResult();
 
+               HImage image = new HImage();
+
                // In overloads, change this to the types being passes and parse them, assigning to
                // properties as needed.
-               if (parameters is Tuple<object>)
+               if (parameters is Tuple<HImage>)
                {
-                    if ((Tuple<object>)parameters != null)
+                    if ((Tuple<HImage>)parameters != null)
                     {
-                         object obj = ((Tuple<object>)parameters).Item1;
+                         image.Dispose();
+                         image = ((Tuple<HImage>)parameters).Item1;
                     }
                }
                else
@@ -114,7 +197,7 @@ namespace H13OcrQuickStart.Models
                     if (this.ErrorCode == ProcessingErrorCode.NoError)
                     {
                          //// Call private methods that perform the processes here.
-
+                         result = ProcessImage(image);
                          //// Store any output results as named values in the ResultsCollection object.
                          ////result.ResultsCollection.Add("MyNamedResultValue", /* A returned value from a private method. */ ));
 
@@ -133,6 +216,10 @@ namespace H13OcrQuickStart.Models
                     // If an exception gets here it is unexpected.
                     result.StatusCode = ProcessingErrorCode.UndefinedError;
                     result.ErrorMessage = "An error occurred during processing: " + ex.Message;
+               }
+               finally
+               {
+                    image?.Dispose();
                }
 
                return result;
@@ -153,6 +240,8 @@ namespace H13OcrQuickStart.Models
                     if (disposing)
                     {
                          //// Dispose of managed resources here.
+                         this.processedImage?.Dispose();
+                         this.processedRegion?.Dispose();
                     }
 
                     //// Dispose of unmanaged resources here.

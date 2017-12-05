@@ -56,7 +56,12 @@ namespace H13OcrQuickStart.Models
           /// <summary>
           /// An error occurred while initializing the camera.
           /// </summary>
-          InitializingCameraError
+          InitializingCameraError,
+
+          /// <summary>
+          /// The HALCON library threw an exception.
+          /// </summary>
+          HalconException
      }
 
      /// <summary>
